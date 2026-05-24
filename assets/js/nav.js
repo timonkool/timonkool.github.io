@@ -118,14 +118,6 @@
       portfolioItem.classList.contains('dropdown-open') ? closeDropdown() : openDropdown();
     });
 
-    // Desktop: also open on hover (CSS handles the visual, this keeps ARIA in sync)
-    portfolioItem.addEventListener('mouseenter', function () {
-      if (window.innerWidth > 640) openDropdown();
-    });
-    portfolioItem.addEventListener('mouseleave', function () {
-      if (window.innerWidth > 640) closeDropdown();
-    });
-
     // Close when clicking outside
     document.addEventListener('click', function (e) {
       if (!portfolioItem.contains(e.target)) closeDropdown();
