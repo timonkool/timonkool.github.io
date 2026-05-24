@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Timon Kool — Leidinggevende & AI-adviseur</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Fraunces:ital,wght@0,300;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  /* ── Design tokens ── */
+  :root {
+    --sage-deep:  #6b8068;
+    --sage-ink:   #3a4a38;
+    --sage:       #8ba287;
+    --sage-soft:  #c8d4c4;
+    --sage-mist:  #eef2ec;
+    --cream:      #faf8f4;
+    --paper:      #ffffff;
+    --text:       #2d352c;
+    --muted:      #6b7268;
+    --radius-sm:  6px;
+    --radius-md:  10px;
+    --radius-lg:  14px;
+    --radius-pill:999px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--text);
+    font-family: 'Quicksand', sans-serif;
+    font-size: 15px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Scroll fade-in ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ══════════════════════════════════════
+     HERO
+  ══════════════════════════════════════ */
+  .hero {
+    background: var(--sage-deep);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 80% at 80% 50%, rgba(58,74,56,0.45) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 10% 80%, rgba(139,162,135,0.2) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 72px 40px 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--sage-soft);
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.1s ease forwards;
+  }
+
+  .hero-name {
+    font-size: clamp(48px, 8vw, 80px);
+    font-weight: 700;
+    color: var(--cream);
+    line-height: 1;
+    letter-spacing: -1.5px;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.2s ease forwards;
+  }
+
+  .hero-quote {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(18px, 2.5vw, 24px);
+    color: var(--cream);
+    max-width: 600px;
+    line-height: 1.5;
+    padding-left: 20px;
+    border-left: 3px solid var(--sage-soft);
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.35s ease forwards;
+  }
+
+  .hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.5s ease forwards;
+  }
+
+  .btn-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--cream);
+    color: var(--sage-deep);
+    font-family: 'Quicksand', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-decoration: none;
+    padding: 12px 28px;
+    border-radius: var(--radius-pill);
+    opacity: 0;
+    animation: fadeUp 0.6s 0.65s ease forwards;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-download:hover { background: var(--sage-mist); transform: translateY(-1px); }
+  .btn-download svg { width: 15px; height: 15px; stroke: var(--sage-deep); fill: none; flex-shrink: 0; }
+
+  .hero-tag {
+    background: rgba(250,248,244,0.12);
+    border: 1px solid rgba(250,248,244,0.25);
+    color: var(--cream);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 7px 16px;
+    border-radius: var(--radius-pill);
+    backdrop-filter: blur(4px);
+  }
+
+  /* Colour-split name bar */
+  .hero-split-bar {
+    background: var(--cream);
+    margin-top: 48px;
+    padding: 18px 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 32px;
+    max-width: 100%;
+  }
+
+  .hero-contact-item {
+    font-size: 13px;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .hero-contact-item svg {
+    width: 14px;
+    height: 14px;
+    stroke: var(--sage-deep);
+    fill: none;
+    flex-shrink: 0;
+  }
+
+  .hero-contact-item a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .hero-contact-item a:hover { color: var(--sage-deep); }
+
+  /* ══════════════════════════════════════
+     LAYOUT
+  ══════════════════════════════════════ */
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 64px 40px 100px;
+  }
+
+  /* Section header */
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--sage-deep);
+    margin-bottom: 28px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--sage-soft);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 6px;
+    height: 6px;
+    background: var(--sage-deep);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  section { margin-bottom: 72px; }
+
+  /* ══════════════════════════════════════
+     PROFIEL
+  ══════════════════════════════════════ */
+  .profile-text {
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--text);
+    max-width: 720px;
+    margin-bottom: 18px;
+  }
+
+  .profile-text:first-of-type {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 17px;
+    color: var(--sage-ink);
+    padding-left: 18px;
+    border-left: 3px solid var(--sage-deep);
+  }
+
+  .available-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--sage-mist);
+    color: var(--sage-ink);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 8px 18px;
+    border-radius: var(--radius-pill);
+    margin-top: 8px;
+  }
+
+  .available-badge::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: var(--sage-deep);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  /* ══════════════════════════════════════
+     WERKERVARING — accordion
+  ══════════════════════════════════════ */
+  .job-card {
+    background: var(--paper);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    transition: box-shadow 0.25s ease;
+  }
+
+  .job-card:hover { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
+
+  .job-header {
+    display: flex;
+    align-items: stretch;
+    cursor: pointer;
+    user-select: none;
+    gap: 0;
+  }
+
+  .job-accent {
+    width: 5px;
+    background: var(--sage-soft);
+    flex-shrink: 0;
+    transition: background 0.25s ease;
+    border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+  }
+
+  .job-card.open .job-accent,
+  .job-card:hover .job-accent {
+    background: var(--sage-deep);
+  }
+
+  .job-header-inner {
+    flex: 1;
+    padding: 22px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .job-meta { flex: 1; }
+
+  .job-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--sage-ink);
+    margin-bottom: 4px;
+  }
+
+  .job-org {
+    font-size: 13px;
+    color: var(--muted);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .job-org-name { color: var(--sage-deep); font-weight: 600; }
+
+  .job-period {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: var(--sage-mist);
+    padding: 4px 12px;
+    border-radius: var(--radius-pill);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .job-toggle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--sage-mist);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.2s, transform 0.3s;
+  }
+
+  .job-toggle svg {
+    width: 14px;
+    height: 14px;
+    stroke: var(--sage-deep);
+    fill: none;
+    transition: transform 0.3s ease;
+  }
+
+  .job-card.open .job-toggle svg { transform: rotate(180deg); }
+  .job-card.open .job-toggle { background: var(--sage-deep); }
+  .job-card.open .job-toggle svg { stroke: var(--cream); }
+
+  /* Tagline */
+  .job-tagline {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 13px;
+    color: var(--muted);
+    padding: 0 24px 0 29px;
+    margin-bottom: 0;
+    display: none;
+  }
+
+  .job-card.open .job-tagline { display: block; }
+
+  /* Tab nav */
+  .job-tabs {
+    display: none;
+    border-top: 1px solid var(--sage-mist);
+    margin-top: 16px;
+  }
+
+  .job-card.open .job-tabs { display: block; }
+
+  .tab-nav {
+    display: flex;
+    gap: 0;
+    padding: 0 24px;
+    border-bottom: 1px solid var(--sage-mist);
+    margin-top: 16px;
+  }
+
+  .tab-btn {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px 20px 12px;
+    position: relative;
+    transition: color 0.2s;
+  }
+
+  .tab-btn::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0; right: 0;
+    height: 2px;
+    background: var(--sage-deep);
+    transform: scaleX(0);
+    transition: transform 0.2s ease;
+  }
+
+  .tab-btn.active { color: var(--sage-deep); }
+  .tab-btn.active::after { transform: scaleX(1); }
+
+  .tab-panel {
+    display: none;
+    padding: 20px 24px 24px 24px;
+  }
+
+  .tab-panel.active { display: block; }
+
+  /* Bullets inside tabs */
+  .tab-panel ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .tab-panel ul li {
+    display: flex;
+    gap: 12px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text);
+  }
+
+  .tab-panel ul li::before {
+    content: '–';
+    color: var(--sage-deep);
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* Result block */
+  .result-block {
+    background: var(--sage-mist);
+    border-radius: var(--radius-md);
+    padding: 14px 18px;
+    margin-top: 16px;
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  .result-block strong {
+    color: var(--sage-ink);
+    font-weight: 700;
+    display: block;
+    margin-bottom: 4px;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  /* Sub-role label inside tab */
+  .subrole-label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--sage-deep);
+    margin: 18px 0 10px;
+  }
+
+  .subrole-label:first-child { margin-top: 0; }
+
+  /* Approach block */
+  .approach-block {
+    background: var(--cream);
+    border: 1px solid var(--sage-soft);
+    border-radius: var(--radius-md);
+    padding: 14px 18px;
+    margin-top: 16px;
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--text);
+  }
+
+  .approach-block strong {
+    color: var(--sage-ink);
+    font-weight: 700;
+    display: block;
+    margin-bottom: 6px;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  /* ══════════════════════════════════════
+     VAARDIGHEDEN
+  ══════════════════════════════════════ */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+  }
+
+  .skill-group {
+    background: var(--paper);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  }
+
+  .skill-group-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--sage-deep);
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--sage-mist);
+  }
+
+  .skill-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+
+  .skill-list li {
+    font-size: 13.5px;
+    color: var(--text);
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    line-height: 1.5;
+  }
+
+  .skill-list li::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    background: var(--sage-soft);
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 6px;
+  }
+
+  /* ══════════════════════════════════════
+     OPLEIDING
+  ══════════════════════════════════════ */
+  .edu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  @media (max-width: 600px) {
+    .edu-grid { grid-template-columns: 1fr; }
+  }
+
+  .edu-card {
+    background: var(--paper);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  }
+
+  .edu-card-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--sage-deep);
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--sage-mist);
+  }
+
+  .edu-item {
+    margin-bottom: 14px;
+  }
+
+  .edu-item-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--sage-ink);
+  }
+
+  .edu-item-sub {
+    font-size: 12.5px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  .training-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+
+  .training-list li {
+    font-size: 13.5px;
+    color: var(--text);
+    display: flex;
+    gap: 9px;
+    align-items: flex-start;
+  }
+
+  .training-list li::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    background: var(--sage-soft);
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 7px;
+  }
+
+  /* ══════════════════════════════════════
+     ANIMATIONS
+  ══════════════════════════════════════ */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  /* ══════════════════════════════════════
+     RESPONSIVE
+  ══════════════════════════════════════ */
+  @media (max-width: 640px) {
+    .hero-inner { padding: 48px 24px 0; }
+    .hero-split-bar { padding: 16px 24px; }
+    .page { padding: 48px 24px 80px; }
+    .job-header-inner { flex-wrap: wrap; }
+    .job-period { order: -1; }
+  }
+
+  /* ══════════════════════════════════════
+     FOOTER
+  ══════════════════════════════════════ */
+  .footer {
+    text-align: center;
+    padding: 32px 24px 48px;
+    font-size: 12px;
+    color: var(--muted);
+    border-top: 1px solid var(--sage-soft);
+  }
+
+  /* ══════════════════════════════════════
+     CONTACT FORM
+  ══════════════════════════════════════ */
+  .contact-form {
+    background: var(--paper);
+    border-radius: var(--radius-lg);
+    padding: 36px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    max-width: 600px;
+  }
+
+  .form-intro {
+    font-size: 15px;
+    color: var(--muted);
+    margin-bottom: 28px;
+    line-height: 1.6;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--sage-ink);
+    margin-bottom: 8px;
+  }
+
+  .form-input,
+  .form-textarea {
+    width: 100%;
+    background: var(--cream);
+    border: 1.5px solid var(--sage-soft);
+    border-radius: var(--radius-md);
+    padding: 12px 16px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+    appearance: none;
+  }
+
+  .form-input:focus,
+  .form-textarea:focus {
+    border-color: var(--sage-deep);
+    box-shadow: 0 0 0 3px rgba(107,128,104,0.12);
+  }
+
+  .form-textarea {
+    resize: vertical;
+    min-height: 130px;
+    line-height: 1.6;
+  }
+
+  .form-submit {
+    background: var(--sage-deep);
+    color: var(--cream);
+    font-family: 'Quicksand', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: none;
+    border-radius: var(--radius-pill);
+    padding: 14px 32px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .form-submit:hover {
+    background: var(--sage-ink);
+    transform: translateY(-1px);
+  }
+
+  .form-submit:active { transform: none; }
+
+  .form-success {
+    display: none;
+    background: var(--sage-mist);
+    border-radius: var(--radius-md);
+    padding: 18px 22px;
+    font-size: 14px;
+    color: var(--sage-ink);
+    margin-top: 16px;
+    line-height: 1.6;
+  }
+
+  .form-success.visible { display: block; }
+
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     HERO
+══════════════════════════════════════ -->
+<header class="hero">
+  <div class="hero-inner">
+    <p class="hero-label">Curriculum Vitae</p>
+    <h1 class="hero-name">Timon Kool</h1>
+    <blockquote class="hero-quote">
+      "Ik zorg dat mensen groeien, teams blijven, en technologie werkt voor mensen die er niks van weten."
+    </blockquote>
+    <div class="hero-tags">
+      <span class="hero-tag">Leidinggevende</span>
+      <span class="hero-tag">Verandermanager</span>
+      <span class="hero-tag">Coach</span>
+      <span class="hero-tag">AI-adviseur</span>
+    </div>
+    <a href="CV_Timon_5_2026.docx" download class="btn-download">
+      <svg viewBox="0 0 24 24" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Download CV (.docx)
+    </a>
+  </div>
+  <div class="hero-split-bar">
+    <span class="hero-contact-item">
+      <svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      Almere
+    </span>
+    <span class="hero-contact-item">
+      <svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+      <a href="https://linkedin.com/in/timonkool" target="_blank">linkedin.com/in/timonkool</a>
+    </span>
+  </div>
+</header>
+
+<!-- ══════════════════════════════════════
+     MAIN CONTENT
+══════════════════════════════════════ -->
+<main class="page">
+
+  <!-- PROFIEL -->
+  <section class="reveal">
+    <h2 class="section-label">Profiel</h2>
+    <p class="profile-text">
+      Leidinggevende en verandermanager die mensen in beweging krijgt: ook als de situatie moeilijk is, de middelen krimpen, of het team halverwege de weg kwijtraakt. Staat bekend om directheid die ruimte laat, feedback die mensen verder brengt in plaats van kleiner maakt, en het vermogen om orde te scheppen in chaos zonder de betrokkenheid van het team te verliezen.
+    </p>
+    <p class="profile-text">
+      Begeleidt daarnaast maatschappelijke organisaties bij de praktische inzet van AI: van procesautomatisering tot het verlagen van de drempel voor mensen die technologie spannend vinden.
+    </p>
+    <span class="available-badge">Beschikbaar per 1 juli 2026</span>
+  </section>
+
+  <!-- WERKERVARING -->
+  <section class="reveal">
+    <h2 class="section-label">Werkervaring</h2>
+
+    <!-- AI-adviseur -->
+    <div class="job-card" id="job-ai">
+      <div class="job-header" onclick="toggleJob('job-ai')">
+        <div class="job-accent"></div>
+        <div class="job-header-inner">
+          <div class="job-meta">
+            <div class="job-title">Adviseur AI-adoptie &amp; procesverbetering</div>
+            <div class="job-org">
+              <span class="job-org-name">Diverse maatschappelijke organisaties</span>
+              <span>pro bono</span>
+            </div>
+          </div>
+          <span class="job-period">02/2026 – heden</span>
+          <div class="job-toggle">
+            <svg viewBox="0 0 24 24" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+      </div>
+      <p class="job-tagline">Technologie werkbaar maken voor organisaties met een hart voor de samenleving</p>
+      <div class="job-tabs">
+        <div class="tab-nav">
+          <button class="tab-btn active" onclick="switchTab('job-ai', 'wat', this)">Wat deed ik</button>
+          <button class="tab-btn" onclick="switchTab('job-ai', 'resultaat', this)">Resultaten</button>
+        </div>
+        <div class="tab-panel active" data-tab="wat">
+          <ul>
+            <li>Begeleiding van stichtingen bij de introductie en praktische toepassing van AI-tools in dagelijkse processen.</li>
+            <li>Vertalen van complexe technologie naar directe, werkbare oplossingen: van communicatiematerialen en pitches tot procesautomatisering.</li>
+            <li>Opstellen van presentaties, evenementenuitingen en beleidsondersteunend materiaal voor vrijwilligersorganisaties.</li>
+          </ul>
+        </div>
+        <div class="tab-panel" data-tab="resultaat">
+          <div class="result-block">
+            <strong>Resultaten bij drie organisaties</strong>
+            Subsidie- en fondsaanvragen van één stichting structureel versterkt met behulp van AI: significant hogere kwaliteit voor aanmerkelijk minder tijdsinvestering. Bij een tweede stichting een geautomatiseerd systeem opgezet voor het structureel delen van nieuwsbrieven via social media, inclusief vast beeldmerk. Een derde stichting heeft na een praktische AI-basistraining zelfstandig marketingactiviteiten opgepakt die eerder onhaalbaar leken: de drempel was te hoog, de kennis ontbrak.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Talent Academie -->
+    <div class="job-card" id="job-ta">
+      <div class="job-header" onclick="toggleJob('job-ta')">
+        <div class="job-accent"></div>
+        <div class="job-header-inner">
+          <div class="job-meta">
+            <div class="job-title">Regiomanager</div>
+            <div class="job-org">
+              <span class="job-org-name">Talent Academie</span>
+            </div>
+          </div>
+          <span class="job-period">10/2023 – 11/2025</span>
+          <div class="job-toggle">
+            <svg viewBox="0 0 24 24" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+      </div>
+      <p class="job-tagline">Eén vertrek in twee jaar, terwijl andere teams structureel bloedden</p>
+      <div class="job-tabs">
+        <div class="tab-nav">
+          <button class="tab-btn active" onclick="switchTab('job-ta', 'wat', this)">Wat deed ik</button>
+          <button class="tab-btn" onclick="switchTab('job-ta', 'resultaat', this)">Resultaten &amp; aanpak</button>
+        </div>
+        <div class="tab-panel active" data-tab="wat">
+          <ul>
+            <li>Doorgegroeid van locatiemanager naar regiomanager binnen het eerste jaar.</li>
+            <li>Leidinggevend aan teams van jong professionals in het sociaal werkveld en hun studentteams op meerdere locaties.</li>
+            <li>Meerdere medewerkers die niet naar behoren functioneerden begeleid naar goed functionerend niveau via intensieve ontwikkeltrajecten, heldere verwachtingen en opbouwende feedback.</li>
+            <li>Teamzelfstandigheid en saamhorigheid structureel vergroot, ook tijdens een periode van reorganisatie en toenemende werkdruk.</li>
+            <li>Elke vakantie opnieuw een volwaardige vakantieschool neergezet op meerdere locaties, met minder budget en minder mensen.</li>
+            <li>Verandermanager tijdens een chaotische reorganisatie: team gemotiveerd en intact door de transitie geloodst.</li>
+          </ul>
+        </div>
+        <div class="tab-panel" data-tab="resultaat">
+          <div class="result-block">
+            <strong>Resultaat</strong>
+            Laagste verloop van alle teams in de organisatie. Slechts één vertrek in twee jaar, uitsluitend door verhuizing. Team bleef structureel klaar om elders gaten op te vullen toen andere teams onderbezet waren: ook in de zwaarste periode van de reorganisatie.
+          </div>
+          <div class="approach-block">
+            <strong>Aanpak</strong>
+            Eerlijkheid en transparantie als basis voor vertrouwen. Teamleden actief betrokken bij besluitvorming. Preventief ruimte maken voor stress in plaats van reactief ingrijpen. Consequent in verwachtingen: geen oogluikend toestaan van ondermaats presteren, zodat de rest van het team niet de rekening betaalt. Successen benoemen en fouten samen oplossen in plaats van afrekenen.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Salta Group -->
+    <div class="job-card" id="job-salta">
+      <div class="job-header" onclick="toggleJob('job-salta')">
+        <div class="job-accent"></div>
+        <div class="job-header-inner">
+          <div class="job-meta">
+            <div class="job-title">Teamleider &amp; Studieadviseur</div>
+            <div class="job-org">
+              <span class="job-org-name">Salta Group</span>
+              <span>doorgroei binnen één organisatie</span>
+            </div>
+          </div>
+          <span class="job-period">03/2020 – 10/2023</span>
+          <div class="job-toggle">
+            <svg viewBox="0 0 24 24" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+      </div>
+      <p class="job-tagline">Doorgegroeid van individuele begeleider naar leidinggevende van drie teams</p>
+      <div class="job-tabs">
+        <div class="tab-nav">
+          <button class="tab-btn active" onclick="switchTab('job-salta', 'wat', this)">Wat deed ik</button>
+          <button class="tab-btn" onclick="switchTab('job-salta', 'resultaat', this)">Resultaten</button>
+        </div>
+        <div class="tab-panel active" data-tab="wat">
+          <div class="subrole-label">Als studieadviseur (03/2020 – 03/2022)</div>
+          <ul>
+            <li>Begeleiding van mbo-studenten bij het behalen van hun opleiding: van studieplanning tot klachtenafhandeling.</li>
+            <li>Uitgeblonken in het ombuigen van klachtgesprekken naar gesprekken over zelfontplooiing: studenten verlieten het gesprek met meer motivatie dan waarmee ze binnenkwamen.</li>
+            <li>Doorgegroeid naar begeleiding van leerplichtige studenten, die intensievere controle en sturing vergen.</li>
+            <li>Controletaken voor de afdeling geautomatiseerd om begeleiding efficiënter en schaalbaarder te maken.</li>
+          </ul>
+          <div class="subrole-label">Als teamleider (03/2022 – 10/2023)</div>
+          <ul>
+            <li>Leidinggevend aan drie teams van in totaal 20 medewerkers, van pas afgestudeerde juniors tot ervaren professionals.</li>
+            <li>Gedurende meerdere maanden als enige leidinggevende een afdeling aangestuurd die normaal door een manager en drie teamleiders werd geleid.</li>
+            <li>Ervaren professionals behouden en gemotiveerd gehouden in een periode van onderbezetting en onzekerheid.</li>
+            <li>Cruciale rol gespeeld in de ontwikkeling van een nieuw softwaresysteem: praktijkkennis vertaald naar concrete systeemvereisten.</li>
+          </ul>
+        </div>
+        <div class="tab-panel" data-tab="resultaat">
+          <div class="result-block">
+            <strong>Resultaat</strong>
+            Afdeling draaiende gehouden met structureel personeelstekort. Meerdere maanden feitelijk de rol van manager én drie teamleiders gecombineerd zonder kwaliteitsverlies. Juniors die als risico werden gezien zijn uitgegroeid tot betrouwbare, zelfstandige professionals. Doorgroei van adviseur naar leidinggevende binnen drie jaar in dezelfde organisatie.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Jaarbeurs -->
+    <div class="job-card" id="job-jaarbeurs">
+      <div class="job-header" onclick="toggleJob('job-jaarbeurs')">
+        <div class="job-accent"></div>
+        <div class="job-header-inner">
+          <div class="job-meta">
+            <div class="job-title">Floormanager hospitality &amp; catering</div>
+            <div class="job-org">
+              <span class="job-org-name">Jaarbeurs e.a.</span>
+            </div>
+          </div>
+          <span class="job-period">01/2016 – 03/2020</span>
+          <div class="job-toggle">
+            <svg viewBox="0 0 24 24" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+      </div>
+      <p class="job-tagline">Dagelijkse operatie bij grootschalige beurzen en congressen</p>
+      <div class="job-tabs">
+        <div class="tab-nav">
+          <button class="tab-btn active" onclick="switchTab('job-jaarbeurs', 'wat', this)">Wat deed ik</button>
+          <button class="tab-btn" onclick="switchTab('job-jaarbeurs', 'resultaat', this)">Resultaten</button>
+        </div>
+        <div class="tab-panel active" data-tab="wat">
+          <ul>
+            <li>Coördinatie van alle horeca- en hospitality-gerelateerde zaken rondom nationale en internationale beurzen.</li>
+            <li>Afstemmen met beursorganisaties en accountmanagers. Aansturen van diverse, continu wisselende teams uitzendkrachten.</li>
+            <li>Flexibel schakelen en leemtes opvullen in een omgeving waar improvisatie en snelheid de norm zijn.</li>
+          </ul>
+        </div>
+        <div class="tab-panel" data-tab="resultaat">
+          <div class="result-block">
+            <strong>Kern van deze periode</strong>
+            Geleerd om te leiden in chaos, met wisselende teams en wisselende omstandigheden. De basis voor het leiderschapspatroon dat in latere functies verder is uitgebouwd.
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- VAARDIGHEDEN -->
+  <section class="reveal">
+    <h2 class="section-label">Vaardigheden</h2>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="skill-group-title">Leidinggeven &amp; veranderen</div>
+        <ul class="skill-list">
+          <li>Coachen en mensen laten groeien</li>
+          <li>Functioneringsproblemen ombuigen naar ontwikkeling</li>
+          <li>Teamcultuur bouwen op vertrouwen en veiligheid</li>
+          <li>Verandermanagement in turbulente omstandigheden</li>
+          <li>Projectmanagement op meerdere locaties</li>
+          <li>Verwachtingen stellen, feedback geven, aanspreken</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">AI &amp; digitaal</div>
+        <ul class="skill-list">
+          <li>Praktische inzet van ChatGPT, Claude en lokale AI-modellen</li>
+          <li>AI-adoptie begeleiden bij maatschappelijke organisaties</li>
+          <li>Procesverbetering en automatisering van routinewerk</li>
+          <li>MS Office / Google Workspace</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Persoonlijk</div>
+        <ul class="skill-list">
+          <li>Verbanden zien en het grote plaatje bewaken</li>
+          <li>Mensen verbinden en teams smeden</li>
+          <li>Kalm en daadkrachtig onder druk</li>
+          <li>Creatief in het oplossen van problemen met beperkte middelen</li>
+          <li>Direct, eerlijk en empathisch in communicatie</li>
+          <li>Positieve feedback als instrument voor groei</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- OPLEIDING -->
+  <section class="reveal">
+    <h2 class="section-label">Opleiding &amp; Trainingen</h2>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <div class="edu-card-title">Opleiding</div>
+        <div class="edu-item">
+          <div class="edu-item-name">Propedeutisch diploma Psychologie</div>
+          <div class="edu-item-sub">Universiteit Utrecht</div>
+        </div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-card-title">Trainingen — NCOI / BVO</div>
+        <ul class="training-list">
+          <li>Managementvaardigheden</li>
+          <li>Timemanagement voor leidinggevenden</li>
+          <li>Coachingsvaardigheden</li>
+          <li>Projectmanagement</li>
+          <li>Didactische vaardigheden</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- CONTACT -->
+  <section class="reveal">
+    <h2 class="section-label">Contact</h2>
+    <div class="contact-form">
+      <p class="form-intro">Wil je kennismaken, een vraag stellen, of een samenwerking verkennen? Stuur een bericht en ik reageer zo snel mogelijk.</p>
+      <form id="contact-form" action="https://formspree.io/f/xojbeokz" method="POST">
+        <div class="form-group">
+          <label class="form-label" for="naam">Naam</label>
+          <input class="form-input" type="text" id="naam" name="naam" placeholder="Jouw naam" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="email">E-mail</label>
+          <input class="form-input" type="email" id="email" name="email" placeholder="jouw@email.nl" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="bericht">Bericht</label>
+          <textarea class="form-textarea" id="bericht" name="bericht" placeholder="Waar wil je het over hebben?" required></textarea>
+        </div>
+        <button class="form-submit" type="submit">Verstuur bericht</button>
+      </form>
+      <div class="form-success" id="form-success">
+        Bedankt voor je bericht. Ik neem zo snel mogelijk contact met je op.
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  Timon Kool &nbsp;·&nbsp; Almere &nbsp;·&nbsp; <a href="https://linkedin.com/in/timonkool" target="_blank" style="color:var(--muted);text-decoration:none;">LinkedIn</a>
+</footer>
+
+<script>
+  // ── Accordion ──
+  function toggleJob(id) {
+    const card = document.getElementById(id);
+    card.classList.toggle('open');
+  }
+
+  // ── Tabs ──
+  function switchTab(jobId, tabName, btn) {
+    const card = document.getElementById(jobId);
+    card.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    card.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    card.querySelector(`.tab-panel[data-tab="${tabName}"]`).classList.add('active');
+  }
+
+  // ── Scroll reveal ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ── Contact form ──
+  const form = document.getElementById('contact-form');
+  if (form) {
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn = form.querySelector('.form-submit');
+      btn.textContent = 'Verzenden...';
+      btn.disabled = true;
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          form.style.display = 'none';
+          document.getElementById('form-success').classList.add('visible');
+        } else {
+          btn.textContent = 'Probeer opnieuw';
+          btn.disabled = false;
+        }
+      } catch(err) {
+        btn.textContent = 'Probeer opnieuw';
+        btn.disabled = false;
+      }
+    });
+  }
+
+</script>
+</body>
+</html>
