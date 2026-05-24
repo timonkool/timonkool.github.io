@@ -199,11 +199,13 @@
   }
 }
 
-/* Also show when toggled via the chevron button (desktop + mobile) */
-.dropdown-open .nav-dropdown {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateX(-50%) translateY(0);
+/* Also show when toggled via the chevron button (desktop only — mobile handled below) */
+@media (min-width: 641px) {
+  .dropdown-open .nav-dropdown {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+  }
 }
 
 /* Dropdown links — override the uppercase/spaced style from .nav-links a */
