@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Fraunces:ital,wght@1,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/nav.css" />
 
   <style>
     /* ─── CSS Variables ─── */
@@ -38,45 +39,6 @@
       font-size: 15px;
       line-height: 1.65;
     }
-
-    /* ─── Nav ─── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      background: var(--cream);
-      border-bottom: 1px solid var(--sage-soft);
-      padding: 0 32px;
-      height: 56px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .nav-name {
-      font-weight: 700;
-      font-size: 15px;
-      color: var(--sage-ink);
-      letter-spacing: 0.5px;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 28px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      transition: color 0.2s;
-    }
-
-    .nav-links a:hover { color: var(--sage-deep); }
 
     /* ─── Hero ─── */
     .hero {
@@ -633,9 +595,7 @@
       .contact-layout { grid-template-columns: 1fr; }
       .exp-item { grid-template-columns: 1fr; }
       .exp-period { grid-column: 1; }
-      nav { padding: 0 16px; }
-      .nav-links { gap: 16px; }
-      .hero-green { padding: 40px 20px 0; }
+.hero-green { padding: 40px 20px 0; }
       .title-zone { margin-left: 20px; margin-right: 20px; }
       .hero-cream { padding: 36px 20px 48px; }
       section { padding: 48px 20px; }
@@ -645,15 +605,7 @@
 <body>
 
   <!-- Nav -->
-  <nav>
-    <span class="nav-name">Timon Kool</span>
-    <ul class="nav-links">
-      <li><a href="#over-mij">Over mij</a></li>
-      <li><a href="#ervaring">Ervaring</a></li>
-      <li><a href="#portfolio">Portfolio</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
+  <nav id="site-nav"></nav>
 
   <!-- Hero -->
   <div class="hero">
@@ -884,5 +836,7 @@
       });
     }
   </script>
+  <script>const NAV_ROOT = './';</script>
+  <script src="assets/js/nav.js"></script>
 </body>
 </html>
