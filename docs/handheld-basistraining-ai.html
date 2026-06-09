@@ -31,7 +31,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ── Scherm: print-knop bovenaan ── */
+/* ── Scherm: printknop ── */
 .screen-bar {
   background: var(--sage-ink);
   padding: 14px 32px;
@@ -76,7 +76,7 @@ body {
   min-height: 297mm;
   background: var(--cream);
   margin: 24px auto;
-  padding: 18mm 16mm 16mm;
+  padding: 18mm 16mm 20mm;
   position: relative;
 }
 
@@ -90,8 +90,6 @@ body {
   margin-bottom: 20px;
   gap: 16px;
 }
-
-.page-header-left {}
 
 .page-supertitle {
   font-size: 9px;
@@ -120,9 +118,10 @@ body {
   border-radius: 999px;
   white-space: nowrap;
   margin-top: 4px;
+  flex-shrink: 0;
 }
 
-/* ── Instructie-intro ── */
+/* ── Introductietekst ── */
 .exercise-intro {
   font-size: 12.5px;
   color: var(--muted);
@@ -138,26 +137,28 @@ body {
   margin-bottom: 14px;
 }
 
-.copy-label {
+.block-label {
   font-size: 9px;
   font-weight: 700;
   letter-spacing: 2.5px;
   text-transform: uppercase;
-  color: var(--sage-deep);
   margin-bottom: 10px;
   display: flex;
   align-items: center;
   gap: 7px;
 }
 
-.copy-label::before {
+.block-label::before {
   content: '';
   display: inline-block;
   width: 5px;
   height: 5px;
-  background: var(--sage-deep);
   border-radius: 50%;
+  flex-shrink: 0;
 }
+
+.copy-block .block-label { color: var(--sage-deep); }
+.copy-block .block-label::before { background: var(--sage-deep); }
 
 .copy-block ul {
   list-style: none;
@@ -179,7 +180,6 @@ body {
   color: var(--sage);
   font-weight: 700;
   flex-shrink: 0;
-  margin-top: 0;
 }
 
 .copy-block p {
@@ -197,26 +197,8 @@ body {
   margin-bottom: 14px;
 }
 
-.prompt-label {
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 2.5px;
-  text-transform: uppercase;
-  color: var(--sage-soft);
-  margin-bottom: 8px;
-  display: flex;
-  align-items: center;
-  gap: 7px;
-}
-
-.prompt-label::before {
-  content: '';
-  display: inline-block;
-  width: 5px;
-  height: 5px;
-  background: var(--sage-soft);
-  border-radius: 50%;
-}
+.prompt-block .block-label { color: var(--sage-soft); }
+.prompt-block .block-label::before { background: var(--sage-soft); }
 
 .prompt-block p {
   font-size: 12.5px;
@@ -226,7 +208,7 @@ body {
   white-space: pre-line;
 }
 
-/* ── Eindproduct-vak ── */
+/* ── Resultaatvak ── */
 .result-block {
   border: 1.5px solid var(--sage-soft);
   border-radius: 8px;
@@ -234,26 +216,8 @@ body {
   margin-bottom: 14px;
 }
 
-.result-label {
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 2.5px;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 8px;
-  display: flex;
-  align-items: center;
-  gap: 7px;
-}
-
-.result-label::before {
-  content: '';
-  display: inline-block;
-  width: 5px;
-  height: 5px;
-  background: var(--sage-soft);
-  border-radius: 50%;
-}
+.result-block .block-label { color: var(--muted); }
+.result-block .block-label::before { background: var(--sage-soft); }
 
 .result-block ul {
   list-style: none;
@@ -277,7 +241,7 @@ body {
   flex-shrink: 0;
 }
 
-/* ── Checklist ── */
+/* ── Checklist (kopieerbaar) ── */
 .checklist {
   list-style: none;
   display: flex;
@@ -290,38 +254,22 @@ body {
   color: var(--text);
   display: flex;
   align-items: flex-start;
-  gap: 9px;
+  gap: 8px;
 }
 
-.checklist li .check-box {
-  width: 14px;
-  height: 14px;
-  border: 1.5px solid var(--sage-soft);
-  border-radius: 3px;
+.checklist li .check-char {
   flex-shrink: 0;
-  margin-top: 1px;
-  background: var(--cream);
-}
-
-.checklist li.checked .check-box {
-  background: var(--sage-deep);
-  border-color: var(--sage-deep);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.checklist li.checked .check-box::after {
-  content: '✓';
-  color: var(--cream);
-  font-size: 9px;
   font-weight: 700;
+  font-size: 13px;
+  line-height: 1.3;
+  width: 16px;
+  text-align: center;
 }
 
-.checklist li.checked span {
-  color: var(--sage-deep);
-  font-weight: 600;
-}
+.checklist li.checked .check-char { color: var(--sage-deep); }
+.checklist li.open    .check-char { color: var(--sage-soft); }
+.checklist li.checked .check-text { color: var(--sage-deep); font-weight: 600; }
+.checklist li.open    .check-text { color: var(--text); }
 
 /* ── Tip-balk ── */
 .tip {
@@ -335,47 +283,141 @@ body {
   font-style: italic;
 }
 
-/* ── Referentiekaart onderaan pagina 3 ── */
+/* ── Scheidingslabel ── */
+.block-sep {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--sage-soft);
+  text-align: center;
+  margin: 10px 0;
+}
+
+/* ── Referentieraster ── */
 .ref-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-top: 4px;
+  gap: 12px;
 }
 
 .ref-card {
   background: var(--sage-mist);
-  border-radius: 6px;
-  padding: 10px 12px;
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+
+.ref-card-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  background: var(--sage-deep);
+  border-radius: 50%;
+  color: var(--cream);
+  font-size: 11px;
+  font-weight: 700;
+  margin-bottom: 8px;
 }
 
 .ref-card-title {
-  font-size: 9.5px;
+  font-size: 13px;
   font-weight: 700;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--sage-deep);
-  margin-bottom: 6px;
+  color: var(--sage-ink);
+  margin-bottom: 4px;
+  line-height: 1.2;
+}
+
+.ref-card-sub {
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 10px;
+  font-style: italic;
 }
 
 .ref-card ul {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 4px;
 }
 
 .ref-card ul li {
-  font-size: 11px;
+  font-size: 11.5px;
   color: var(--text);
   display: flex;
-  gap: 6px;
+  gap: 7px;
+  align-items: flex-start;
 }
 
 .ref-card ul li::before {
   content: '→';
   color: var(--sage);
   flex-shrink: 0;
+}
+
+/* Technieken-kaart (volle breedte) */
+.ref-card-wide {
+  grid-column: 1 / -1;
+  background: var(--sage-ink);
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+
+.ref-card-wide .ref-card-title { color: var(--cream); }
+.ref-card-wide .ref-card-sub   { color: var(--sage-soft); }
+
+.ref-card-wide .techniques {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 6px 16px;
+  list-style: none;
+}
+
+.ref-card-wide .techniques li {
+  font-size: 11.5px;
+  color: var(--soft);
+  display: flex;
+  gap: 7px;
+  align-items: flex-start;
+  color: var(--sage-soft);
+}
+
+.ref-card-wide .techniques li strong {
+  color: var(--cream);
+}
+
+.ref-card-wide .techniques li::before {
+  content: '→';
+  color: var(--sage);
+  flex-shrink: 0;
+}
+
+/* ── Gouden regel banner ── */
+.golden-rule {
+  background: var(--sage-deep);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+}
+
+.golden-rule p {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--cream);
+  font-style: italic;
+  line-height: 1.5;
+}
+
+.golden-rule span {
+  display: block;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--sage-soft);
+  margin-bottom: 6px;
 }
 
 /* ── Paginavoet ── */
@@ -391,40 +433,19 @@ body {
   padding-top: 7px;
 }
 
-.page-footer-left {
+.page-footer span {
   font-size: 9px;
   color: var(--muted);
   letter-spacing: 1px;
-}
-
-.page-footer-right {
-  font-size: 9px;
-  color: var(--muted);
-}
-
-/* ── Scheidingslabel tussen blokken ── */
-.block-sep {
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--sage-soft);
-  text-align: center;
-  margin: 10px 0;
 }
 
 /* ══════════════════════════════════════
    PRINT
 ══════════════════════════════════════ */
 @media print {
-  @page {
-    size: A4;
-    margin: 0;
-  }
+  @page { size: A4; margin: 0; }
 
-  body {
-    background: white;
-  }
+  body { background: white; }
 
   .screen-bar { display: none; }
 
@@ -433,7 +454,7 @@ body {
     min-height: 0;
     height: 297mm;
     margin: 0;
-    padding: 18mm 16mm 20mm;
+    padding: 18mm 16mm 22mm;
     page-break-after: always;
     break-after: page;
   }
@@ -457,16 +478,101 @@ body {
 </div>
 
 <!-- ══════════════════════════════════════
-     PAGINA 1  –  Oefening 1: Draaiboek
+     PAGINA 1  –  Snelgids goede prompts
 ══════════════════════════════════════ -->
 <div class="page">
 
   <div class="page-header">
-    <div class="page-header-left">
+    <div>
+      <p class="page-supertitle">Werken met AI voor stichtingen &middot; Training Timon Kool</p>
+      <h1 class="page-title">Snelgids: zo schrijf je een goede prompt</h1>
+    </div>
+    <span class="page-badge">Bewaar dit vel</span>
+  </div>
+
+  <div class="golden-rule">
+    <span>De basisregel</span>
+    <p>"Vaag in = vaag uit. Hoe specifieker je vraag, hoe bruikbaarder het antwoord."</p>
+  </div>
+
+  <div class="ref-grid">
+
+    <div class="ref-card">
+      <div class="ref-card-num">1</div>
+      <p class="ref-card-title">ROL</p>
+      <p class="ref-card-sub">Vertel wie AI moet zijn</p>
+      <ul>
+        <li>"Schrijf als een ervaren eventcoördinator…"</li>
+        <li>"Je bent een HR-adviseur met kennis van verzuim…"</li>
+        <li>"Schrijf als een communicatiemedewerker voor een stichting…"</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-num">2</div>
+      <p class="ref-card-title">TAAK</p>
+      <p class="ref-card-sub">Wat moet er precies komen?</p>
+      <ul>
+        <li>"…een draaiboek met tijdsblokken en taakverdeling…"</li>
+        <li>"…een actielijst gesorteerd op prioriteit…"</li>
+        <li>"…een uitnodiging van maximaal 150 woorden…"</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-num">3</div>
+      <p class="ref-card-title">CONTEXT</p>
+      <p class="ref-card-sub">Wat moet AI weten?</p>
+      <ul>
+        <li>"…voor een gratis inloopmiddag op 15 april, 2 uur…"</li>
+        <li>"…toon: warm, niet formeel, voor kwetsbare doelgroep…"</li>
+        <li>"…max 1 A4, gebruik eenvoudige taal, geen jargon…"</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-num" style="background: var(--sage-soft); color: var(--sage-ink);">!</div>
+      <p class="ref-card-title">Altijd controleren</p>
+      <p class="ref-card-sub">AI klinkt zeker maar liegt soms</p>
+      <ul>
+        <li>Wetten, regels en procedures</li>
+        <li>Namen, functies en datums</li>
+        <li>Bedragen en juridische informatie</li>
+        <li>Medische informatie</li>
+      </ul>
+    </div>
+
+    <div class="ref-card-wide">
+      <p class="ref-card-title">5 technieken die direct werken</p>
+      <p class="ref-card-sub">Gebruik deze als je resultaat niet meteen klopt</p>
+      <ul class="techniques">
+        <li><strong>Geef een voorbeeld</strong> &mdash; "Net als deze tekst: [plak voorbeeld]"</li>
+        <li><strong>Zeg wat je niet wilt</strong> &mdash; "Geen jargon, niet formeel, zonder opsomming"</li>
+        <li><strong>Vraag varianten</strong> &mdash; "Geef me drie versies"</li>
+        <li><strong>Bouw voort</strong> &mdash; "Maak dit korter" / "Schrijf het vriendelijker"</li>
+        <li><strong>Vraag door</strong> &mdash; "Waarom kies je voor deze aanpak?"</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="page-footer">
+    <span>timonkool.nl &middot; Basistraining AI voor stichtingen</span>
+    <span>1 / 4</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGINA 2  –  Oefening 1: Draaiboek
+══════════════════════════════════════ -->
+<div class="page">
+
+  <div class="page-header">
+    <div>
       <p class="page-supertitle">Werken met AI voor stichtingen &middot; Training Timon Kool</p>
       <h1 class="page-title">Oefening 1: Van ruw plan naar draaiboek</h1>
     </div>
-    <span class="page-badge">0–15 minuten</span>
+    <span class="page-badge">10 minuten</span>
   </div>
 
   <p class="exercise-intro">
@@ -474,7 +580,7 @@ body {
   </p>
 
   <div class="copy-block">
-    <p class="copy-label">Kopieer dit naar AI</p>
+    <p class="block-label">Kopieer dit naar AI</p>
     <ul>
       <li>Inloopmiddag voor mensen met geldzorgen</li>
       <li>Gratis, laagdrempelig, ergens in april</li>
@@ -492,14 +598,14 @@ body {
   </div>
 
   <div class="prompt-block">
-    <p class="prompt-label">Voorbeeldprompt</p>
+    <p class="block-label">Voorbeeldprompt</p>
     <p>"Schrijf als een ervaren eventcoördinator een draaiboek met tijdsblokken en taakverdeling voor de inloopmiddag hieronder. Voeg ook een checklist toe van alles wat geregeld moet worden. Max 1 A4."
 
 [plak de ruwe input daarna hieronder]</p>
   </div>
 
   <div class="result-block">
-    <p class="result-label">Gewenst eindproduct</p>
+    <p class="block-label">Gewenst eindproduct</p>
     <ul>
       <li>Draaiboek met tijdsblokken</li>
       <li>Taakverdeling: wie doet wat</li>
@@ -510,30 +616,30 @@ body {
   <div class="block-sep">Na 10 minuten: laat 2–3 mensen hun resultaat tonen. Wie gebruikte een ROL? Maakte dat verschil?</div>
 
   <div class="page-footer">
-    <span class="page-footer-left">timonkool.nl &middot; Basistraining AI voor stichtingen</span>
-    <span class="page-footer-right">1 / 3</span>
+    <span>timonkool.nl &middot; Basistraining AI voor stichtingen</span>
+    <span>2 / 4</span>
   </div>
 </div>
 
 <!-- ══════════════════════════════════════
-     PAGINA 2  –  Oefening 2: Mail
+     PAGINA 3  –  Oefening 2: Mail
 ══════════════════════════════════════ -->
 <div class="page">
 
   <div class="page-header">
-    <div class="page-header-left">
+    <div>
       <p class="page-supertitle">Werken met AI voor stichtingen &middot; Training Timon Kool</p>
       <h1 class="page-title">Oefening 2: Actiepunten uit een mail halen</h1>
     </div>
-    <span class="page-badge">10–20 minuten</span>
+    <span class="page-badge">10 minuten</span>
   </div>
 
   <p class="exercise-intro">
-    Kopieer de mail hieronder volledig naar het chatvenster. Voeg er de prompt onder toe. AI analyseert de mail en maakt een gestructureerde actielijst.
+    Kopieer de mail hieronder volledig naar het chatvenster. Voeg er de prompt boven toe. AI analyseert de mail en maakt een gestructureerde actielijst.
   </p>
 
   <div class="copy-block">
-    <p class="copy-label">Kopieer deze mail naar AI</p>
+    <p class="block-label">Kopieer deze mail naar AI</p>
     <p>Hoi, ik zat net alles op een rijtje te zetten. De zaal staat voor 15 april, 13:00–15:30, en Sandra van de schuldhulpverlening heeft bevestigd.
 
 Wat mij zorgen baart is de gemeente — ik heb vorige week gemaild maar nog niks gehoord. Kun jij ze nabellen? Voor vrijdag graag, anders kunnen we het niet meenemen.
@@ -546,7 +652,7 @@ Groetjes, Marieke</p>
   </div>
 
   <div class="prompt-block">
-    <p class="prompt-label">Kopieer deze prompt erboven</p>
+    <p class="block-label">Kopieer deze prompt erboven</p>
     <p>"Lees de mail hieronder. Maak een actielijst:
 – wat, door wie, wanneer
 – al geregeld vs. nog te doen"
@@ -561,18 +667,18 @@ Groetjes, Marieke</p>
   <div class="block-sep">Na 10 minuten: wat heeft AI gemist? Wat heeft het beter benoemd dan jijzelf?</div>
 
   <div class="page-footer">
-    <span class="page-footer-left">timonkool.nl &middot; Basistraining AI voor stichtingen</span>
-    <span class="page-footer-right">2 / 3</span>
+    <span>timonkool.nl &middot; Basistraining AI voor stichtingen</span>
+    <span>3 / 4</span>
   </div>
 </div>
 
 <!-- ══════════════════════════════════════
-     PAGINA 3  –  Oefening 3: Statusupdate
+     PAGINA 4  –  Oefening 3: Statusupdate
 ══════════════════════════════════════ -->
 <div class="page">
 
   <div class="page-header">
-    <div class="page-header-left">
+    <div>
       <p class="page-supertitle">Werken met AI voor stichtingen &middot; Training Timon Kool</p>
       <h1 class="page-title">Oefening 3: Statusupdate voor het team</h1>
     </div>
@@ -583,23 +689,23 @@ Groetjes, Marieke</p>
     Combineer de resultaten van oefening 1 en 2 met de afvinklijst hieronder. Plak alles in één prompt en laat AI de statusupdate schrijven.
   </p>
 
-  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px;">
 
     <div class="copy-block" style="margin-bottom: 0;">
-      <p class="copy-label">Afvinklijst — voeg toe aan je prompt</p>
+      <p class="block-label">Afvinklijst — voeg toe aan je prompt</p>
       <ul class="checklist">
-        <li class="checked"><div class="check-box"></div><span>Zaal geboekt: 15 april, 13:00–15:30</span></li>
-        <li class="checked"><div class="check-box"></div><span>Sandra (schuldhulp) bevestigd</span></li>
-        <li><div class="check-box"></div><span>Gemeente nabellen (voor vrijdag)</span></li>
-        <li><div class="check-box"></div><span>Flyer maken (volgende week, wie?)</span></li>
-        <li><div class="check-box"></div><span>Kinderactiviteit regelen (deze week)</span></li>
-        <li><div class="check-box"></div><span>Aanmeldprocedure bepalen</span></li>
-        <li><div class="check-box"></div><span>Catering regelen</span></li>
+        <li class="checked"><span class="check-char">✓</span><span class="check-text">Zaal geboekt: 15 april, 13:00–15:30</span></li>
+        <li class="checked"><span class="check-char">✓</span><span class="check-text">Sandra (schuldhulp) bevestigd</span></li>
+        <li class="open">   <span class="check-char">○</span><span class="check-text">Gemeente nabellen (voor vrijdag)</span></li>
+        <li class="open">   <span class="check-char">○</span><span class="check-text">Flyer maken (volgende week, wie?)</span></li>
+        <li class="open">   <span class="check-char">○</span><span class="check-text">Kinderactiviteit regelen (deze week)</span></li>
+        <li class="open">   <span class="check-char">○</span><span class="check-text">Aanmeldprocedure bepalen</span></li>
+        <li class="open">   <span class="check-char">○</span><span class="check-text">Catering regelen</span></li>
       </ul>
     </div>
 
     <div class="prompt-block" style="margin-bottom: 0;">
-      <p class="prompt-label">Jouw prompt</p>
+      <p class="block-label">Jouw prompt</p>
       <p>"Schrijf een korte, informele statusupdate voor mijn team over de inloopmiddag van 15 april.
 
 Gebruik: draaiboek (oef. 1) + actielijst (oef. 2) + afvinklijst hieronder.
@@ -615,49 +721,9 @@ Toon: collegiaal en bondig. Wat staat, wat nog openstaat, wie wat pakt."
     Vraag na afloop: "Hoelang had dit normaal gekost?" — laat de stilte vallen.
   </div>
 
-  <div style="margin-top: 6px; border-top: 1.5px solid var(--sage-soft); padding-top: 12px;">
-    <p style="font-size: 9px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 10px;">Snel naslagwerk: de drie elementen van een goede prompt</p>
-    <div class="ref-grid">
-      <div class="ref-card">
-        <p class="ref-card-title">ROL &nbsp;·&nbsp; Vertel wie AI moet zijn</p>
-        <ul>
-          <li>"Schrijf als een ervaren eventcoördinator…"</li>
-          <li>"Je bent een HR-adviseur met kennis van verzuim…"</li>
-          <li>"Schrijf als een communicatiemedewerker…"</li>
-        </ul>
-      </div>
-      <div class="ref-card">
-        <p class="ref-card-title">TAAK &nbsp;·&nbsp; Wat moet er precies komen?</p>
-        <ul>
-          <li>"…een draaiboek met tijdsblokken…"</li>
-          <li>"…een actielijst gesorteerd op prioriteit…"</li>
-          <li>"…een uitnodiging van max 150 woorden…"</li>
-        </ul>
-      </div>
-      <div class="ref-card">
-        <p class="ref-card-title">CONTEXT &nbsp;·&nbsp; Wat moet AI weten?</p>
-        <ul>
-          <li>"…voor een inloopmiddag op 15 april, 2 uur, gratis…"</li>
-          <li>"…toon: warm, niet formeel, voor kwetsbare doelgroep…"</li>
-          <li>"…max 1 A4, gebruik eenvoudige taal…"</li>
-        </ul>
-      </div>
-      <div class="ref-card">
-        <p class="ref-card-title">5 technieken die direct werken</p>
-        <ul>
-          <li>Geef een voorbeeld: "Net als deze tekst: [plak]"</li>
-          <li>Zeg wat je niet wilt: "Geen jargon, niet formeel"</li>
-          <li>Vraag varianten: "Geef drie versies"</li>
-          <li>Bouw voort: "Maak dit korter / vriendelijker"</li>
-          <li>Vraag door: "Waarom kies je deze aanpak?"</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
   <div class="page-footer">
-    <span class="page-footer-left">timonkool.nl &middot; Basistraining AI voor stichtingen</span>
-    <span class="page-footer-right">3 / 3</span>
+    <span>timonkool.nl &middot; Basistraining AI voor stichtingen</span>
+    <span>4 / 4</span>
   </div>
 </div>
 
