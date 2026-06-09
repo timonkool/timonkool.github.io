@@ -27,6 +27,11 @@
       label: 'Handboek AI & Cowork voor leiders',
       href:  href('pages/portfolio/handboek-ai-cowork.html'),
       tag:   'Handboek'
+    },
+    {
+      label: 'Basistraining AI voor stichtingen',
+      href:  href('pages/portfolio/basistraining-ai.html'),
+      tag:   'Training'
     }
   ];
 
