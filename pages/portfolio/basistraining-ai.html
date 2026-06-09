@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Basistraining AI voor medewerkers en vrijwilligers — Timon Kool</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Fraunces:ital,wght@0,300;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/nav.css">
+<style>
+  /* ── Design tokens ── */
+  :root {
+    --sage-deep:  #6b8068;
+    --sage-ink:   #3a4a38;
+    --sage:       #8ba287;
+    --sage-soft:  #c8d4c4;
+    --sage-mist:  #eef2ec;
+    --cream:      #faf8f4;
+    --paper:      #ffffff;
+    --text:       #2d352c;
+    --muted:      #6b7268;
+    --radius-sm:  6px;
+    --radius-md:  10px;
+    --radius-lg:  14px;
+    --radius-pill:999px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--text);
+    font-family: 'Quicksand', sans-serif;
+    font-size: 15px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    padding-top: 56px;
+  }
+
+  /* ── Scroll fade-in ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ══════════════════════════════════════
+     HERO
+  ══════════════════════════════════════ */
+  .hero {
+    background: var(--sage-deep);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 80% at 80% 50%, rgba(58,74,56,0.45) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 10% 80%, rgba(139,162,135,0.2) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 72px 40px 64px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--sage-soft);
+    text-decoration: none;
+    margin-bottom: 36px;
+    opacity: 0;
+    animation: fadeUp 0.5s 0s ease forwards;
+    transition: color 0.2s;
+  }
+  .hero-back:hover { color: var(--cream); }
+  .hero-back svg {
+    width: 14px; height: 14px;
+    stroke: currentColor; fill: none;
+    stroke-width: 2;
+  }
+
+  .hero-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--sage-soft);
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.1s ease forwards;
+  }
+
+  .hero-name {
+    font-size: clamp(36px, 6vw, 60px);
+    font-weight: 700;
+    color: var(--cream);
+    line-height: 1.1;
+    letter-spacing: -1px;
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.2s ease forwards;
+  }
+
+  .hero-quote {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(17px, 2.2vw, 22px);
+    color: var(--cream);
+    max-width: 620px;
+    line-height: 1.55;
+    padding-left: 20px;
+    border-left: 3px solid var(--sage-soft);
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.35s ease forwards;
+  }
+
+  .hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 36px;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.5s ease forwards;
+  }
+
+  .hero-tag {
+    background: rgba(250,248,244,0.12);
+    border: 1px solid rgba(250,248,244,0.25);
+    color: var(--cream);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 7px 16px;
+    border-radius: var(--radius-pill);
+    backdrop-filter: blur(4px);
+  }
+
+  .btn-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(250,248,244,0.15);
+    border: 1.5px solid rgba(250,248,244,0.35);
+    color: var(--cream);
+    font-family: 'Quicksand', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-decoration: none;
+    padding: 11px 24px;
+    border-radius: var(--radius-pill);
+    opacity: 0;
+    animation: fadeUp 0.6s 0.65s ease forwards;
+    transition: background 0.2s, border-color 0.2s, transform 0.15s;
+  }
+  .btn-download:hover {
+    background: rgba(250,248,244,0.22);
+    border-color: rgba(250,248,244,0.55);
+    transform: translateY(-1px);
+  }
+  .btn-download svg { width: 15px; height: 15px; stroke: currentColor; fill: none; flex-shrink: 0; stroke-width: 2; }
+
+  /* ══════════════════════════════════════
+     E-LEARNING BANNER
+  ══════════════════════════════════════ */
+  .elearning-banner {
+    background: var(--sage-ink);
+    padding: 0;
+  }
+
+  .elearning-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 52px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+  }
+
+  .elearning-left {
+    flex: 1;
+  }
+
+  .elearning-badge {
+    display: inline-block;
+    background: rgba(200,212,196,0.18);
+    border: 1px solid rgba(200,212,196,0.35);
+    color: var(--sage-soft);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: var(--radius-pill);
+    margin-bottom: 16px;
+  }
+
+  .elearning-title {
+    font-size: clamp(24px, 3.5vw, 36px);
+    font-weight: 700;
+    color: var(--cream);
+    line-height: 1.15;
+    margin-bottom: 14px;
+    letter-spacing: -0.5px;
+  }
+
+  .elearning-desc {
+    font-size: 15px;
+    color: var(--sage-soft);
+    line-height: 1.65;
+    max-width: 480px;
+  }
+
+  .elearning-cta {
+    flex-shrink: 0;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .btn-elearning {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    background: var(--cream);
+    color: var(--sage-ink);
+    font-family: 'Quicksand', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    padding: 14px 30px;
+    border-radius: var(--radius-pill);
+    transition: background 0.2s, transform 0.15s;
+    white-space: nowrap;
+  }
+  .btn-elearning:hover { background: var(--sage-mist); transform: translateY(-2px); }
+  .btn-elearning svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; flex-shrink: 0; }
+
+  .elearning-soon {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  /* ══════════════════════════════════════
+     LAYOUT
+  ══════════════════════════════════════ */
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 72px 40px 100px;
+  }
+
+  /* Section header */
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--sage-deep);
+    margin-bottom: 28px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--sage-soft);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 6px;
+    height: 6px;
+    background: var(--sage-deep);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  section { margin-bottom: 72px; }
+
+  /* ══════════════════════════════════════
+     INTRO
+  ══════════════════════════════════════ */
+  .intro-text {
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--text);
+    max-width: 720px;
+    margin-bottom: 18px;
+  }
+
+  .intro-text:first-of-type {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 17px;
+    color: var(--sage-ink);
+    padding-left: 18px;
+    border-left: 3px solid var(--sage-deep);
+  }
+
+  /* ══════════════════════════════════════
+     PROGRAMMA (DELEN)
+  ══════════════════════════════════════ */
+  .parts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+  }
+
+  .part-card {
+    background: var(--paper);
+    border-radius: var(--radius-lg);
+    padding: 28px 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    border: 1.5px solid var(--sage-mist);
+  }
+
+  .part-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  .part-number {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--sage-deep);
+  }
+
+  .part-time {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    background: var(--sage-mist);
+    padding: 3px 10px;
+    border-radius: var(--radius-pill);
+  }
+
+  .part-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--sage-ink);
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+
+  .part-desc {
+    font-size: 13.5px;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  /* ══════════════════════════════════════
+     WAT JE LEERT
+  ══════════════════════════════════════ */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 14px;
+  }
+
+  .skill-item {
+    background: var(--sage-mist);
+    border-radius: var(--radius-md);
+    padding: 20px 22px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .skill-icon {
+    width: 32px;
+    height: 32px;
+    background: var(--sage-deep);
+    border-radius: var(--radius-sm);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .skill-icon svg {
+    width: 16px;
+    height: 16px;
+    stroke: var(--cream);
+    fill: none;
+    stroke-width: 2;
+  }
+
+  .skill-text {
+    flex: 1;
+  }
+
+  .skill-title {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--sage-ink);
+    margin-bottom: 4px;
+  }
+
+  .skill-desc {
+    font-size: 12.5px;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  /* ══════════════════════════════════════
+     DOELGROEP
+  ══════════════════════════════════════ */
+  .audience-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .audience-tag {
+    background: var(--paper);
+    border: 1.5px solid var(--sage-soft);
+    color: var(--sage-ink);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 8px 18px;
+    border-radius: var(--radius-pill);
+  }
+
+  /* ══════════════════════════════════════
+     ANIMATIONS
+  ══════════════════════════════════════ */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  /* ══════════════════════════════════════
+     RESPONSIVE
+  ══════════════════════════════════════ */
+  @media (max-width: 720px) {
+    .elearning-inner {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 40px 24px;
+      gap: 28px;
+    }
+    .elearning-cta { align-items: flex-start; }
+  }
+
+  @media (max-width: 640px) {
+    .hero-inner { padding: 48px 24px 48px; }
+    .page { padding: 48px 24px 80px; }
+    .parts-grid { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ══════════════════════════════════════
+     FOOTER
+  ══════════════════════════════════════ */
+  .footer {
+    text-align: center;
+    padding: 32px 24px 48px;
+    font-size: 12px;
+    color: var(--muted);
+    border-top: 1px solid var(--sage-soft);
+  }
+</style>
+</head>
+<body>
+
+<nav id="site-nav"></nav>
+
+<!-- ══════════════════════════════════════
+     HERO
+══════════════════════════════════════ -->
+<header class="hero">
+  <div class="hero-inner">
+    <a href="../../index.html" class="hero-back">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      Terug naar overzicht
+    </a>
+    <p class="hero-label">Training &middot; AI &middot; 2026</p>
+    <h1 class="hero-name">Werken met AI<br>voor stichtingen</h1>
+    <blockquote class="hero-quote">
+      "Een praktische training voor medewerkers en vrijwilligers die AI direct willen inzetten in hun werk. Geen technische kennis vereist."
+    </blockquote>
+    <div class="hero-tags">
+      <span class="hero-tag">Beginners</span>
+      <span class="hero-tag">Medewerkers</span>
+      <span class="hero-tag">Vrijwilligers</span>
+      <span class="hero-tag">Stichtingen</span>
+      <span class="hero-tag">90 minuten</span>
+    </div>
+    <a href="../../docs/basistraining-ai.pptx" download class="btn-download">
+      <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Download presentatie (.pptx)
+    </a>
+  </div>
+</header>
+
+<!-- ══════════════════════════════════════
+     E-LEARNING BANNER
+══════════════════════════════════════ -->
+<div class="elearning-banner">
+  <div class="elearning-inner">
+    <div class="elearning-left">
+      <span class="elearning-badge">Binnenkort beschikbaar</span>
+      <h2 class="elearning-title">E-learning: Werken<br>met AI voor stichtingen</h2>
+      <p class="elearning-desc">
+        De volledige training op je eigen tempo. Met video's, oefeningen en directe feedback. Toegankelijk voor iedereen in je organisatie, wanneer het uitkomt.
+      </p>
+    </div>
+    <div class="elearning-cta">
+      <a href="#" class="btn-elearning" aria-disabled="true" tabindex="-1" style="opacity:0.6; cursor: default; pointer-events: none;">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+        Naar de e-learning
+      </a>
+      <span class="elearning-soon">Nog niet live</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     MAIN CONTENT
+══════════════════════════════════════ -->
+<main class="page">
+
+  <!-- OVER DEZE TRAINING -->
+  <section class="reveal">
+    <h2 class="section-label">Over deze training</h2>
+    <p class="intro-text">
+      Medewerkers en vrijwilligers bij stichtingen besteden meer tijd aan schrijfwerk, verslagen en communicatie dan nodig is. Deze training laat zien hoe AI dat verandert, in negentig minuten.
+    </p>
+    <p class="intro-text">
+      De training is opgebouwd rond een doorlopende casus: het organiseren van een inloopmiddag. Deelnemers werken van uitnodiging tot statusupdate, stap voor stap, met AI. Geen theorie zonder praktijk.
+    </p>
+    <p class="intro-text">
+      De presentatie is vrij te downloaden en in te zetten als basis voor een eigen training. De bijbehorende e-learning volgt binnenkort.
+    </p>
+  </section>
+
+  <!-- PROGRAMMA -->
+  <section class="reveal">
+    <h2 class="section-label">Programma</h2>
+    <div class="parts-grid">
+      <div class="part-card">
+        <div class="part-meta">
+          <p class="part-number">Deel 1</p>
+          <span class="part-time">0 &ndash; 15 min</span>
+        </div>
+        <h3 class="part-title">Het wow-moment</h3>
+        <p class="part-desc">Eerst zien, dan begrijpen. Een live demonstratie laat zien wat AI in seconden doet, zodat deelnemers met eigen ogen ervaren wat er mogelijk is.</p>
+      </div>
+      <div class="part-card">
+        <div class="part-meta">
+          <p class="part-number">Deel 2</p>
+          <span class="part-time">15 &ndash; 25 min</span>
+        </div>
+        <h3 class="part-title">Wat is AI eigenlijk?</h3>
+        <p class="part-desc">Hoe AI werkt in gewone taal. Inclusief uitleg over hallucinaties: waarom AI geloofwaardig klinkt maar soms gewoon liegt, en hoe je dat herkent.</p>
+      </div>
+      <div class="part-card">
+        <div class="part-meta">
+          <p class="part-number">Deel 3</p>
+          <span class="part-time">25 &ndash; 35 min</span>
+        </div>
+        <h3 class="part-title">Veilig gebruik</h3>
+        <p class="part-desc">AVG in de praktijk. Wat geef je wel en niet aan AI? Concrete voorbeelden uit het werk bij stichtingen, met de gouden regel als houvast.</p>
+      </div>
+      <div class="part-card">
+        <div class="part-meta">
+          <p class="part-number">Deel 4</p>
+          <span class="part-time">35 &ndash; 50 min</span>
+        </div>
+        <h3 class="part-title">Goede prompts schrijven</h3>
+        <p class="part-desc">Vaag in is vaag uit. Deelnemers leren de drie elementen van een goede prompt: Rol, Taak en Context. Met vijf technieken die direct werken.</p>
+      </div>
+      <div class="part-card">
+        <div class="part-meta">
+          <p class="part-number">Deel 5</p>
+          <span class="part-time">50 &ndash; 80 min</span>
+        </div>
+        <h3 class="part-title">Drie oefeningen</h3>
+        <p class="part-desc">Zelf aan de slag met een echte casus. Draaiboek schrijven, actiepunten uit een mail halen, een statusupdate voor het team opstellen. Drie taken, dertig minuten.</p>
+      </div>
+      <div class="part-card">
+        <div class="part-meta">
+          <p class="part-number">Deel 6</p>
+          <span class="part-time">80 &ndash; 90 min</span>
+        </div>
+        <h3 class="part-title">Wat nu?</h3>
+        <p class="part-desc">Van training naar morgen. Deelnemers kiezen één concrete taak die ze deze week anders aanpakken. Met een stappenplan en een blik op wat er verder nog mogelijk is.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WAT JE LEERT -->
+  <section class="reveal">
+    <h2 class="section-label">Wat deelnemers meenemen</h2>
+    <div class="skills-grid">
+      <div class="skill-item">
+        <div class="skill-icon">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="skill-text">
+          <p class="skill-title">AI direct gebruiken</p>
+          <p class="skill-desc">Een account aanmaken en dezelfde dag aan de slag met een echte werktaak.</p>
+        </div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </div>
+        <div class="skill-text">
+          <p class="skill-title">Goede prompts schrijven</p>
+          <p class="skill-desc">De drie-elementen-formule toepassen op eigen taken: Rol, Taak, Context.</p>
+        </div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="skill-text">
+          <p class="skill-title">Veilig werken</p>
+          <p class="skill-desc">Weten wat je wel en niet invoert. AVG toepassen zonder het handboek open te slaan.</p>
+        </div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <div class="skill-text">
+          <p class="skill-title">Kritisch blijven</p>
+          <p class="skill-desc">Herkennen wanneer AI hallucineert en weten wat je altijd zelf controleert.</p>
+        </div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <div class="skill-text">
+          <p class="skill-title">Taken delegeren aan AI</p>
+          <p class="skill-desc">Uitnodigingen, verslagen, actiepunten en statusupdates in minuten in plaats van uren.</p>
+        </div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <div class="skill-text">
+          <p class="skill-title">Het gesprek starten in je team</p>
+          <p class="skill-desc">Weten hoe je AI-gebruik bespreekbaar maakt met collega's en leidinggevenden.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOELGROEP -->
+  <section class="reveal">
+    <h2 class="section-label">Voor wie</h2>
+    <p class="intro-text" style="margin-bottom: 24px;">
+      Deze training is gemaakt voor medewerkers en vrijwilligers bij stichtingen en non-profitorganisaties die AI willen gebruiken in hun dagelijkse werk. Je hoeft niets te weten van technologie.
+    </p>
+    <div class="audience-row">
+      <span class="audience-tag">Stichtingen</span>
+      <span class="audience-tag">Non-profit</span>
+      <span class="audience-tag">Welzijn</span>
+      <span class="audience-tag">Vrijwilligers</span>
+      <span class="audience-tag">Medewerkers</span>
+      <span class="audience-tag">Teamleiders</span>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  &copy; 2026 Timon Kool &mdash; <a href="../../index.html" style="color: var(--sage-deep); text-decoration: none;">timonkool.nl</a>
+</footer>
+
+<script>
+  // Scroll fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+<script>const NAV_ROOT = '../../';</script>
+<script src="../../assets/js/nav.js"></script>
+
+</body>
+</html>

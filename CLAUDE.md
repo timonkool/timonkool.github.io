@@ -181,7 +181,7 @@ De volledige schrijfstijlinstructie staat in `schrijfstijl_instructie.md`. Onder
 | CV (visueel) | `pages/cv.html` | In ontwikkeling |
 | CV (download) | `docs/cv-timon-kool.pdf` | Nog toe te voegen |
 | Handboek AI & Cowork | `pages/portfolio/handboek-ai-cowork.html` | Nog toe te voegen |
-| Basistraining AI-chatbots | `pages/portfolio/basistraining-ai.html` | In ontwikkeling |
+| Basistraining AI voor stichtingen | `pages/portfolio/basistraining-ai.html` | Live |
 
 Houd dit overzicht actueel bij elke wijziging.
 
