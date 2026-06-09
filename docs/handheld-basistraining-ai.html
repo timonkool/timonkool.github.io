@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Werken met AI — Handout oefeningen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+/* ── Design tokens ── */
+:root {
+  --sage-deep: #6b8068;
+  --sage-ink:  #3a4a38;
+  --sage:      #8ba287;
+  --sage-soft: #c8d4c4;
+  --sage-mist: #eef2ec;
+  --cream:     #faf8f4;
+  --text:      #2d352c;
+  --muted:     #6b7268;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Quicksand', 'Trebuchet MS', Verdana, sans-serif;
+  background: #e8e8e4;
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Scherm: print-knop bovenaan ── */
+.screen-bar {
+  background: var(--sage-ink);
+  padding: 14px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.screen-bar-title {
+  color: var(--sage-soft);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.btn-print {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--cream);
+  color: var(--sage-ink);
+  font-family: 'Quicksand', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 9px 22px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.btn-print:hover { background: var(--sage-mist); }
+.btn-print svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+/* ── A4-pagina's ── */
+.page {
+  width: 210mm;
+  min-height: 297mm;
+  background: var(--cream);
+  margin: 24px auto;
+  padding: 18mm 16mm 16mm;
+  position: relative;
+}
+
+/* ── Paginaheader ── */
+.page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  border-bottom: 2.5px solid var(--sage-deep);
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  gap: 16px;
+}
+
+.page-header-left {}
+
+.page-supertitle {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 3px;
+}
+
+.page-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--sage-ink);
+  line-height: 1.15;
+}
+
+.page-badge {
+  background: var(--sage-deep);
+  color: var(--cream);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 999px;
+  white-space: nowrap;
+  margin-top: 4px;
+}
+
+/* ── Instructie-intro ── */
+.exercise-intro {
+  font-size: 12.5px;
+  color: var(--muted);
+  margin-bottom: 16px;
+  font-style: italic;
+}
+
+/* ── Kopieervak ── */
+.copy-block {
+  background: var(--sage-mist);
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin-bottom: 14px;
+}
+
+.copy-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--sage-deep);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.copy-label::before {
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  background: var(--sage-deep);
+  border-radius: 50%;
+}
+
+.copy-block ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.copy-block ul li {
+  font-size: 12.5px;
+  color: var(--text);
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.copy-block ul li::before {
+  content: '·';
+  color: var(--sage);
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 0;
+}
+
+.copy-block p {
+  font-size: 12.5px;
+  color: var(--text);
+  line-height: 1.7;
+  white-space: pre-line;
+}
+
+/* ── Promptvak ── */
+.prompt-block {
+  background: var(--sage-ink);
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin-bottom: 14px;
+}
+
+.prompt-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--sage-soft);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.prompt-label::before {
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  background: var(--sage-soft);
+  border-radius: 50%;
+}
+
+.prompt-block p {
+  font-size: 12.5px;
+  color: var(--cream);
+  line-height: 1.7;
+  font-style: italic;
+  white-space: pre-line;
+}
+
+/* ── Eindproduct-vak ── */
+.result-block {
+  border: 1.5px solid var(--sage-soft);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 14px;
+}
+
+.result-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.result-label::before {
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  background: var(--sage-soft);
+  border-radius: 50%;
+}
+
+.result-block ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.result-block ul li {
+  font-size: 12px;
+  color: var(--text);
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.result-block ul li::before {
+  content: '✓';
+  color: var(--sage-deep);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* ── Checklist ── */
+.checklist {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.checklist li {
+  font-size: 12.5px;
+  color: var(--text);
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+}
+
+.checklist li .check-box {
+  width: 14px;
+  height: 14px;
+  border: 1.5px solid var(--sage-soft);
+  border-radius: 3px;
+  flex-shrink: 0;
+  margin-top: 1px;
+  background: var(--cream);
+}
+
+.checklist li.checked .check-box {
+  background: var(--sage-deep);
+  border-color: var(--sage-deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checklist li.checked .check-box::after {
+  content: '✓';
+  color: var(--cream);
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.checklist li.checked span {
+  color: var(--sage-deep);
+  font-weight: 600;
+}
+
+/* ── Tip-balk ── */
+.tip {
+  background: var(--cream);
+  border-left: 3px solid var(--sage-deep);
+  padding: 10px 14px;
+  border-radius: 0 6px 6px 0;
+  margin-bottom: 14px;
+  font-size: 12px;
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* ── Referentiekaart onderaan pagina 3 ── */
+.ref-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.ref-card {
+  background: var(--sage-mist);
+  border-radius: 6px;
+  padding: 10px 12px;
+}
+
+.ref-card-title {
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--sage-deep);
+  margin-bottom: 6px;
+}
+
+.ref-card ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.ref-card ul li {
+  font-size: 11px;
+  color: var(--text);
+  display: flex;
+  gap: 6px;
+}
+
+.ref-card ul li::before {
+  content: '→';
+  color: var(--sage);
+  flex-shrink: 0;
+}
+
+/* ── Paginavoet ── */
+.page-footer {
+  position: absolute;
+  bottom: 12mm;
+  left: 16mm;
+  right: 16mm;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--sage-soft);
+  padding-top: 7px;
+}
+
+.page-footer-left {
+  font-size: 9px;
+  color: var(--muted);
+  letter-spacing: 1px;
+}
+
+.page-footer-right {
+  font-size: 9px;
+  color: var(--muted);
+}
+
+/* ── Scheidingslabel tussen blokken ── */
+.block-sep {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--sage-soft);
+  text-align: center;
+  margin: 10px 0;
+}
+
+/* ══════════════════════════════════════
+   PRINT
+══════════════════════════════════════ */
+@media print {
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  body {
+    background: white;
+  }
+
+  .screen-bar { display: none; }
+
+  .page {
+    width: 210mm;
+    min-height: 0;
+    height: 297mm;
+    margin: 0;
+    padding: 18mm 16mm 20mm;
+    page-break-after: always;
+    break-after: page;
+  }
+
+  .page:last-child {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Schermknop -->
+<div class="screen-bar">
+  <span class="screen-bar-title">Werken met AI voor stichtingen &mdash; Handout oefeningen</span>
+  <button class="btn-print" onclick="window.print()">
+    <svg viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+    Afdrukken / Opslaan als PDF
+  </button>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGINA 1  –  Oefening 1: Draaiboek
+══════════════════════════════════════ -->
+<div class="page">
+
+  <div class="page-header">
+    <div class="page-header-left">
+      <p class="page-supertitle">Werken met AI voor stichtingen &middot; Training Timon Kool</p>
+      <h1 class="page-title">Oefening 1: Van ruw plan naar draaiboek</h1>
+    </div>
+    <span class="page-badge">0–15 minuten</span>
+  </div>
+
+  <p class="exercise-intro">
+    Kopieer de ruwe input hieronder naar het chatvenster. Schrijf er zelf een prompt bij met ROL + TAAK + CONTEXT. Het gewenste eindproduct staat rechtsonder.
+  </p>
+
+  <div class="copy-block">
+    <p class="copy-label">Kopieer dit naar AI</p>
+    <ul>
+      <li>Inloopmiddag voor mensen met geldzorgen</li>
+      <li>Gratis, laagdrempelig, ergens in april</li>
+      <li>Informatietafel gemeente over toeslagen</li>
+      <li>Schuldhulpverlener aanwezig</li>
+      <li>Koffie, thee, misschien wat te eten</li>
+      <li>Activiteit voor kinderen</li>
+      <li>Aanmelden niet verplicht maar handig</li>
+      <li>Flyer bij voedselbank en wijkcentrum</li>
+    </ul>
+  </div>
+
+  <div class="tip">
+    Voeg zelf een prompt toe boven de invoer. Gebruik: <strong>ROL</strong> (wie moet AI zijn?), <strong>TAAK</strong> (wat moet er komen?) en <strong>CONTEXT</strong> (wat moet AI weten?).
+  </div>
+
+  <div class="prompt-block">
+    <p class="prompt-label">Voorbeeldprompt</p>
+    <p>"Schrijf als een ervaren eventcoördinator een draaiboek met tijdsblokken en taakverdeling voor de inloopmiddag hieronder. Voeg ook een checklist toe van alles wat geregeld moet worden. Max 1 A4."
+
+[plak de ruwe input daarna hieronder]</p>
+  </div>
+
+  <div class="result-block">
+    <p class="result-label">Gewenst eindproduct</p>
+    <ul>
+      <li>Draaiboek met tijdsblokken</li>
+      <li>Taakverdeling: wie doet wat</li>
+      <li>Checklist van wat geregeld moet worden</li>
+    </ul>
+  </div>
+
+  <div class="block-sep">Na 10 minuten: laat 2–3 mensen hun resultaat tonen. Wie gebruikte een ROL? Maakte dat verschil?</div>
+
+  <div class="page-footer">
+    <span class="page-footer-left">timonkool.nl &middot; Basistraining AI voor stichtingen</span>
+    <span class="page-footer-right">1 / 3</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGINA 2  –  Oefening 2: Mail
+══════════════════════════════════════ -->
+<div class="page">
+
+  <div class="page-header">
+    <div class="page-header-left">
+      <p class="page-supertitle">Werken met AI voor stichtingen &middot; Training Timon Kool</p>
+      <h1 class="page-title">Oefening 2: Actiepunten uit een mail halen</h1>
+    </div>
+    <span class="page-badge">10–20 minuten</span>
+  </div>
+
+  <p class="exercise-intro">
+    Kopieer de mail hieronder volledig naar het chatvenster. Voeg er de prompt onder toe. AI analyseert de mail en maakt een gestructureerde actielijst.
+  </p>
+
+  <div class="copy-block">
+    <p class="copy-label">Kopieer deze mail naar AI</p>
+    <p>Hoi, ik zat net alles op een rijtje te zetten. De zaal staat voor 15 april, 13:00–15:30, en Sandra van de schuldhulpverlening heeft bevestigd.
+
+Wat mij zorgen baart is de gemeente — ik heb vorige week gemaild maar nog niks gehoord. Kun jij ze nabellen? Voor vrijdag graag, anders kunnen we het niet meenemen.
+
+De flyer: Jan heeft het te druk. Heb jij iemand? Volgende week klaar graag.
+
+De kinderen — nog niks geregeld. Laten we dit week afstemmen.
+
+Groetjes, Marieke</p>
+  </div>
+
+  <div class="prompt-block">
+    <p class="prompt-label">Kopieer deze prompt erboven</p>
+    <p>"Lees de mail hieronder. Maak een actielijst:
+– wat, door wie, wanneer
+– al geregeld vs. nog te doen"
+
+[plak de mail daarna hieronder]</p>
+  </div>
+
+  <div class="tip">
+    AI schrijft niet alleen tekst, het structureert ook bestaande informatie. Deze techniek werkt op elk soort mailwisseling, vergaderverslag of notitie.
+  </div>
+
+  <div class="block-sep">Na 10 minuten: wat heeft AI gemist? Wat heeft het beter benoemd dan jijzelf?</div>
+
+  <div class="page-footer">
+    <span class="page-footer-left">timonkool.nl &middot; Basistraining AI voor stichtingen</span>
+    <span class="page-footer-right">2 / 3</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGINA 3  –  Oefening 3: Statusupdate
+══════════════════════════════════════ -->
+<div class="page">
+
+  <div class="page-header">
+    <div class="page-header-left">
+      <p class="page-supertitle">Werken met AI voor stichtingen &middot; Training Timon Kool</p>
+      <h1 class="page-title">Oefening 3: Statusupdate voor het team</h1>
+    </div>
+    <span class="page-badge">15 minuten</span>
+  </div>
+
+  <p class="exercise-intro">
+    Combineer de resultaten van oefening 1 en 2 met de afvinklijst hieronder. Plak alles in één prompt en laat AI de statusupdate schrijven.
+  </p>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+
+    <div class="copy-block" style="margin-bottom: 0;">
+      <p class="copy-label">Afvinklijst — voeg toe aan je prompt</p>
+      <ul class="checklist">
+        <li class="checked"><div class="check-box"></div><span>Zaal geboekt: 15 april, 13:00–15:30</span></li>
+        <li class="checked"><div class="check-box"></div><span>Sandra (schuldhulp) bevestigd</span></li>
+        <li><div class="check-box"></div><span>Gemeente nabellen (voor vrijdag)</span></li>
+        <li><div class="check-box"></div><span>Flyer maken (volgende week, wie?)</span></li>
+        <li><div class="check-box"></div><span>Kinderactiviteit regelen (deze week)</span></li>
+        <li><div class="check-box"></div><span>Aanmeldprocedure bepalen</span></li>
+        <li><div class="check-box"></div><span>Catering regelen</span></li>
+      </ul>
+    </div>
+
+    <div class="prompt-block" style="margin-bottom: 0;">
+      <p class="prompt-label">Jouw prompt</p>
+      <p>"Schrijf een korte, informele statusupdate voor mijn team over de inloopmiddag van 15 april.
+
+Gebruik: draaiboek (oef. 1) + actielijst (oef. 2) + afvinklijst hieronder.
+
+Toon: collegiaal en bondig. Wat staat, wat nog openstaat, wie wat pakt."
+
+[plak draaiboek, actielijst en afvinklijst hieronder]</p>
+    </div>
+
+  </div>
+
+  <div class="tip">
+    Vraag na afloop: "Hoelang had dit normaal gekost?" — laat de stilte vallen.
+  </div>
+
+  <div style="margin-top: 6px; border-top: 1.5px solid var(--sage-soft); padding-top: 12px;">
+    <p style="font-size: 9px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 10px;">Snel naslagwerk: de drie elementen van een goede prompt</p>
+    <div class="ref-grid">
+      <div class="ref-card">
+        <p class="ref-card-title">ROL &nbsp;·&nbsp; Vertel wie AI moet zijn</p>
+        <ul>
+          <li>"Schrijf als een ervaren eventcoördinator…"</li>
+          <li>"Je bent een HR-adviseur met kennis van verzuim…"</li>
+          <li>"Schrijf als een communicatiemedewerker…"</li>
+        </ul>
+      </div>
+      <div class="ref-card">
+        <p class="ref-card-title">TAAK &nbsp;·&nbsp; Wat moet er precies komen?</p>
+        <ul>
+          <li>"…een draaiboek met tijdsblokken…"</li>
+          <li>"…een actielijst gesorteerd op prioriteit…"</li>
+          <li>"…een uitnodiging van max 150 woorden…"</li>
+        </ul>
+      </div>
+      <div class="ref-card">
+        <p class="ref-card-title">CONTEXT &nbsp;·&nbsp; Wat moet AI weten?</p>
+        <ul>
+          <li>"…voor een inloopmiddag op 15 april, 2 uur, gratis…"</li>
+          <li>"…toon: warm, niet formeel, voor kwetsbare doelgroep…"</li>
+          <li>"…max 1 A4, gebruik eenvoudige taal…"</li>
+        </ul>
+      </div>
+      <div class="ref-card">
+        <p class="ref-card-title">5 technieken die direct werken</p>
+        <ul>
+          <li>Geef een voorbeeld: "Net als deze tekst: [plak]"</li>
+          <li>Zeg wat je niet wilt: "Geen jargon, niet formeel"</li>
+          <li>Vraag varianten: "Geef drie versies"</li>
+          <li>Bouw voort: "Maak dit korter / vriendelijker"</li>
+          <li>Vraag door: "Waarom kies je deze aanpak?"</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span class="page-footer-left">timonkool.nl &middot; Basistraining AI voor stichtingen</span>
+    <span class="page-footer-right">3 / 3</span>
+  </div>
+</div>
+
+</body>
+</html>
