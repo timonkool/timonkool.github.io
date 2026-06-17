@@ -26,20 +26,23 @@
     {
       label: 'Handboek AI & Cowork voor leiders',
       href:  href('pages/portfolio/handboek-ai-cowork.html'),
-      tag:   'Handboek'
+      tag:   'Handboek',
+      icon:  'ph-book-open'
     },
     {
       label: 'Basistraining AI voor stichtingen',
       href:  href('pages/portfolio/basistraining-ai.html'),
-      tag:   'Training'
+      tag:   'Training',
+      icon:  'ph-chalkboard-simple'
     }
   ];
 
   const dropdownItems = portfolioItems.map(function (item) {
     return '<li>'
       + '<a href="' + item.href + '">'
+      + '<i class="ph-duotone ' + item.icon + '" style="font-size:20px;color:var(--sage-deep);flex-shrink:0"></i>'
+      + '<span style="flex:1">' + item.label + '</span>'
       + '<span class="nav-dropdown-tag">' + item.tag + '</span>'
-      + item.label
       + '</a>'
       + '</li>';
   }).join('');
@@ -49,7 +52,10 @@
   if (!nav) return;
 
   nav.innerHTML =
-    '<a class="nav-logo" href="' + href('index.html') + '">Timon Kool</a>'
+    '<a class="nav-logo" href="' + href('index.html') + '">'
+    +   '<span class="nav-logo-mark" aria-hidden="true">TK</span>'
+    +   'Timon Kool'
+    + '</a>'
 
     + '<button class="nav-toggle" aria-label="Menu openen" aria-expanded="false" aria-controls="nav-menu">'
     +   '<span></span><span></span><span></span>'

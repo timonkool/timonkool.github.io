@@ -5,531 +5,199 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Handboek AI &amp; Cowork voor leiders — Timon Kool</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Fraunces:ital,wght@0,300;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/duotone/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css">
+<link rel="stylesheet" href="../../assets/css/saliegroen.css">
 <link rel="stylesheet" href="../../assets/css/nav.css">
 <style>
-  /* ── Design tokens ── */
-  :root {
-    --sage-deep:  #6b8068;
-    --sage-ink:   #3a4a38;
-    --sage:       #8ba287;
-    --sage-soft:  #c8d4c4;
-    --sage-mist:  #eef2ec;
-    --cream:      #faf8f4;
-    --paper:      #ffffff;
-    --text:       #2d352c;
-    --muted:      #6b7268;
-    --radius-sm:  6px;
-    --radius-md:  10px;
-    --radius-lg:  14px;
-    --radius-pill:999px;
-  }
+  body { padding-top: 60px; }
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--cream);
-    color: var(--text);
-    font-family: 'Quicksand', sans-serif;
-    font-size: 15px;
-    line-height: 1.65;
-    -webkit-font-smoothing: antialiased;
-    padding-top: 56px;
-  }
-
-  /* ── Scroll fade-in ── */
-  .reveal {
-    opacity: 0;
-    transform: translateY(22px);
-    transition: opacity 0.55s ease, transform 0.55s ease;
-  }
-  .reveal.visible {
-    opacity: 1;
-    transform: none;
-  }
-
-  /* ══════════════════════════════════════
-     HERO
-  ══════════════════════════════════════ */
-  .hero {
-    background: var(--sage-deep);
-    padding: 0;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse 70% 80% at 80% 50%, rgba(58,74,56,0.45) 0%, transparent 70%),
-      radial-gradient(ellipse 40% 60% at 10% 80%, rgba(139,162,135,0.2) 0%, transparent 60%);
-    pointer-events: none;
-  }
-
-  .hero-inner {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 72px 40px 64px;
-    position: relative;
-    z-index: 1;
-  }
-
-  .hero-back {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--sage-soft);
-    text-decoration: none;
-    margin-bottom: 36px;
-    opacity: 0;
-    animation: fadeUp 0.5s 0s ease forwards;
-    transition: color 0.2s;
-  }
-  .hero-back:hover { color: var(--cream); }
-  .hero-back svg {
-    width: 14px; height: 14px;
-    stroke: currentColor; fill: none;
-    stroke-width: 2;
-  }
-
-  .hero-label {
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--sage-soft);
-    margin-bottom: 20px;
-    opacity: 0;
-    animation: fadeUp 0.6s 0.1s ease forwards;
-  }
-
-  .hero-name {
-    font-size: clamp(36px, 6vw, 60px);
-    font-weight: 700;
-    color: var(--cream);
-    line-height: 1.1;
-    letter-spacing: -1px;
-    margin-bottom: 24px;
-    opacity: 0;
-    animation: fadeUp 0.6s 0.2s ease forwards;
-  }
-
-  .hero-quote {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-weight: 300;
-    font-size: clamp(17px, 2.2vw, 22px);
-    color: var(--cream);
-    max-width: 620px;
-    line-height: 1.55;
-    padding-left: 20px;
-    border-left: 3px solid var(--sage-soft);
-    margin-bottom: 40px;
-    opacity: 0;
-    animation: fadeUp 0.6s 0.35s ease forwards;
-  }
-
-  .hero-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 36px;
-    opacity: 0;
-    animation: fadeUp 0.6s 0.5s ease forwards;
-  }
-
-  .hero-tag {
-    background: rgba(250,248,244,0.12);
-    border: 1px solid rgba(250,248,244,0.25);
-    color: var(--cream);
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    padding: 7px 16px;
-    border-radius: var(--radius-pill);
-    backdrop-filter: blur(4px);
-  }
-
-  .btn-download {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--cream);
-    color: var(--sage-deep);
-    font-family: 'Quicksand', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-decoration: none;
-    padding: 12px 28px;
-    border-radius: var(--radius-pill);
-    opacity: 0;
-    animation: fadeUp 0.6s 0.65s ease forwards;
-    transition: background 0.2s, transform 0.15s;
-  }
-  .btn-download:hover { background: var(--sage-mist); transform: translateY(-1px); }
-  .btn-download svg { width: 15px; height: 15px; stroke: var(--sage-deep); fill: none; flex-shrink: 0; stroke-width: 2; }
-
-  /* ══════════════════════════════════════
-     LAYOUT
-  ══════════════════════════════════════ */
-  .page {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 72px 40px 100px;
-  }
-
-  /* Section header */
-  .section-label {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--sage-deep);
-    margin-bottom: 28px;
-    padding-bottom: 12px;
-    border-bottom: 2px solid var(--sage-soft);
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .section-label::before {
-    content: '';
-    display: block;
-    width: 6px;
-    height: 6px;
-    background: var(--sage-deep);
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-
-  section { margin-bottom: 72px; }
-
-  /* ══════════════════════════════════════
-     INTRO
-  ══════════════════════════════════════ */
-  .intro-text {
-    font-size: 16px;
-    line-height: 1.75;
-    color: var(--text);
-    max-width: 720px;
-    margin-bottom: 18px;
-  }
-
-  .intro-text:first-of-type {
-    font-family: 'Fraunces', serif;
-    font-weight: 300;
-    font-size: 17px;
-    color: var(--sage-ink);
-    padding-left: 18px;
-    border-left: 3px solid var(--sage-deep);
-  }
-
-  /* ══════════════════════════════════════
-     ONDERDELEN
-  ══════════════════════════════════════ */
+  /* Onderdelen-grid */
   .parts-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 20px;
+    gap: 18px;
+    margin-top: var(--space-6);
   }
+  .part-card i { font-size: 30px; color: var(--sage-deep); margin-bottom: 14px; display: block; }
+  .part-number { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sage-deep); margin-bottom: 8px; }
+  .part-title { font-size: 16px; font-weight: 600; color: var(--sage-ink); margin-bottom: 10px; line-height: 1.3; }
+  .part-desc { font-size: 13.5px; color: var(--muted); margin: 0; }
 
-  .part-card {
-    background: var(--paper);
-    border-radius: var(--radius-lg);
-    padding: 28px 24px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-    border: 1.5px solid var(--sage-mist);
-  }
-
-  .part-number {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--sage-deep);
-    margin-bottom: 10px;
-  }
-
-  .part-title {
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--sage-ink);
-    margin-bottom: 10px;
-    line-height: 1.3;
-  }
-
-  .part-desc {
-    font-size: 13.5px;
-    color: var(--muted);
-    line-height: 1.65;
-  }
-
-  /* ══════════════════════════════════════
-     TOEPASSINGEN
-  ══════════════════════════════════════ */
-  .use-cases-grid {
+  /* Toepassingen */
+  .use-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 14px;
+    margin-top: var(--space-6);
   }
+  .use-group { background: var(--sage-mist); border-radius: var(--radius-md); padding: 22px; }
+  .use-group-title { display: flex; align-items: center; gap: 9px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--sage-deep); margin-bottom: 14px; }
+  .use-group-title i { font-size: 18px; }
+  .use-list { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+  .use-list li { font-size: 13px; color: var(--text); display: flex; gap: 9px; align-items: flex-start; }
+  .use-list li::before { content: ''; width: 5px; height: 5px; background: var(--sage); border-radius: 50%; flex-shrink: 0; margin-top: 7px; }
 
-  .use-case-group {
-    background: var(--sage-mist);
-    border-radius: var(--radius-md);
-    padding: 20px;
-  }
+  /* Doelgroep */
+  .audience-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: var(--space-5); }
+  .audience-tag { background: var(--paper); border: 1.5px solid var(--sage-soft); color: var(--sage-ink); font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 8px 18px; border-radius: var(--radius-pill); }
 
-  .use-case-group-title {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--sage-deep);
-    margin-bottom: 12px;
-  }
-
-  .use-case-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
-  }
-
-  .use-case-list li {
-    font-size: 13px;
-    color: var(--text);
-    display: flex;
-    gap: 9px;
-    align-items: flex-start;
-  }
-
-  .use-case-list li::before {
-    content: '';
-    width: 5px;
-    height: 5px;
-    background: var(--sage);
-    border-radius: 50%;
-    flex-shrink: 0;
-    margin-top: 6px;
-  }
-
-  /* ══════════════════════════════════════
-     DOELGROEP
-  ══════════════════════════════════════ */
-  .audience-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-
-  .audience-tag {
-    background: var(--paper);
-    border: 1.5px solid var(--sage-soft);
-    color: var(--sage-ink);
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    padding: 8px 18px;
-    border-radius: var(--radius-pill);
-  }
-
-  /* ══════════════════════════════════════
-     ANIMATIONS
-  ══════════════════════════════════════ */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(16px); }
-    to   { opacity: 1; transform: none; }
-  }
-
-  /* ══════════════════════════════════════
-     RESPONSIVE
-  ══════════════════════════════════════ */
-  @media (max-width: 640px) {
-    .hero-inner { padding: 48px 24px 48px; }
-    .page { padding: 48px 24px 80px; }
-    .parts-grid { grid-template-columns: 1fr; }
-    .use-cases-grid { grid-template-columns: 1fr; }
-  }
-
-  /* ══════════════════════════════════════
-     FOOTER
-  ══════════════════════════════════════ */
-  .footer {
-    text-align: center;
-    padding: 32px 24px 48px;
-    font-size: 12px;
-    color: var(--muted);
-    border-top: 1px solid var(--sage-soft);
-  }
-
+  .intro p { font-size: 16px; line-height: 1.75; color: var(--text); max-width: 720px; margin-bottom: 16px; }
 </style>
 </head>
 <body>
 
 <nav id="site-nav"></nav>
 
-<!-- ══════════════════════════════════════
-     HERO
-══════════════════════════════════════ -->
-<header class="hero">
-  <div class="hero-inner">
-    <a href="../../index.html" class="hero-back">
-      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
-      Terug naar overzicht
-    </a>
-    <p class="hero-label">Handboek &middot; AI &middot; 2026</p>
-    <h1 class="hero-name">Minder administratie,<br>meer mensen</h1>
-    <blockquote class="hero-quote">
-      "Een praktische gids voor leidinggevenden die AI inzetten om hun werk lichter te maken, zonder technische achtergrond nodig te hebben."
-    </blockquote>
-    <div class="hero-tags">
-      <span class="hero-tag">AI-adoptie</span>
-      <span class="hero-tag">Leidinggevenden</span>
-      <span class="hero-tag">Maatschappelijke sector</span>
-      <span class="hero-tag">Praktisch</span>
+<!-- ══ Hero ══ -->
+<header class="page-hero">
+  <div class="page-hero__inner">
+    <a href="../../index.html" class="page-hero__back"><i class="ph-bold ph-caret-left"></i> Terug naar overzicht</a>
+    <span class="page-hero__eyebrow">Handboek &middot; AI &middot; 2026</span>
+    <h1 class="page-hero__title">Minder administratie, meer mensen</h1>
+    <p class="page-hero__lead">Een praktische gids voor leidinggevenden die AI inzetten om hun werk lichter te maken, zonder technische achtergrond nodig te hebben.</p>
+    <div class="page-hero__tags">
+      <span class="chip-on-green">AI-adoptie</span>
+      <span class="chip-on-green">Leidinggevenden</span>
+      <span class="chip-on-green">Maatschappelijke sector</span>
+      <span class="chip-on-green">Praktisch</span>
     </div>
-    <a href="../../docs/handboek-ai-cowork.pdf" download class="btn-download">
-      <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-      Download handboek (.pdf)
-    </a>
+    <div class="page-hero__actions">
+      <a href="../../docs/handboek-ai-cowork.pdf" download class="btn btn--on-green">
+        <i class="ph-duotone ph-download-simple"></i> Download handboek (.pdf)
+      </a>
+    </div>
   </div>
 </header>
 
-<!-- ══════════════════════════════════════
-     MAIN CONTENT
-══════════════════════════════════════ -->
-<main class="page">
-
-  <!-- OVER DIT HANDBOEK -->
-  <section class="reveal">
-    <h2 class="section-label">Over dit handboek</h2>
-    <p class="intro-text">
+<!-- ══ Over dit handboek ══ -->
+<section class="section wrap reveal">
+  <div class="section-head"><h2 class="section-title">Over dit handboek</h2><span class="label">Introductie</span></div>
+  <div class="intro">
+    <p class="lead" style="max-width: 720px; margin-bottom: 20px;">
       Leidinggevenden in zorg, onderwijs, welzijn, cultuur en productie zijn meer tijd kwijt aan administratie dan aan de mensen voor wie ze het doen. Dit handboek laat zien hoe dat anders kan.
     </p>
-    <p class="intro-text">
-      Geschreven samen met Claude (AI-assistent van Anthropic), gebaseerd op praktijkervaring uit de maatschappelijke sector. Geen hype, geen jargon. Wel concrete instructies, direct toepasbaar. Je hebt geen technische achtergrond nodig.
-    </p>
-    <p class="intro-text">
-      Het handboek behandelt alles van de eerste setup van een AI-assistent tot dertig concrete toepassingen voor de dagelijkse praktijk van een leidinggevende.
-    </p>
-  </section>
+    <p>Geschreven samen met Claude, gebaseerd op praktijkervaring uit de maatschappelijke sector. Geen hype, geen jargon. Wel concrete instructies, direct toepasbaar. Je hebt geen technische achtergrond nodig.</p>
+    <p>Het handboek behandelt alles van de eerste setup van een AI-assistent tot dertig concrete toepassingen voor de dagelijkse praktijk van een leidinggevende.</p>
+  </div>
+</section>
 
-  <!-- ONDERDELEN -->
-  <section class="reveal">
-    <h2 class="section-label">Wat er in staat</h2>
+<!-- ══ Wat er in staat ══ -->
+<div class="section--mist">
+  <section class="section wrap reveal">
+    <div class="section-head"><h2 class="section-title">Wat er in staat</h2><span class="label">Vijf delen</span></div>
     <div class="parts-grid">
-      <div class="part-card">
+      <div class="card card--paper part-card">
+        <i class="ph-duotone ph-compass-tool"></i>
         <p class="part-number">Deel 1</p>
-        <h3 class="part-title">Het Fundament</h3>
+        <h3 class="part-title">Het fundament</h3>
         <p class="part-desc">Waarom AI voor leidinggevenden, hoe het werkt, en wat je er realistisch van kunt verwachten. Inclusief ethische randvoorwaarden.</p>
       </div>
-      <div class="part-card">
+      <div class="card card--paper part-card">
+        <i class="ph-duotone ph-gear"></i>
         <p class="part-number">Deel 2</p>
-        <h3 class="part-title">Het Systeem Inrichten</h3>
-        <p class="part-desc">Stap-voor-stap opzetten van je AI-assistent, van account aanmaken tot je eerste gesprek. Geschikt voor wie nog nooit met AI heeft gewerkt.</p>
+        <h3 class="part-title">Het systeem inrichten</h3>
+        <p class="part-desc">Stap voor stap je AI-assistent opzetten, van account aanmaken tot je eerste gesprek. Geschikt voor wie nog nooit met AI heeft gewerkt.</p>
       </div>
-      <div class="part-card">
+      <div class="card card--paper part-card">
+        <i class="ph-duotone ph-brain"></i>
         <p class="part-number">Deel 3</p>
-        <h3 class="part-title">Permanent Geheugen</h3>
+        <h3 class="part-title">Permanent geheugen</h3>
         <p class="part-desc">Hoe je de AI voorziet van blijvende context via een manager-profiel, zodat je niet telkens hoeft uit te leggen wie je bent en wat je nodig hebt.</p>
       </div>
-      <div class="part-card">
+      <div class="card card--paper part-card">
+        <i class="ph-duotone ph-list-checks"></i>
         <p class="part-number">Deel 4</p>
-        <h3 class="part-title">Dertig Toepassingen</h3>
-        <p class="part-desc">Concrete gebruikssituaties gegroepeerd per thema: dagelijkse praktijk, teamontwikkeling, HR en verzuim, communicatie, analyse en zelfontwikkeling.</p>
+        <h3 class="part-title">Dertig toepassingen</h3>
+        <p class="part-desc">Concrete gebruikssituaties per thema: dagelijkse praktijk, teamontwikkeling, HR en verzuim, communicatie, analyse en zelfontwikkeling.</p>
       </div>
-      <div class="part-card">
+      <div class="card card--paper part-card">
+        <i class="ph-duotone ph-trend-up"></i>
         <p class="part-number">Deel 5</p>
-        <h3 class="part-title">Verder Groeien</h3>
+        <h3 class="part-title">Verder groeien</h3>
         <p class="part-desc">Hoe je AI-gebruik geleidelijk uitbreidt, wat te vermijden, en hoe je het gesprek aangaat binnen je organisatie.</p>
       </div>
     </div>
   </section>
+</div>
 
-  <!-- TOEPASSINGEN -->
-  <section class="reveal">
-    <h2 class="section-label">Dertig toepassingen</h2>
-    <div class="use-cases-grid">
-      <div class="use-case-group">
-        <p class="use-case-group-title">Dagelijkse praktijk</p>
-        <ul class="use-case-list">
-          <li>Vergaderverslagen schrijven</li>
-          <li>E-mails opstellen en herschrijven</li>
-          <li>Agenda structureren</li>
-          <li>Beslissingen documenteren</li>
-          <li>Rapportages samenvatten</li>
-        </ul>
-      </div>
-      <div class="use-case-group">
-        <p class="use-case-group-title">Teamontwikkeling</p>
-        <ul class="use-case-list">
-          <li>Functioneringsgesprekken voorbereiden</li>
-          <li>Onboarding-documenten opstellen</li>
-          <li>Feedback formuleren</li>
-          <li>Teamoverleg structureren</li>
-          <li>Ontwikkelplannen schrijven</li>
-        </ul>
-      </div>
-      <div class="use-case-group">
-        <p class="use-case-group-title">HR &amp; verzuim</p>
-        <ul class="use-case-list">
-          <li>Re-integratiegesprekken voorbereiden</li>
-          <li>Verzuimcorrespondentie opstellen</li>
-          <li>Beleidsteksten herschrijven</li>
-          <li>Vacatureteksten schrijven</li>
-          <li>Sollicitatieprocedures uitwerken</li>
-        </ul>
-      </div>
-      <div class="use-case-group">
-        <p class="use-case-group-title">Communicatie &amp; vergaderen</p>
-        <ul class="use-case-list">
-          <li>Presentaties opzetten</li>
-          <li>Nieuwsbrieven schrijven</li>
-          <li>Moeilijke boodschappen formuleren</li>
-          <li>Notulen omzetten naar actiepunten</li>
-          <li>Overlegstructuren ontwerpen</li>
-        </ul>
-      </div>
-      <div class="use-case-group">
-        <p class="use-case-group-title">Analyse &amp; inzicht</p>
-        <ul class="use-case-list">
-          <li>Data interpreteren</li>
-          <li>Jaarverslagen analyseren</li>
-          <li>Subsidieaanvragen toetsen</li>
-          <li>Knelpunten in processen opsporen</li>
-          <li>Benchmarks uitwerken</li>
-        </ul>
-      </div>
-      <div class="use-case-group">
-        <p class="use-case-group-title">Zelfontwikkeling</p>
-        <ul class="use-case-list">
-          <li>Reflectieoefeningen doen</li>
-          <li>Leiderschapsdilemma's doordenken</li>
-          <li>Literatuur samenvatten</li>
-          <li>Persoonlijke doelen formuleren</li>
-          <li>Studiegesprekken voorbereiden</li>
-        </ul>
-      </div>
+<!-- ══ Dertig toepassingen ══ -->
+<section class="section wrap reveal">
+  <div class="section-head"><h2 class="section-title">Dertig toepassingen</h2><span class="label">Zes thema's</span></div>
+  <div class="use-grid">
+    <div class="use-group">
+      <p class="use-group-title"><i class="ph-duotone ph-calendar-check"></i> Dagelijkse praktijk</p>
+      <ul class="use-list">
+        <li>Vergaderverslagen schrijven</li>
+        <li>E-mails opstellen en herschrijven</li>
+        <li>Agenda structureren</li>
+        <li>Beslissingen documenteren</li>
+        <li>Rapportages samenvatten</li>
+      </ul>
     </div>
-  </section>
+    <div class="use-group">
+      <p class="use-group-title"><i class="ph-duotone ph-users-three"></i> Teamontwikkeling</p>
+      <ul class="use-list">
+        <li>Functioneringsgesprekken voorbereiden</li>
+        <li>Onboarding-documenten opstellen</li>
+        <li>Feedback formuleren</li>
+        <li>Teamoverleg structureren</li>
+        <li>Ontwikkelplannen schrijven</li>
+      </ul>
+    </div>
+    <div class="use-group">
+      <p class="use-group-title"><i class="ph-duotone ph-first-aid-kit"></i> HR &amp; verzuim</p>
+      <ul class="use-list">
+        <li>Re-integratiegesprekken voorbereiden</li>
+        <li>Verzuimcorrespondentie opstellen</li>
+        <li>Beleidsteksten herschrijven</li>
+        <li>Vacatureteksten schrijven</li>
+        <li>Sollicitatieprocedures uitwerken</li>
+      </ul>
+    </div>
+    <div class="use-group">
+      <p class="use-group-title"><i class="ph-duotone ph-chats-circle"></i> Communicatie &amp; vergaderen</p>
+      <ul class="use-list">
+        <li>Presentaties opzetten</li>
+        <li>Nieuwsbrieven schrijven</li>
+        <li>Moeilijke boodschappen formuleren</li>
+        <li>Notulen omzetten naar actiepunten</li>
+        <li>Overlegstructuren ontwerpen</li>
+      </ul>
+    </div>
+    <div class="use-group">
+      <p class="use-group-title"><i class="ph-duotone ph-chart-line"></i> Analyse &amp; inzicht</p>
+      <ul class="use-list">
+        <li>Data interpreteren</li>
+        <li>Jaarverslagen analyseren</li>
+        <li>Subsidieaanvragen toetsen</li>
+        <li>Knelpunten in processen opsporen</li>
+        <li>Benchmarks uitwerken</li>
+      </ul>
+    </div>
+    <div class="use-group">
+      <p class="use-group-title"><i class="ph-duotone ph-seedling"></i> Zelfontwikkeling</p>
+      <ul class="use-list">
+        <li>Reflectieoefeningen doen</li>
+        <li>Leiderschapsdilemma's doordenken</li>
+        <li>Literatuur samenvatten</li>
+        <li>Persoonlijke doelen formuleren</li>
+        <li>Studiegesprekken voorbereiden</li>
+      </ul>
+    </div>
+  </div>
+</section>
 
-  <!-- DOELGROEP -->
-  <section class="reveal">
-    <h2 class="section-label">Voor wie</h2>
-    <p class="intro-text" style="margin-bottom: 24px;">
-      Dit handboek is geschreven voor leidinggevenden in de maatschappelijke sector die AI willen inzetten zonder dat ze er technisch in hoeven te duiken. Je hoeft niets te programmeren of te installeren.
+<!-- ══ Voor wie ══ -->
+<div class="section--mist">
+  <section class="section wrap reveal">
+    <div class="section-head"><h2 class="section-title">Voor wie</h2><span class="label">Doelgroep</span></div>
+    <p class="lead" style="max-width: 720px;">
+      Geschreven voor leidinggevenden in de maatschappelijke sector die AI willen inzetten zonder dat ze er technisch in hoeven te duiken. Je hoeft niets te programmeren of te installeren.
     </p>
     <div class="audience-row">
       <span class="audience-tag">Zorg</span>
@@ -540,24 +208,23 @@
       <span class="audience-tag">Non-profit</span>
     </div>
   </section>
+</div>
 
-</main>
-
-<footer class="footer">
-  &copy; 2026 Timon Kool &mdash; <a href="../../index.html" style="color: var(--sage-deep); text-decoration: none;">timonkool.nl</a>
+<!-- ══ Footer ══ -->
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <a class="site-footer__brand" href="../../index.html">Timon Kool</a>
+    <div class="site-footer__social">
+      <a href="https://linkedin.com/in/timonkool" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="ph-duotone ph-linkedin-logo"></i></a>
+      <a href="../../index.html#contact" aria-label="Contact"><i class="ph-duotone ph-envelope-simple"></i></a>
+    </div>
+  </div>
 </footer>
 
 <script>
-  // Scroll fade-in
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        observer.unobserve(e.target);
-      }
-    });
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
   }, { threshold: 0.1 });
-
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
 <script>const NAV_ROOT = '../../';</script>

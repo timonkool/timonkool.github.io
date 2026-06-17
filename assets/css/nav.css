@@ -1,6 +1,6 @@
 /* ══════════════════════════════════════
-   Site-wide navigation
-   Depends on CSS custom properties defined per-page (:root).
+   Site-navigatie — Saliegroen
+   Tokens komen uit saliegroen.css (per pagina gelinkt vóór dit bestand).
    ══════════════════════════════════════ */
 
 #site-nav {
@@ -8,38 +8,56 @@
   top: 0; left: 0; right: 0;
   z-index: 200;
   background: var(--cream);
-  border-bottom: 1px solid var(--sage-soft);
-  padding: 0 32px;
-  height: 56px;
+  border-bottom: 1px solid var(--sage-mist);
+  padding: 0 var(--pad-edge);
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  transition: box-shadow 0.25s ease;
+  transition: box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
 #site-nav.nav-scrolled {
-  box-shadow: 0 2px 20px rgba(0,0,0,0.07);
+  box-shadow: var(--shadow-sm);
   border-bottom-color: transparent;
 }
 
-/* ── Logo ── */
+/* ── Wordmerk met TK-blokje ── */
 .nav-logo {
-  font-family: 'Quicksand', 'Trebuchet MS', sans-serif;
-  font-weight: 700;
-  font-size: 15px;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 19px;
+  letter-spacing: -0.01em;
   color: var(--sage-ink);
-  letter-spacing: 0.5px;
   text-decoration: none;
   flex-shrink: 0;
   transition: color 0.2s;
 }
 .nav-logo:hover { color: var(--sage-deep); }
 
-/* ── Link list ── */
+.nav-logo-mark {
+  width: 26px; height: 26px;
+  border-radius: 7px;
+  background: var(--sage-deep);
+  color: var(--cream);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0;
+  flex-shrink: 0;
+}
+
+/* ── Linklijst ── */
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -51,38 +69,32 @@
   display: block;
   text-decoration: none;
   color: var(--muted);
-  font-family: 'Quicksand', 'Trebuchet MS', sans-serif;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  padding: 6px 12px;
-  border-radius: var(--radius-pill, 999px);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  padding: 8px 14px;
+  border-radius: var(--radius-pill);
   transition: color 0.2s, background 0.2s;
 }
 
-.nav-links a:hover {
-  color: var(--sage-deep);
-  background: var(--sage-mist);
-}
+.nav-links a:hover { color: var(--sage-ink); background: var(--sage-mist); }
+.nav-links a.nav-active { color: var(--sage-ink); background: var(--sage-mist); }
 
-.nav-links a.nav-active {
-  color: var(--sage-deep);
-  background: var(--sage-mist);
-}
-
-/* CV gets a bordered pill */
+/* CV krijgt een gevulde pill */
 .nav-links .nav-item-cv a {
-  border: 1.5px solid var(--sage-soft);
+  background: var(--sage-deep);
+  color: var(--cream);
+  font-weight: 600;
 }
 .nav-links .nav-item-cv a:hover,
 .nav-links .nav-item-cv a.nav-active {
-  background: var(--sage-deep);
-  border-color: var(--sage-deep);
+  background: var(--accent-hover);
   color: var(--cream);
 }
 
-/* ── Mobile toggle ── */
+/* ── Mobiele toggle ── */
 .nav-toggle {
   display: none;
   flex-direction: column;
@@ -92,9 +104,9 @@
   border: none;
   cursor: pointer;
   padding: 6px;
-  border-radius: var(--radius-sm, 6px);
-  width: 36px;
-  height: 36px;
+  border-radius: var(--radius-sm);
+  width: 38px;
+  height: 38px;
   transition: background 0.2s;
 }
 .nav-toggle:hover { background: var(--sage-mist); }
@@ -113,16 +125,10 @@
 .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 /* ══════════════════════════════════════
-   PORTFOLIO DROPDOWN
+   PORTFOLIO-DROPDOWN
    ══════════════════════════════════════ */
+.nav-item-row { display: flex; align-items: center; }
 
-/* Row: link + chevron button side by side */
-.nav-item-row {
-  display: flex;
-  align-items: center;
-}
-
-/* Chevron toggle button */
 .nav-dropdown-toggle {
   display: flex;
   align-items: center;
@@ -132,42 +138,32 @@
   cursor: pointer;
   padding: 6px 4px 6px 2px;
   color: var(--muted);
-  border-radius: var(--radius-sm, 6px);
-  margin-left: -6px;
+  border-radius: var(--radius-sm);
+  margin-left: -8px;
   transition: color 0.2s, background 0.2s;
 }
 .nav-dropdown-toggle:hover { color: var(--sage-deep); background: var(--sage-mist); }
+.nav-dropdown-toggle svg { width: 12px; height: 12px; transition: transform 0.2s ease; }
+.dropdown-open .nav-dropdown-toggle svg { transform: rotate(180deg); }
 
-.nav-dropdown-toggle svg {
-  width: 12px; height: 12px;
-  transition: transform 0.2s ease;
-}
-
-.dropdown-open .nav-dropdown-toggle svg {
-  transform: rotate(180deg);
-}
-
-/* Dropdown panel */
 .nav-dropdown {
   position: absolute;
-  top: calc(100% + 8px);
+  top: calc(100% + 10px);
   left: 50%;
   transform: translateX(-50%) translateY(-6px);
   list-style: none;
   margin: 0; padding: 8px;
   background: var(--cream);
-  border: 1.5px solid var(--sage-soft);
-  border-radius: var(--radius-lg, 14px);
-  min-width: 290px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.09);
+  border: 1px solid var(--sage-soft);
+  border-radius: var(--radius-lg);
+  min-width: 300px;
+  box-shadow: var(--shadow-md);
   z-index: 10;
-  /* hidden by default */
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.18s ease, transform 0.18s ease;
 }
 
-/* Small caret pointing up */
 .nav-dropdown::before {
   content: '';
   position: absolute;
@@ -176,31 +172,19 @@
   transform: translateX(-50%) rotate(45deg);
   width: 12px; height: 12px;
   background: var(--cream);
-  border-top: 1.5px solid var(--sage-soft);
-  border-left: 1.5px solid var(--sage-soft);
+  border-top: 1px solid var(--sage-soft);
+  border-left: 1px solid var(--sage-soft);
 }
 
-/* Desktop: show on CSS hover.
-   The ::after bridge fills the 8px gap between the nav item and the panel,
-   so the mouse stays "inside" the li while moving toward the dropdown. */
 @media (min-width: 641px) {
   .nav-item-dropdown::after {
     content: '';
     position: absolute;
     top: 100%;
     left: 0; right: 0;
-    height: 12px; /* covers the gap + a little extra */
+    height: 14px;
   }
-
-  .nav-item-dropdown:hover .nav-dropdown {
-    opacity: 1;
-    pointer-events: auto;
-    transform: translateX(-50%) translateY(0);
-  }
-}
-
-/* Also show when toggled via the chevron button (desktop only — mobile handled below) */
-@media (min-width: 641px) {
+  .nav-item-dropdown:hover .nav-dropdown,
   .dropdown-open .nav-dropdown {
     opacity: 1;
     pointer-events: auto;
@@ -208,43 +192,38 @@
   }
 }
 
-/* Dropdown links — override the uppercase/spaced style from .nav-links a */
 .nav-dropdown a {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 11px 14px;
-  border-radius: var(--radius-md, 10px);
-  font-size: 13.5px;
-  font-weight: 600;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  font-weight: 500;
   color: var(--text);
-  letter-spacing: 0.2px;
+  letter-spacing: 0;
   text-transform: none;
   background: none;
   transition: background 0.15s, color 0.15s;
 }
+.nav-dropdown a:hover { background: var(--sage-mist); color: var(--sage-ink); }
 
-.nav-dropdown a:hover {
-  background: var(--sage-mist);
-  color: var(--sage-ink);
-}
-
-/* Small pill tag inside dropdown item */
 .nav-dropdown-tag {
+  font-family: var(--font-sans);
   font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 1.5px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--sage-deep);
   background: var(--sage-mist);
-  padding: 3px 8px;
-  border-radius: var(--radius-pill, 999px);
+  padding: 4px 9px;
+  border-radius: var(--radius-pill);
   flex-shrink: 0;
   white-space: nowrap;
 }
 
 /* ══════════════════════════════════════
-   RESPONSIVE — mobile
+   RESPONSIVE — mobiel
    ══════════════════════════════════════ */
 @media (max-width: 640px) {
   #site-nav { padding: 0 20px; }
@@ -254,42 +233,36 @@
   .nav-links {
     display: none;
     position: absolute;
-    top: 56px; left: 0; right: 0;
+    top: 60px; left: 0; right: 0;
     flex-direction: column;
     align-items: stretch;
     gap: 0;
     background: var(--cream);
     border-bottom: 1px solid var(--sage-soft);
     padding: 8px 16px 16px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.07);
+    box-shadow: var(--shadow-md);
   }
 
   .nav-links.nav-open { display: flex; }
 
-  /* Divider between top-level items */
   .nav-links > li { border-bottom: 1px solid var(--sage-mist); }
   .nav-links > li:last-child { border-bottom: none; }
 
   .nav-links a {
-    padding: 13px 8px;
-    font-size: 12px;
+    padding: 14px 8px;
+    font-size: 15px;
     border-radius: 0;
     background: none !important;
   }
 
-  .nav-links .nav-item-cv a { border: none; color: var(--sage-deep); }
-  .nav-links a.nav-active    { color: var(--sage-deep); }
+  .nav-links .nav-item-cv a { color: var(--sage-deep); font-weight: 600; }
+  .nav-links a.nav-active { color: var(--sage-deep); }
 
-  /* Portfolio row: link takes all available space */
   .nav-item-dropdown { border-bottom: none !important; }
   .nav-item-row { border-bottom: 1px solid var(--sage-mist); }
 
-  .nav-dropdown-toggle {
-    margin-left: auto;
-    padding: 8px;
-  }
+  .nav-dropdown-toggle { margin-left: auto; padding: 8px; }
 
-  /* Dropdown panel: inline expand, no floating panel */
   .nav-dropdown {
     position: static;
     transform: none;
@@ -301,27 +274,21 @@
     background: transparent;
     padding: 0;
     min-width: 0;
-    /* collapsed by default via max-height */
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.25s ease;
   }
 
   .nav-dropdown::before { display: none; }
-
-  .dropdown-open .nav-dropdown {
-    max-height: 400px;
-  }
+  .dropdown-open .nav-dropdown { max-height: 400px; }
 
   .nav-dropdown a {
     padding: 12px 8px 12px 20px;
-    font-size: 12px;
+    font-size: 14px;
     border-radius: 0;
     color: var(--muted);
     border-bottom: 1px solid var(--sage-mist);
   }
-
   .nav-dropdown li:last-child a { border-bottom: none; }
-
   .nav-dropdown-tag { display: none; }
 }

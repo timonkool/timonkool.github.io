@@ -6,677 +6,208 @@
   <title>Timon Kool</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Fraunces:ital,wght@1,300&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/duotone/style.css" />
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css" />
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css" />
+  <link rel="stylesheet" href="assets/css/saliegroen.css" />
   <link rel="stylesheet" href="assets/css/nav.css" />
-
   <style>
-    /* ─── CSS Variables ─── */
-    :root {
-      --sage-deep:  #6b8068;
-      --sage-ink:   #3a4a38;
-      --sage:       #8ba287;
-      --sage-soft:  #c8d4c4;
-      --sage-mist:  #eef2ec;
-      --cream:      #faf8f4;
-      --paper:      #ffffff;
-      --text:       #2d352c;
-      --muted:      #6b7268;
+    body { padding-top: 60px; }
 
-      --radius-sm:   6px;
-      --radius-md:  10px;
-      --radius-lg:  12px;
-      --radius-pill: 999px;
-    }
-
-    /* ─── Reset ─── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Quicksand', 'Trebuchet MS', Verdana, Arial, sans-serif;
-      background: var(--cream);
-      color: var(--text);
-      font-size: 15px;
-      line-height: 1.65;
-    }
-
-    /* ─── Hero ─── */
-    .hero {
-      padding-top: 56px;
-    }
-
-    .hero-green {
-      background: var(--sage-deep);
-      padding: 56px 32px 0;
-      min-height: 200px;
-      position: relative;
-    }
-
-    .hero-label {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: rgba(250,248,244,0.65);
-      margin-bottom: 20px;
-    }
-
-    /* Kleurwissel kop
-       font-size: 144px (= 96 × 1.5)
-       title-zone height = 144px (= font-size)
-       margin-top = -(2/3 × 144) = -96px  → 2/3 van de tekst zit in het groene vlak
-       Clip wit:   0 → 52%   (bovenste 52% is wit op groen = goed leesbaar)
-       Clip groen: 48% → 0   (overlap 48-52% = zachte groen-op-groen strook, even breed als voorheen)
-    */
-    .title-zone {
-      position: relative;
-      height: 144px;
-      margin: -96px 32px 0;
-    }
-
-    .title {
-      position: absolute;
-      top: 0; left: 0;
-      font-family: 'Quicksand', sans-serif;
-      font-size: 144px;
-      font-weight: 700;
-      line-height: 1;
-      letter-spacing: -3px;
-      white-space: nowrap;
-      margin: 0;
-    }
-
-    .title-white {
-      color: var(--cream);
-      clip-path: inset(0 0 48% 0);
-    }
-
-    .title-green {
-      color: var(--sage-deep);
-      clip-path: inset(52% 0 0 0);
-    }
-
-    .hero-cream {
-      background: var(--cream);
-      padding: 40px 32px 64px;
-    }
-
-    .hero-tagline {
-      font-family: 'Fraunces', Georgia, serif;
-      font-style: italic;
-      font-weight: 300;
-      font-size: 18px;
-      line-height: 1.6;
-      color: var(--sage-ink);
-      border-left: 3px solid var(--sage-deep);
-      padding-left: 14px;
-      max-width: 560px;
-      margin-bottom: 32px;
-    }
-
-    .hero-actions {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .btn-primary {
-      background: var(--sage-deep);
-      color: var(--cream);
-      border: none;
-      border-radius: var(--radius-pill);
-      padding: 12px 28px;
-      font-family: 'Quicksand', sans-serif;
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background 0.2s, transform 0.15s;
-      display: inline-block;
-    }
-
-    .btn-primary:hover {
-      background: var(--sage-ink);
-      transform: translateY(-1px);
-    }
-
-    .btn-secondary {
-      background: transparent;
-      color: var(--sage-deep);
-      border: 2px solid var(--sage-soft);
-      border-radius: var(--radius-pill);
-      padding: 10px 24px;
-      font-family: 'Quicksand', sans-serif;
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      cursor: pointer;
-      text-decoration: none;
-      transition: border-color 0.2s, color 0.2s, transform 0.15s;
-      display: inline-block;
-    }
-
-    .btn-secondary:hover {
-      border-color: var(--sage-deep);
-      color: var(--sage-ink);
-      transform: translateY(-1px);
-    }
-
-    /* ─── Sections ─── */
-    section {
-      padding: 72px 32px;
-      max-width: 900px;
+    /* ── Hero ── */
+    .hero-content {
+      max-width: var(--width-page);
       margin: 0 auto;
+      padding: 8px var(--pad-edge) clamp(56px, 7vw, 80px);
     }
+    .hero-content .lead { max-width: 600px; font-size: 21px; }
+    .hero-actions { display: flex; gap: 12px; margin-top: var(--space-6); flex-wrap: wrap; }
 
-    .section-label {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--sage-deep);
-      margin-bottom: 12px;
-    }
-
-    .section-title {
-      font-size: 32px;
-      font-weight: 600;
-      color: var(--sage-ink);
-      line-height: 1.15;
-      margin-bottom: 24px;
-      letter-spacing: -0.5px;
-    }
-
-    /* ─── Over mij ─── */
+    /* ── Over mij ── */
     .about-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-      margin-top: 32px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+      margin-top: var(--space-6);
     }
+    .about-card i { font-size: 32px; color: var(--sage-deep); margin-bottom: 14px; display: block; }
+    .about-card h3 { font-size: 17px; color: var(--sage-ink); margin-bottom: 8px; }
+    .about-card p { font-size: 14px; color: var(--muted); margin: 0; }
 
-    .about-card {
-      background: var(--sage-mist);
-      border-radius: var(--radius-lg);
-      padding: 24px;
-    }
-
-    .about-card h3 {
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--sage-ink);
-      margin-bottom: 8px;
-    }
-
-    .about-card p {
-      font-size: 14px;
-      color: var(--muted);
-      line-height: 1.65;
-    }
-
-    .about-lead {
-      font-family: 'Fraunces', Georgia, serif;
-      font-style: italic;
-      font-weight: 300;
-      font-size: 17px;
-      line-height: 1.65;
-      color: var(--sage-ink);
-      border-left: 3px solid var(--sage-deep);
-      padding-left: 14px;
-      margin-bottom: 32px;
-      max-width: 640px;
-    }
-
-    /* ─── Werkervaring ─── */
-    .experience-list {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      margin-top: 32px;
-    }
-
+    /* ── Werkervaring ── */
+    .exp-list { display: flex; flex-direction: column; gap: 14px; }
     .exp-item {
-      background: var(--sage-mist);
-      border-radius: var(--radius-lg);
-      padding: 24px 28px;
       display: grid;
       grid-template-columns: 1fr auto;
       gap: 8px 24px;
       align-items: start;
     }
-
-    .exp-role {
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--sage-ink);
-    }
-
-    .exp-org {
-      font-size: 14px;
-      color: var(--sage-deep);
-      font-weight: 500;
-      margin-top: 2px;
-    }
-
-    .exp-desc {
-      font-size: 13px;
-      color: var(--muted);
-      margin-top: 8px;
-      line-height: 1.6;
-      grid-column: 1 / -1;
-    }
-
+    .exp-role { font-size: 17px; font-weight: 600; color: var(--sage-ink); }
+    .exp-org { font-size: 14px; color: var(--sage-deep); font-weight: 500; margin-top: 2px; }
     .exp-period {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: var(--muted);
-      white-space: nowrap;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); white-space: nowrap; padding-top: 4px;
     }
+    .exp-desc { font-size: 13.5px; color: var(--muted); margin-top: 8px; grid-column: 1 / -1; }
 
-    /* ─── Portfolio ─── */
+    /* ── Portfolio ── */
     .portfolio-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      margin-top: 32px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+      margin-top: var(--space-6);
     }
-
     .portfolio-card {
-      background: var(--sage-mist);
-      border-radius: var(--radius-lg);
-      padding: 28px;
-      text-decoration: none;
-      transition: transform 0.2s, box-shadow 0.2s;
-      display: block;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .portfolio-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 4px;
-      background: var(--sage-deep);
-      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-    }
-
-    .portfolio-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
-    }
-
-    .portfolio-tag {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--sage-deep);
-      margin-bottom: 10px;
-    }
-
-    .portfolio-card h3 {
-      font-size: 17px;
-      font-weight: 600;
-      color: var(--sage-ink);
-      margin-bottom: 8px;
-      line-height: 1.3;
-    }
-
-    .portfolio-card p {
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.6;
-    }
-
-    .portfolio-coming {
-      opacity: 0.6;
-    }
-
-    .portfolio-coming::before {
-      background: var(--sage-soft);
-    }
-
-    /* ─── CV sectie ─── */
-    .cv-block {
-      background: var(--sage-deep);
-      border-radius: var(--radius-lg);
-      padding: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-      flex-wrap: wrap;
-    }
-
-    .cv-block h2 {
-      font-size: 22px;
-      font-weight: 600;
-      color: var(--cream);
-      margin-bottom: 8px;
-    }
-
-    .cv-block p {
-      font-size: 14px;
-      color: rgba(250,248,244,0.75);
-      max-width: 420px;
-    }
-
-    .btn-cream {
-      background: var(--cream);
-      color: var(--sage-deep);
-      border: none;
-      border-radius: var(--radius-pill);
-      padding: 12px 28px;
-      font-family: 'Quicksand', sans-serif;
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background 0.2s, transform 0.15s;
-      display: inline-block;
-      white-space: nowrap;
-    }
-
-    .btn-cream:hover {
-      background: var(--sage-mist);
-      transform: translateY(-1px);
-    }
-
-    /* ─── Opleiding ─── */
-    .opleiding-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 24px;
-    }
-
-    .opleiding-item {
-      display: flex;
-      align-items: baseline;
-      gap: 12px;
-      padding: 14px 18px;
-      background: var(--sage-mist);
-      border-radius: var(--radius-md);
-    }
-
-    .opleiding-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--sage-deep);
-      flex-shrink: 0;
-      margin-top: 3px;
-    }
-
-    .opleiding-item span {
-      font-size: 14px;
-      color: var(--text);
-      font-weight: 500;
-    }
-
-    .opleiding-item small {
-      font-size: 12px;
-      color: var(--muted);
-      margin-left: auto;
-    }
-
-    /* ─── Contact ─── */
-    .contact-layout {
-      display: grid;
-      grid-template-columns: 1fr 1.6fr;
-      gap: 24px;
-      margin-top: 32px;
-      align-items: start;
-    }
-
-    .contact-links {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .contact-form {
-      background: var(--sage-mist);
-      border-radius: var(--radius-lg);
-      padding: 28px;
       display: flex;
       flex-direction: column;
       gap: 16px;
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .form-group label {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .form-group input,
-    .form-group textarea {
-      font-family: 'Quicksand', 'Trebuchet MS', sans-serif;
-      font-size: 14px;
-      color: var(--text);
-      background: var(--cream);
-      border: 1.5px solid var(--sage-soft);
-      border-radius: var(--radius-md);
-      padding: 10px 14px;
-      outline: none;
-      transition: border-color 0.2s;
-      resize: vertical;
-    }
-
-    .form-group input:focus,
-    .form-group textarea:focus {
-      border-color: var(--sage-deep);
-    }
-
-    .form-group input::placeholder,
-    .form-group textarea::placeholder {
-      color: var(--sage-soft);
-    }
-
-    .form-success {
-      display: none;
-      font-size: 13px;
-      color: var(--sage-deep);
-      font-weight: 600;
-      text-align: center;
-      margin-top: 4px;
-    }
-
-    .contact-item {
-      background: var(--sage-mist);
-      border-radius: var(--radius-md);
-      padding: 20px 24px;
+      min-height: 220px;
       text-decoration: none;
-      transition: transform 0.2s;
-      display: flex;
-      align-items: center;
-      gap: 14px;
+      transition: transform 0.2s var(--ease-soft), box-shadow 0.2s var(--ease-soft);
     }
+    .portfolio-card:hover { transform: translateY(-3px); }
+    .portfolio-card.card--paper:hover { box-shadow: var(--shadow-md); }
+    .portfolio-card i.pf-icon { font-size: 36px; }
+    .portfolio-card .pf-body { margin-top: auto; }
+    .portfolio-card h3 { font-size: 19px; margin-bottom: 6px; }
+    .portfolio-card p { font-size: 13.5px; margin: 0; }
+    .pf-arrow { font-size: 18px; }
 
+    /* ── CV-blok ── */
+    .cv-block {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 24px; flex-wrap: wrap;
+    }
+    .cv-block h2 { font-family: var(--font-display); font-size: 24px; color: var(--cream); margin-bottom: 8px; }
+    .cv-block p { font-size: 14px; color: var(--sage-soft); max-width: 440px; margin: 0; }
+
+    /* ── Opleiding ── */
+    .edu-list { display: flex; flex-direction: column; gap: 10px; margin-top: var(--space-5); }
+    .edu-item {
+      display: flex; align-items: center; gap: 14px;
+      padding: 16px 20px; background: var(--sage-mist); border-radius: var(--radius-md);
+    }
+    .edu-item i { font-size: 22px; color: var(--sage-deep); flex-shrink: 0; }
+    .edu-item span { font-size: 14px; color: var(--text); font-weight: 500; }
+    .edu-item small { font-size: 12px; color: var(--muted); margin-left: auto; text-align: right; }
+
+    /* ── Contact ── */
+    .contact-layout {
+      display: grid; grid-template-columns: 1fr 1.6fr; gap: 24px;
+      margin-top: var(--space-6); align-items: start;
+    }
+    .contact-links { display: flex; flex-direction: column; gap: 12px; }
+    .contact-item {
+      display: flex; align-items: center; gap: 14px;
+      background: var(--paper); border-radius: var(--radius-md); padding: 18px 22px;
+      box-shadow: var(--shadow-soft); text-decoration: none;
+      transition: transform 0.2s var(--ease-soft);
+    }
     .contact-item:hover { transform: translateY(-2px); }
-
     .contact-icon {
-      width: 36px;
-      height: 36px;
-      background: var(--sage-deep);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
+      width: 40px; height: 40px; border-radius: 50%; background: var(--sage-deep);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
+    .contact-icon i { font-size: 20px; color: var(--cream); }
+    .contact-label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
+    .contact-value { font-size: 14px; font-weight: 600; color: var(--sage-ink); }
+    .contact-form { background: var(--paper); border-radius: var(--radius-lg); padding: 28px; box-shadow: var(--shadow-soft); }
+    .form-success { display: none; font-size: 14px; color: var(--sage-deep); font-weight: 600; text-align: center; margin-top: 12px; }
 
-    .contact-icon svg {
-      width: 16px;
-      height: 16px;
-      fill: var(--cream);
-    }
-
-    .contact-label {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 2px;
-    }
-
-    .contact-value {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--sage-ink);
-    }
-
-    /* ─── Footer ─── */
-    footer {
-      background: var(--sage-ink);
-      padding: 28px 32px;
-      text-align: center;
-    }
-
-    footer p {
-      font-size: 12px;
-      color: rgba(250,248,244,0.45);
-      letter-spacing: 1px;
-    }
-
-    /* ─── Divider ─── */
-    .full-bleed {
-      background: var(--sage-mist);
-      padding: 72px 0;
-    }
-
-    .full-bleed > section {
-      padding-top: 0;
-      padding-bottom: 0;
-    }
-
-    /* ─── Animaties ─── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .hero-label,
-    .title-zone,
-    .hero-tagline,
-    .hero-actions {
-      animation: fadeUp 0.6s ease both;
-    }
-
-    .hero-label   { animation-delay: 0.1s; }
-    .title-zone   { animation-delay: 0.25s; }
-    .hero-tagline { animation-delay: 0.4s; }
-    .hero-actions { animation-delay: 0.55s; }
-
-    /* ─── Responsive ─── */
-    @media (max-width: 640px) {
-      .title { font-size: 72px; letter-spacing: -1.5px; }
-      .title-zone { height: 72px; margin: -48px 20px 0; }
-      .about-grid,
-      .portfolio-grid,
+    @media (max-width: 760px) {
       .contact-layout { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
       .exp-item { grid-template-columns: 1fr; }
-      .exp-period { grid-column: 1; }
-.hero-green { padding: 40px 20px 0; }
-      .title-zone { margin-left: 20px; margin-right: 20px; }
-      .hero-cream { padding: 36px 20px 48px; }
-      section { padding: 48px 20px; }
+      .exp-period { order: -1; padding-top: 0; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Nav -->
   <nav id="site-nav"></nav>
 
-  <!-- Hero -->
-  <div class="hero">
-    <div class="hero-green">
-      <p class="hero-label">Leidinggevende &amp; adviseur</p>
+  <!-- ══ Hero ══ -->
+  <header>
+    <div class="cs" style="--cs-size: clamp(46px, 11vw, 104px); --cs-pad: clamp(20px, 5vw, 48px);">
+      <div class="cs-band">
+        <span class="label cs-eyebrow">Leidinggevende &amp; adviseur</span>
+      </div>
+      <div class="cs-zone">
+        <span class="cs-text cs-white" aria-hidden="true">Timon Kool</span>
+        <h1 class="cs-text cs-green">Timon Kool</h1>
+      </div>
     </div>
-    <div class="title-zone">
-      <h1 class="title title-white">Timon Kool</h1>
-      <h1 class="title title-green">Timon Kool</h1>
-    </div>
-    <div class="hero-cream">
-      <p class="hero-tagline">
+    <div class="hero-content">
+      <p class="lead">
         Verbindend, motiverend en adaptief. Ik breng mensen en technologie bij elkaar om efficiënt en bevredigend te werken.
       </p>
       <div class="hero-actions">
-        <a href="#contact" class="btn-primary">Neem contact op</a>
-        <a href="#portfolio" class="btn-secondary">Bekijk mijn werk</a>
+        <a href="#contact" class="btn btn--primary">Neem contact op</a>
+        <a href="#portfolio" class="btn btn--secondary">Bekijk mijn werk <i class="ph-fill ph-arrow-down-right"></i></a>
       </div>
     </div>
-  </div>
+  </header>
 
-  <!-- Over mij -->
-  <section id="over-mij">
-    <p class="section-label">Over mij</p>
-    <h2 class="section-title">Generalist met een scherp oog<br>voor mensen en processen</h2>
-    <p class="about-lead">
-      Als leidinggevende ben ik begripvol, empathisch en helder over verwachtingen. Ik vertrouw op de expertise van mijn mensen, maar vraag wel door. Ik beloon initiatief en geef ruimte om fouten te maken, op voorwaarde dat er ook van geleerd wordt.
+  <!-- ══ Over mij ══ -->
+  <section id="over-mij" class="section wrap reveal">
+    <div class="section-head">
+      <span class="label">Over mij</span>
+    </div>
+    <h2 class="section-title" style="max-width: 16ch; margin-bottom: 20px;">Generalist met een scherp oog voor mensen en processen</h2>
+    <p class="lead" style="max-width: 640px;">
+      Als leidinggevende ben ik begripvol, empathisch en helder over verwachtingen. Ik vertrouw op de expertise van mijn mensen, maar vraag wel door.
     </p>
     <div class="about-grid">
-      <div class="about-card">
+      <div class="card card--mist about-card">
+        <i class="ph-duotone ph-users-three"></i>
         <h3>Verbinden en motiveren</h3>
-        <p>Ik haal energie uit een diverse omgeving. Ik weet mensen in beweging te krijgen, ook wanneer ze zelf nog niet geloven dat verandering of groei mogelijk is. Of het nu gaat om een junior die doorgroeit of een senior die vastloopt.</p>
+        <p>Ik haal energie uit een diverse omgeving en weet mensen in beweging te krijgen, ook wanneer ze zelf nog niet geloven dat groei mogelijk is.</p>
       </div>
-      <div class="about-card">
+      <div class="card card--mist about-card">
+        <i class="ph-duotone ph-compass"></i>
         <h3>Groot plaatje, kleine stappen</h3>
-        <p>Ik zie verbanden en patronen waar anderen losse puzzelstukken zien. Dat gebruik ik om richting te geven, prioriteiten te stellen en teams gestructureerd vooruit te helpen.</p>
+        <p>Ik zie verbanden en patronen waar anderen losse puzzelstukken zien. Daarmee geef ik richting, stel ik prioriteiten en help ik teams gestructureerd vooruit.</p>
       </div>
-      <div class="about-card">
+      <div class="card card--mist about-card">
+        <i class="ph-duotone ph-arrows-clockwise"></i>
         <h3>Verandering als kans</h3>
-        <p>Ik heb teams door reorganisaties heen geleid en zorg dat mensen gemotiveerd en betrokken blijven, ook als de omgeving chaotisch is. Verandermanagement is geen methode voor mij, het is een houding.</p>
+        <p>Ik heb teams door reorganisaties heen geleid en zorg dat mensen betrokken blijven, ook als de omgeving chaotisch is. Verandermanagement is een houding.</p>
       </div>
-      <div class="about-card">
+      <div class="card card--mist about-card">
+        <i class="ph-duotone ph-sparkle"></i>
         <h3>AI als werkinstrument</h3>
-        <p>Ik werk actief met AI-tools om slimmer en sneller te werken. Ik ontwikkel materialen voor anderen om hetzelfde te leren, van handboeken tot interactieve e-learnings.</p>
+        <p>Ik werk actief met AI om slimmer te werken en ontwikkel materialen voor anderen om hetzelfde te leren, van handboeken tot interactieve e-learnings.</p>
       </div>
     </div>
   </section>
 
-  <!-- Werkervaring (full bleed) -->
-  <div class="full-bleed">
-    <section id="ervaring">
-      <p class="section-label">Werkervaring</p>
-      <h2 class="section-title">Waar ik mijn vak heb geleerd</h2>
-      <div class="experience-list">
-        <div class="exp-item">
+  <!-- ══ Werkervaring ══ -->
+  <div class="section--mist">
+    <section id="ervaring" class="section wrap reveal">
+      <div class="section-head">
+        <h2 class="section-title">Waar ik mijn vak heb geleerd</h2>
+        <span class="label">Werkervaring</span>
+      </div>
+      <div class="exp-list">
+        <div class="card card--paper exp-item">
           <div>
             <div class="exp-role">Regiomanager</div>
-            <div class="exp-org">Weekend Academie</div>
+            <div class="exp-org">Talent Academie</div>
           </div>
-          <div class="exp-period">2023 &ndash; heden</div>
-          <p class="exp-desc">Begonnen als locatiemanager en snel doorgegroeid naar regiomanager. Leidinggevend aan teams van jong professionals en hun teams studenten in het sociaal werkveld. Projectleider voor vakantie scholen, beleidsontwikkeling en een digitale kennisbank. Daarnaast verandermanager tijdens een complexe reorganisatie.</p>
+          <div class="exp-period">2023 &ndash; 2025</div>
+          <p class="exp-desc">Begonnen als locatiemanager en snel doorgegroeid naar regiomanager. Leidinggevend aan teams van jong professionals en hun studententeams in het sociaal werkveld. Projectleider voor vakantiescholen, beleidsontwikkeling en een digitale kennisbank. Daarnaast verandermanager tijdens een complexe reorganisatie.</p>
         </div>
-        <div class="exp-item">
+        <div class="card card--paper exp-item">
           <div>
             <div class="exp-role">Teamleider</div>
             <div class="exp-org">Salta Group</div>
           </div>
-          <div class="exp-period">2022 &ndash; 2023</div>
-          <p class="exp-desc">Leidinggevend aan drie teams van in totaal 20 mensen, van starters tot ervaren professionals. Betrokken bij meerdere bedrijfsbrede processen en projecten. Contactpersoon voor externe partners.</p>
+          <div class="exp-period">2020 &ndash; 2023</div>
+          <p class="exp-desc">Leidinggevend aan drie teams van in totaal twintig mensen, van starters tot ervaren professionals. Betrokken bij meerdere bedrijfsbrede processen en projecten. Contactpersoon voor externe partners.</p>
         </div>
-        <div class="exp-item">
+        <div class="card card--paper exp-item">
           <div>
             <div class="exp-role">Floormanager hospitality</div>
             <div class="exp-org">Jaarbeurs e.a.</div>
@@ -688,135 +219,122 @@
     </section>
   </div>
 
-  <!-- Portfolio -->
-  <section id="portfolio">
-    <p class="section-label">Portfolio</p>
-    <h2 class="section-title">Wat ik maak</h2>
+  <!-- ══ Portfolio ══ -->
+  <section id="portfolio" class="section wrap reveal">
+    <div class="section-head">
+      <h2 class="section-title">Wat ik maak</h2>
+      <span class="label">Portfolio</span>
+    </div>
     <div class="portfolio-grid">
-      <a href="pages/portfolio/handboek-ai-cowork.html" class="portfolio-card">
-        <p class="portfolio-tag">Handboek &middot; AI</p>
-        <h3>Handboek AI &amp; Cowork voor leiders</h3>
-        <p>Praktische gids voor leidinggevenden die AI-tools zoals Cowork willen inzetten in hun dagelijkse werk. Concrete instructies, geen hype.</p>
+      <a href="pages/portfolio/handboek-ai-cowork.html" class="card card--green portfolio-card">
+        <i class="ph-duotone ph-book-open pf-icon" style="color: var(--cream);"></i>
+        <div class="pf-body">
+          <span class="card-label">Handboek &middot; AI</span>
+          <h3 style="color: var(--cream);">Handboek AI &amp; Cowork voor leiders</h3>
+          <p style="color: var(--sage-soft);">Praktische gids voor leidinggevenden die AI-tools zoals Cowork willen inzetten in hun dagelijkse werk. Concrete instructies, geen hype.</p>
+        </div>
+        <i class="ph ph-arrow-up-right pf-arrow" style="color: var(--cream);"></i>
       </a>
-      <a href="pages/portfolio/basistraining-ai.html" class="portfolio-card">
-        <p class="portfolio-tag">Training &middot; AI</p>
-        <h3>Basistraining AI voor stichtingen</h3>
-        <p>Praktische training voor medewerkers en vrijwilligers. Inclusief downloadbare presentatie en binnenkort een volledige e-learning.</p>
+      <a href="pages/portfolio/basistraining-ai.html" class="card card--paper portfolio-card">
+        <i class="ph-duotone ph-chalkboard-simple pf-icon" style="color: var(--sage-deep);"></i>
+        <div class="pf-body">
+          <span class="card-label">Training &middot; AI</span>
+          <h3 style="color: var(--sage-ink);">Basistraining AI voor stichtingen</h3>
+          <p style="color: var(--muted);">Praktische training voor medewerkers en vrijwilligers. Inclusief downloadbare presentatie en een volledige e-learning.</p>
+        </div>
+        <i class="ph ph-arrow-up-right pf-arrow" style="color: var(--sage-deep);"></i>
       </a>
     </div>
   </section>
 
-  <!-- CV -->
-  <div style="background: var(--sage-mist); padding: 0 32px 72px;">
-    <div style="max-width: 900px; margin: 0 auto;">
-      <div class="cv-block">
-        <div>
-          <h2>Mijn volledige CV</h2>
-          <p>Overzicht van mijn werkervaring, opleiding en vaardigheden. Neem gerust contact op als je meer wilt weten.</p>
-        </div>
-        <a href="pages/cv.html" class="btn-cream">Bekijk CV</a>
+  <!-- ══ CV-blok ══ -->
+  <div class="wrap" style="padding-bottom: var(--space-9);">
+    <div class="card card--green cv-block">
+      <div>
+        <h2>Mijn volledige CV</h2>
+        <p>Overzicht van mijn werkervaring, opleiding en vaardigheden. Neem gerust contact op als je meer wilt weten.</p>
       </div>
+      <a href="pages/cv.html" class="btn btn--on-green">Bekijk CV</a>
     </div>
   </div>
 
-  <!-- Opleiding -->
-  <section id="opleiding">
-    <p class="section-label">Opleiding &amp; training</p>
-    <h2 class="section-title">Achtergrond</h2>
-    <div class="opleiding-list">
-      <div class="opleiding-item">
-        <div class="opleiding-dot"></div>
-        <span>Bachelor Psychologie</span>
-        <small>Universiteit Utrecht</small>
-      </div>
-      <div class="opleiding-item">
-        <div class="opleiding-dot"></div>
-        <span>Training Managementvaardigheden</span>
-        <small>NCOI</small>
-      </div>
-      <div class="opleiding-item">
-        <div class="opleiding-dot"></div>
-        <span>Training Coachingsvaardigheden</span>
-        <small>BVO</small>
-      </div>
-      <div class="opleiding-item">
-        <div class="opleiding-dot"></div>
-        <span>Training Projectmanagement</span>
-        <small>BVO</small>
-      </div>
-      <div class="opleiding-item">
-        <div class="opleiding-dot"></div>
-        <span>Training Didactische vaardigheden</span>
-        <small>BVO</small>
-      </div>
-      <div class="opleiding-item">
-        <div class="opleiding-dot"></div>
-        <span>Training Timemanagement voor leidinggevenden</span>
-        <small>BVO</small>
-      </div>
+  <!-- ══ Opleiding ══ -->
+  <section id="opleiding" class="section wrap reveal" style="padding-top: 0;">
+    <div class="section-head">
+      <h2 class="section-title">Achtergrond</h2>
+      <span class="label">Opleiding &amp; training</span>
+    </div>
+    <div class="edu-list">
+      <div class="edu-item"><i class="ph-duotone ph-graduation-cap"></i><span>Bachelor Psychologie</span><small>Universiteit Utrecht</small></div>
+      <div class="edu-item"><i class="ph-duotone ph-certificate"></i><span>Training Managementvaardigheden</span><small>NCOI</small></div>
+      <div class="edu-item"><i class="ph-duotone ph-certificate"></i><span>Training Coachingsvaardigheden</span><small>BVO</small></div>
+      <div class="edu-item"><i class="ph-duotone ph-certificate"></i><span>Training Projectmanagement</span><small>BVO</small></div>
+      <div class="edu-item"><i class="ph-duotone ph-certificate"></i><span>Training Didactische vaardigheden</span><small>BVO</small></div>
+      <div class="edu-item"><i class="ph-duotone ph-certificate"></i><span>Training Timemanagement voor leidinggevenden</span><small>BVO</small></div>
     </div>
   </section>
 
-  <!-- Contact -->
-  <div class="full-bleed">
-    <section id="contact">
-      <p class="section-label">Contact</p>
-      <h2 class="section-title">Praten over een samenwerking?</h2>
-      <p style="color: var(--muted); max-width: 500px; margin-bottom: 8px;">
+  <!-- ══ Contact ══ -->
+  <div class="section--mist">
+    <section id="contact" class="section wrap reveal">
+      <div class="section-head">
+        <h2 class="section-title">Praten over een samenwerking?</h2>
+        <span class="label">Contact</span>
+      </div>
+      <p class="lead" style="max-width: 520px;">
         Ik hoor graag van je. Of het nu gaat om een concrete vacature, een adviesvraag of een eerste kennismaking.
       </p>
       <div class="contact-layout">
-          <div class="contact-links">
-            <a href="https://linkedin.com/in/timonkool" target="_blank" rel="noopener" class="contact-item">
-              <div class="contact-icon">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14m-.5 15.5v-5.3a3.26 3.26 0 00-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 011.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 001.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 00-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
-                </svg>
-              </div>
-              <div>
-                <div class="contact-label">LinkedIn</div>
-                <div class="contact-value">linkedin.com/in/timonkool</div>
-              </div>
-            </a>
-            <div class="contact-item" style="cursor: default;">
-              <div class="contact-icon">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/>
-                </svg>
-              </div>
-              <div>
-                <div class="contact-label">Locatie</div>
-                <div class="contact-value">Almere, Nederland</div>
-              </div>
+        <div class="contact-links">
+          <a href="https://linkedin.com/in/timonkool" target="_blank" rel="noopener" class="contact-item">
+            <div class="contact-icon"><i class="ph-fill ph-linkedin-logo"></i></div>
+            <div>
+              <div class="contact-label">LinkedIn</div>
+              <div class="contact-value">linkedin.com/in/timonkool</div>
+            </div>
+          </a>
+          <div class="contact-item" style="cursor: default;">
+            <div class="contact-icon"><i class="ph-duotone ph-map-pin"></i></div>
+            <div>
+              <div class="contact-label">Locatie</div>
+              <div class="contact-value">Almere, Nederland</div>
             </div>
           </div>
-
-          <form class="contact-form" id="contact-form" action="https://formspree.io/f/xojbeokz" method="POST">
-            <div class="form-group">
-              <label for="name">Naam</label>
-              <input type="text" id="name" name="name" placeholder="Jouw naam" required />
-            </div>
-            <div class="form-group">
-              <label for="email">E-mailadres</label>
-              <input type="email" id="email" name="email" placeholder="jouw@email.nl" required />
-            </div>
-            <div class="form-group">
-              <label for="message">Bericht</label>
-              <textarea id="message" name="message" rows="4" placeholder="Waar wil je over sparren?" required></textarea>
-            </div>
-            <button type="submit" class="btn-primary" style="width: 100%; text-align: center;">Verstuur bericht</button>
-            <p class="form-success" id="form-success">Bericht verstuurd. Ik neem zo snel mogelijk contact op.</p>
-          </form>
         </div>
+
+        <form class="contact-form" id="contact-form" action="https://formspree.io/f/xojbeokz" method="POST">
+          <div class="field">
+            <label class="field-label" for="name">Naam</label>
+            <input class="input" type="text" id="name" name="name" placeholder="Jouw naam" required />
+          </div>
+          <div class="field">
+            <label class="field-label" for="email">E-mailadres</label>
+            <input class="input" type="email" id="email" name="email" placeholder="jouw@email.nl" required />
+          </div>
+          <div class="field">
+            <label class="field-label" for="message">Bericht</label>
+            <textarea class="textarea" id="message" name="message" rows="4" placeholder="Waar wil je over sparren?" required></textarea>
+          </div>
+          <button type="submit" class="btn btn--primary" style="width: 100%;">Verstuur bericht</button>
+          <p class="form-success" id="form-success">Bericht verstuurd. Ik neem zo snel mogelijk contact op.</p>
+        </form>
+      </div>
     </section>
   </div>
 
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2026 Timon Kool &middot; Almere</p>
+  <!-- ══ Footer ══ -->
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <span class="site-footer__brand">Timon Kool</span>
+      <div class="site-footer__social">
+        <a href="https://linkedin.com/in/timonkool" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="ph-duotone ph-linkedin-logo"></i></a>
+        <a href="#contact" aria-label="Contact"><i class="ph-duotone ph-envelope-simple"></i></a>
+      </div>
+    </div>
   </footer>
 
   <script>
+    // Contactformulier
     const form = document.getElementById('contact-form');
     const success = document.getElementById('form-success');
     if (form) {
@@ -835,6 +353,14 @@
         }
       });
     }
+
+    // Scroll-reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   </script>
   <script>const NAV_ROOT = './';</script>
   <script src="assets/js/nav.js"></script>

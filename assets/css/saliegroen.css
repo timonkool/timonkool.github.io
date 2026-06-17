@@ -1,0 +1,526 @@
+/* ============================================================
+   SALIEGROEN — Design System (productie-stylesheet)
+   Vertaald uit het "Saliegroene rust" design systeem naar pure
+   CSS voor timonkool.nl. Eén bestand: tokens + base + componenten.
+
+   Fonts (via <link> in de <head>): Fraunces, Hanken Grotesk,
+   JetBrains Mono. Iconen: Phosphor duotone (CDN).
+   ============================================================ */
+
+/* ──────────────────────────────────────────────
+   TOKENS — kleuren
+   ────────────────────────────────────────────── */
+:root {
+  /* Sage-familie (de anker-kleur) */
+  --sage-deep: #6b8068;
+  --sage-ink:  #3a4a38;
+  --sage:      #8ba287;
+  --sage-soft: #c8d4c4;
+  --sage-mist: #eef2ec;
+
+  /* Neutralen */
+  --cream:  #faf8f4;   /* warme pagina-achtergrond, nooit puur wit */
+  --paper:  #ffffff;
+  --text:   #2d352c;
+  --muted:  #6b7268;
+
+  /* Gedempte semantiek (alleen waar kleur verheldert) */
+  --clay-deep: #a8584a; --clay-surface: #f5e7e2; --clay-border: #e6cdc4; --clay-ink: #6e3127;
+  --amber-deep: #ab7e34; --amber-surface: #f6eed8; --amber-border: #e7d8ac; --amber-ink: #5d4615;
+  --blue-deep: #5a7a8c; --blue-surface: #e7eef2; --blue-border: #ccdae1; --blue-ink: #2e4753;
+
+  /* Interactie */
+  --accent: var(--sage-deep);
+  --accent-hover: #5d7059;
+  --accent-press: #51624e;
+  --link: var(--sage-deep);
+  --link-hover: var(--sage-ink);
+  --focus-ring: #8ba287;
+
+  /* ──────────────────────────────────────────────
+     TOKENS — typografie
+     ────────────────────────────────────────────── */
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-serif:   'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-sans:    'Hanken Grotesk', 'Trebuchet MS', Verdana, system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, Menlo, monospace;
+
+  --weight-light: 300;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  --fs-display: clamp(44px, 6vw, 72px);
+  --fs-h1: clamp(30px, 4vw, 40px);
+  --fs-h2: 26px;
+  --fs-h3: 18px;
+  --fs-h4: 15px;
+  --fs-lead: 19px;
+  --fs-body-lg: 17px;
+  --fs-body: 15px;
+  --fs-body-sm: 13px;
+  --fs-label: 11px;
+  --fs-caption: 12px;
+
+  --lh-display: 1.02;
+  --lh-tight: 1.12;
+  --lh-heading: 1.25;
+  --lh-body: 1.65;
+  --lh-relaxed: 1.75;
+
+  --ls-display: -0.02em;
+  --ls-heading: -0.01em;
+  --ls-label: 0.18em;
+
+  /* ──────────────────────────────────────────────
+     TOKENS — ruimte & layout
+     ────────────────────────────────────────────── */
+  --space-1: 4px;  --space-2: 8px;  --space-3: 12px; --space-4: 16px;
+  --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px;
+  --space-9: 96px; --space-10: 128px;
+
+  --pad-edge: clamp(20px, 5vw, 48px);
+  --width-prose: 720px;
+  --width-content: 960px;
+  --width-page: 1120px;
+
+  /* ──────────────────────────────────────────────
+     TOKENS — vorm & effect
+     ────────────────────────────────────────────── */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --radius-xl: 18px;
+  --radius-pill: 999px;
+
+  --shadow-xs: 0 1px 2px rgba(58,74,56,0.05);
+  --shadow-sm: 0 2px 8px rgba(58,74,56,0.05);
+  --shadow-soft: 0 4px 24px rgba(58,74,56,0.06);
+  --shadow-md: 0 8px 30px rgba(58,74,56,0.08);
+  --shadow-lg: 0 16px 48px rgba(58,74,56,0.10);
+
+  --hairline: 1px solid var(--sage-mist);
+  --hairline-soft: 1px solid var(--sage-soft);
+
+  --ease-soft: cubic-bezier(0.33, 0, 0.2, 1);
+  --dur-fast: 120ms;
+  --dur-base: 200ms;
+  --dur-slow: 320ms;
+}
+
+/* ──────────────────────────────────────────────
+   BASE
+   ────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+body {
+  background: var(--cream);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  font-weight: var(--weight-regular);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-sans);
+  color: var(--sage-ink);
+  font-weight: var(--weight-semibold);
+  line-height: var(--lh-heading);
+  letter-spacing: var(--ls-heading);
+  text-wrap: balance;
+}
+
+a { color: var(--link); text-decoration: none; transition: color var(--dur-fast) var(--ease-soft); }
+a:hover { color: var(--link-hover); }
+
+strong, b { font-weight: var(--weight-semibold); }
+
+::selection { background: var(--sage-soft); color: var(--sage-ink); }
+
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* ──────────────────────────────────────────────
+   TYPOGRAFIE-HELPERS
+   ────────────────────────────────────────────── */
+.display {
+  font-family: var(--font-display);
+  font-weight: var(--weight-semibold);
+  font-size: var(--fs-display);
+  line-height: var(--lh-display);
+  letter-spacing: var(--ls-display);
+  color: var(--sage-ink);
+}
+
+.lead {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: var(--weight-light);
+  font-size: var(--fs-lead);
+  line-height: var(--lh-body);
+  color: var(--sage-ink);
+  border-left: 3px solid var(--sage-deep);
+  padding-left: 14px;
+}
+
+.label {
+  font-family: var(--font-sans);
+  font-size: var(--fs-label);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ──────────────────────────────────────────────
+   LAYOUT
+   ────────────────────────────────────────────── */
+.wrap {
+  max-width: var(--width-page);
+  margin: 0 auto;
+  padding-inline: var(--pad-edge);
+}
+
+.section { padding-block: var(--space-9); }
+.section--tight { padding-block: var(--space-8); }
+.section--mist { background: var(--sage-mist); }
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: var(--space-6);
+  flex-wrap: wrap;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-weight: var(--weight-semibold);
+  font-size: 30px;
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-display);
+  color: var(--sage-ink);
+}
+
+/* ──────────────────────────────────────────────
+   SIGNATURE — kleurwissel-kop (pure CSS)
+   Alles afgeleid van --cs-size, dus de clip kan nooit
+   uit lijn lopen. Container erachter MOET cream zijn.
+   ────────────────────────────────────────────── */
+.cs {
+  --cs-size: 56px;
+  --cs-pad: 20px;
+  --cs-band-h: calc(var(--cs-size) * 1.5);
+  background: var(--cream);
+  padding-bottom: calc(var(--cs-size) * 0.4);
+}
+.cs-band {
+  background: var(--sage-deep);
+  height: var(--cs-band-h);
+  padding: 16px var(--cs-pad) 0;
+  display: flex;
+  align-items: flex-start;
+}
+.cs-eyebrow { color: var(--sage-soft); }
+.cs-zone {
+  position: relative;
+  height: var(--cs-size);
+  margin: calc(var(--cs-size) * -0.667) var(--cs-pad) 0;
+}
+.cs-text {
+  position: absolute;
+  top: 0; left: 0;
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: var(--weight-bold);
+  font-size: var(--cs-size);
+  line-height: 1;            /* kritisch: houdt glyphs gecentreerd */
+  letter-spacing: var(--ls-display);
+  white-space: nowrap;
+}
+.cs-white { color: var(--cream); clip-path: inset(0 0 43.0% 0); }
+.cs-green { color: var(--sage-deep); clip-path: inset(57.0% 0 0 0); }
+
+/* ──────────────────────────────────────────────
+   BUTTONS
+   ────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-sans);
+  font-weight: var(--weight-semibold);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1;
+  padding: 12px 24px;
+  border-radius: var(--radius-pill);
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background var(--dur-base) var(--ease-soft),
+              color var(--dur-base) var(--ease-soft),
+              border-color var(--dur-base) var(--ease-soft),
+              transform var(--dur-fast) var(--ease-soft);
+}
+.btn:active { transform: scale(0.97); }
+.btn i { font-size: 16px; }
+
+.btn--sm { padding: 9px 17px; font-size: 11px; }
+.btn--lg { padding: 15px 32px; font-size: 13px; }
+
+.btn--primary { background: var(--sage-deep); color: var(--cream); }
+.btn--primary:hover { background: var(--accent-hover); color: var(--cream); }
+
+.btn--secondary { background: var(--cream); color: var(--sage-ink); border-color: var(--sage-soft); }
+.btn--secondary:hover { background: var(--sage-mist); color: var(--sage-ink); }
+
+.btn--ghost { background: transparent; color: var(--sage-deep); }
+.btn--ghost:hover { background: var(--sage-mist); }
+
+.btn--on-green { background: var(--cream); color: var(--sage-ink); }
+.btn--on-green:hover { background: var(--sage-soft); color: var(--sage-ink); }
+
+.btn--outline-green { background: transparent; color: var(--cream); border-color: rgba(250,248,244,0.45); }
+.btn--outline-green:hover { background: rgba(250,248,244,0.14); color: var(--cream); }
+
+/* ──────────────────────────────────────────────
+   CARDS
+   ────────────────────────────────────────────── */
+.card {
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  background: var(--sage-mist);
+  color: var(--text);
+}
+.card--paper { background: var(--paper); box-shadow: var(--shadow-soft); }
+.card--green { background: var(--sage-deep); color: var(--cream); }
+.card--green h1, .card--green h2, .card--green h3 { color: var(--cream); }
+
+.card-label {
+  font-family: var(--font-sans);
+  font-size: var(--fs-label);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+.card--green .card-label { color: var(--sage-soft); }
+
+/* ──────────────────────────────────────────────
+   BADGES & CHIPS
+   ────────────────────────────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  background: var(--sage-mist);
+  color: var(--sage-ink);
+}
+
+.badge--dot::before {
+  content: '';
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--sage-deep);
+  animation: pulse 2s infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .badge--dot::before { animation: none; }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+/* Chip op groen vlak (hero-tags) */
+.chip-on-green {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cream);
+  background: rgba(250,248,244,0.12);
+  border: 1px solid rgba(250,248,244,0.25);
+  padding: 7px 16px;
+  border-radius: var(--radius-pill);
+}
+
+/* ──────────────────────────────────────────────
+   INTERIEUR-HERO (groen vlak met Fraunces-kop)
+   ────────────────────────────────────────────── */
+.page-hero {
+  background: var(--sage-deep);
+  position: relative;
+  overflow: hidden;
+}
+.page-hero__inner {
+  max-width: var(--width-page);
+  margin: 0 auto;
+  padding: clamp(48px, 7vw, 80px) var(--pad-edge) clamp(44px, 6vw, 64px);
+  position: relative;
+  z-index: 1;
+}
+.page-hero__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sage-soft);
+  margin-bottom: var(--space-6);
+}
+.page-hero__back:hover { color: var(--cream); }
+.page-hero__back i { font-size: 15px; }
+
+.page-hero__eyebrow {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: var(--fs-label);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--sage-soft);
+  margin-bottom: var(--space-4);
+}
+.page-hero__title {
+  font-family: var(--font-display);
+  font-weight: var(--weight-bold);
+  font-size: clamp(34px, 5.2vw, 60px);
+  line-height: 1.05;
+  letter-spacing: var(--ls-display);
+  color: var(--cream);
+  margin-bottom: var(--space-5);
+  max-width: 14ch;
+}
+.page-hero__lead {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: var(--weight-light);
+  font-size: clamp(17px, 2.2vw, 22px);
+  line-height: 1.55;
+  color: var(--cream);
+  max-width: 620px;
+  padding-left: 18px;
+  border-left: 3px solid var(--sage-soft);
+  margin-bottom: var(--space-6);
+}
+.page-hero__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: var(--space-6);
+}
+.page-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* ──────────────────────────────────────────────
+   FORMULIER
+   ────────────────────────────────────────────── */
+.field { margin-bottom: var(--space-5); }
+.field-label {
+  display: block;
+  font-size: var(--fs-label);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--sage-ink);
+  margin-bottom: var(--space-2);
+}
+.input, .textarea {
+  width: 100%;
+  background: var(--cream);
+  border: 1.5px solid var(--sage-soft);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--text);
+  outline: none;
+  appearance: none;
+  transition: border-color var(--dur-base) var(--ease-soft), box-shadow var(--dur-base) var(--ease-soft);
+}
+.input:focus, .textarea:focus {
+  border-color: var(--sage-deep);
+  box-shadow: 0 0 0 3px rgba(107,128,104,0.12);
+}
+.input::placeholder, .textarea::placeholder { color: var(--sage); }
+.textarea { resize: vertical; min-height: 130px; line-height: 1.6; }
+
+/* ──────────────────────────────────────────────
+   FOOTER
+   ────────────────────────────────────────────── */
+.site-footer {
+  border-top: 1px solid var(--sage-mist);
+}
+.site-footer__inner {
+  max-width: var(--width-page);
+  margin: 0 auto;
+  padding: var(--space-7) var(--pad-edge);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.site-footer__brand {
+  font-family: var(--font-display);
+  font-weight: var(--weight-semibold);
+  color: var(--sage-ink);
+  font-size: 17px;
+}
+.site-footer__social {
+  display: flex;
+  gap: 18px;
+  color: var(--sage-deep);
+  font-size: 22px;
+}
+.site-footer__social a { color: inherit; }
+.site-footer__social a:hover { color: var(--sage-ink); }
+.site-footer__meta { font-size: 12px; color: var(--muted); }
+
+/* ──────────────────────────────────────────────
+   SCROLL-REVEAL
+   ────────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity var(--dur-slow) var(--ease-soft), transform var(--dur-slow) var(--ease-soft);
+}
+.reveal.visible { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
