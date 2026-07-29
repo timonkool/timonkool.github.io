@@ -194,6 +194,7 @@ Houd dit overzicht actueel bij elke wijziging.
 - Inline styles alleen als tijdelijke oplossing. Structurele stijlen horen in de stylesheet.
 - Geen `<form>`-tags met directe e-mailverwijzingen. Altijd via Formspree.
 - Bij toevoegen van een nieuw portfolio-item: ook de portfoliokaart op `index.html` bijwerken.
+- Bij elke wijziging in `assets/css/saliegroen.css`: werk de versieparameter `?v=JJJJ-MM-DD` bij in **alle** HTML-pagina's die de stylesheet inladen. GitHub Pages serveert met `max-age=600`, dus zonder nieuwe URL combineert de browser nieuwe HTML met een oude stylesheet en valt de opmaak weg. Controleer met `grep -rn "saliegroen.css" --include=*.html .` of je geen pagina mist.
 
 ---
 
