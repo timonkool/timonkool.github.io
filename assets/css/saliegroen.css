@@ -447,6 +447,33 @@ strong, b { font-weight: var(--weight-semibold); }
 }
 
 /* ──────────────────────────────────────────────
+   HERO-PORTRET — kwartcirkel met de rechte hoek
+   rechtsboven. Valt over het groene vlak heen en
+   steekt er aan de onderkant uit.
+   .hero-shell is de positioneringscontext en mag
+   geen overflow: hidden krijgen.
+   ────────────────────────────────────────────── */
+.hero-shell { position: relative; }
+.hero-portrait {
+  --portrait-size: clamp(110px, 30vw, 400px);
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  width: var(--portrait-size);
+  height: var(--portrait-size);
+  object-fit: cover;
+  border-radius: 0 0 0 100%;
+  pointer-events: none;
+  user-select: none;
+}
+/* Op smalle schermen loopt de kop bijna tot de rechterrand.
+   De kwartcirkel krimpt mee zodat hij de tekst nooit raakt. */
+@media (max-width: 480px) { .hero-portrait { --portrait-size: 96px; } }
+@media (max-width: 410px) { .hero-portrait { --portrait-size: 84px; } }
+@media (max-width: 340px) { .hero-portrait { display: none; } }
+
+/* ──────────────────────────────────────────────
    FORMULIER
    ────────────────────────────────────────────── */
 .field { margin-bottom: var(--space-5); }

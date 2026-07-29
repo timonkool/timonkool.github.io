@@ -36,6 +36,12 @@
 
   .profile-text { font-size: 16px; line-height: 1.75; color: var(--text); max-width: 720px; margin-bottom: 16px; }
 
+  /* Kern-pijlers */
+  .core-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; margin-top: var(--space-6); }
+  .core-title { display: flex; align-items: center; gap: 9px; font-size: 14px; font-weight: 700; color: var(--sage-ink); margin-bottom: 6px; }
+  .core-title i { font-size: 20px; color: var(--sage-deep); flex-shrink: 0; }
+  .core-card p { font-size: 13.5px; line-height: 1.55; color: var(--muted); margin: 0; }
+
   /* Werkervaring — accordion */
   .job-card { background: var(--paper); border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 14px; box-shadow: var(--shadow-soft); transition: box-shadow 0.25s var(--ease-soft); }
   .job-card:hover { box-shadow: var(--shadow-md); }
@@ -47,6 +53,7 @@
   .job-title { font-size: 16px; font-weight: 700; color: var(--sage-ink); margin-bottom: 4px; }
   .job-org { font-size: 13px; color: var(--muted); display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
   .job-org-name { color: var(--sage-deep); font-weight: 600; }
+  .job-badge { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); background: var(--sage-mist); padding: 3px 9px; border-radius: var(--radius-pill); }
   .job-period { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); background: var(--sage-mist); padding: 4px 12px; border-radius: var(--radius-pill); white-space: nowrap; flex-shrink: 0; }
   .job-toggle { width: 34px; height: 34px; border-radius: 50%; background: var(--sage-mist); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background 0.2s; }
   .job-toggle i { font-size: 16px; color: var(--sage-deep); transition: transform 0.3s var(--ease-soft); }
@@ -72,8 +79,7 @@
   .result-block { background: var(--sage-mist); border-radius: var(--radius-md); padding: 16px 20px; margin-top: 16px; font-size: 14px; line-height: 1.65; }
   .approach-block { background: var(--cream); border: 1px solid var(--sage-soft); border-radius: var(--radius-md); padding: 16px 20px; margin-top: 16px; font-size: 14px; line-height: 1.65; color: var(--text); }
   .result-block strong, .approach-block strong { color: var(--sage-ink); font-weight: 700; display: block; margin-bottom: 6px; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; }
-  .subrole-label { font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--sage-deep); margin: 18px 0 10px; }
-  .subrole-label:first-child { margin-top: 0; }
+  .job-context { font-size: 14px; line-height: 1.65; color: var(--muted); margin-bottom: 14px; max-width: 70ch; }
 
   /* Vaardigheden */
   .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 18px; margin-top: var(--space-6); }
@@ -93,6 +99,7 @@
   .training-list { list-style: none; display: flex; flex-direction: column; gap: 9px; }
   .training-list li { font-size: 13.5px; color: var(--text); display: flex; gap: 9px; align-items: flex-start; }
   .training-list li::before { content: ''; width: 5px; height: 5px; background: var(--sage-soft); border-radius: 50%; flex-shrink: 0; margin-top: 7px; }
+  .training-org { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-left: auto; padding-left: 10px; flex-shrink: 0; }
 
   /* Contact */
   .contact-form { background: var(--paper); border-radius: var(--radius-lg); padding: 32px; box-shadow: var(--shadow-soft); max-width: 600px; }
@@ -111,28 +118,30 @@
 <nav id="site-nav"></nav>
 
 <!-- ══ Hero ══ -->
-<header class="page-hero">
-  <div class="page-hero__inner">
-    <span class="page-hero__eyebrow">Curriculum Vitae</span>
-    <h1 class="page-hero__title">Timon Kool</h1>
-    <p class="page-hero__lead">Ik zorg dat mensen groeien, teams blijven, en technologie werkt voor mensen die er niks van weten.</p>
-    <div class="page-hero__tags">
-      <span class="chip-on-green">Leidinggevende</span>
-      <span class="chip-on-green">Verandermanager</span>
-      <span class="chip-on-green">Coach</span>
-      <span class="chip-on-green">AI-adviseur</span>
+<div class="hero-shell">
+  <img class="hero-portrait" src="../assets/images/profielfoto-timon.jpg" alt="Portret van Timon Kool" width="900" height="900">
+  <header class="page-hero">
+    <div class="page-hero__inner">
+      <span class="page-hero__eyebrow">Curriculum Vitae</span>
+      <h1 class="page-hero__title">Timon Kool</h1>
+      <p class="page-hero__lead">Mensen helpen groeien: dat is mijn passie, en de rode draad door al mijn functies.</p>
+      <div class="page-hero__tags">
+        <span class="chip-on-green">Leidinggevende</span>
+        <span class="chip-on-green">Didactiek</span>
+        <span class="chip-on-green">AI-adoptie</span>
+      </div>
+      <div class="page-hero__actions">
+        <a href="../docs/cv-timon-kool.pdf" download class="btn btn--on-green">
+          <i class="ph-duotone ph-download-simple"></i> Download CV (.pdf)
+        </a>
+      </div>
     </div>
-    <div class="page-hero__actions">
-      <a href="../docs/cv-timon-kool.docx" download class="btn btn--on-green">
-        <i class="ph-duotone ph-download-simple"></i> Download CV (.docx)
-      </a>
+  </header>
+  <div class="hero-contacts">
+    <div class="hero-contacts__inner">
+      <span class="hero-contact-item"><i class="ph-duotone ph-map-pin"></i> Almere</span>
+      <span class="hero-contact-item"><i class="ph-duotone ph-linkedin-logo"></i> <a href="https://linkedin.com/in/timonkool" target="_blank" rel="noopener">linkedin.com/in/timonkool</a></span>
     </div>
-  </div>
-</header>
-<div class="hero-contacts">
-  <div class="hero-contacts__inner">
-    <span class="hero-contact-item"><i class="ph-duotone ph-map-pin"></i> Almere</span>
-    <span class="hero-contact-item"><i class="ph-duotone ph-linkedin-logo"></i> <a href="https://linkedin.com/in/timonkool" target="_blank" rel="noopener">linkedin.com/in/timonkool</a></span>
   </div>
 </div>
 
@@ -143,12 +152,31 @@
   <section class="section wrap reveal">
     <div class="section-head"><h2 class="section-title">Profiel</h2><span class="label">Wie ik ben</span></div>
     <p class="lead profile-text" style="margin-bottom: 18px;">
-      Leidinggevende en verandermanager die mensen in beweging krijgt: ook als de situatie moeilijk is, de middelen krimpen, of het team halverwege de weg kwijtraakt. Bekend om directheid die ruimte laat, feedback die mensen verder brengt in plaats van kleiner maakt, en het vermogen om orde te scheppen in chaos zonder de betrokkenheid van het team te verliezen.
+      Als studieadviseur spoorde ik het leerprobleem achter de praktische klacht op. Als leidinggevende begeleidde ik medewerkers via coaching, feedback en heldere verwachtingen van junior naar zelfstandig professional. Bij de vakantiescholen ontwierp ik onderwijs dat ook onervaren teams pedagogische kwaliteit liet leveren.
     </p>
     <p class="profile-text">
-      Begeleidt daarnaast maatschappelijke organisaties bij de praktische inzet van AI: van procesautomatisering tot het verlagen van de drempel voor mensen die technologie spannend vinden.
+      Ik schakel moeiteloos tussen strategie en uitvoering: van programma's ontwerpen en management adviseren tot zelf trainen en coachen. Die veelzijdigheid vulde ik aan met diepgaande AI-kennis, nu ook ingezet als zelfstandig vrijwilliger voor drie stichtingen.
     </p>
-    <span class="badge badge--dot" style="margin-top: 8px;">Beschikbaar per 1 juli 2026</span>
+    <span class="badge badge--dot" style="margin-top: 8px;">Direct beschikbaar</span>
+
+    <div class="core-grid">
+      <div class="card card--mist core-card">
+        <div class="core-title"><i class="ph-duotone ph-plant"></i> Coachend leidinggeven</div>
+        <p>Van junior naar zelfstandig professional.</p>
+      </div>
+      <div class="card card--mist core-card">
+        <div class="core-title"><i class="ph-duotone ph-book-open-text"></i> Didactisch ontwerp</div>
+        <p>Programma's die ook onervaren teams dragen.</p>
+      </div>
+      <div class="card card--mist core-card">
+        <div class="core-title"><i class="ph-duotone ph-compass"></i> Strategisch én hands-on</div>
+        <p>Schakelt tussen adviseren, ontwerpen en uitvoeren.</p>
+      </div>
+      <div class="card card--mist core-card">
+        <div class="core-title"><i class="ph-duotone ph-sparkle"></i> AI-adoptie</div>
+        <p>Automatiseert taken, zodat er tijd overblijft voor de mens.</p>
+      </div>
+    </div>
   </section>
 
   <!-- Werkervaring -->
@@ -162,30 +190,36 @@
           <div class="job-accent"></div>
           <div class="job-header-inner">
             <div class="job-meta">
-              <div class="job-title">Adviseur AI-adoptie &amp; procesverbetering</div>
-              <div class="job-org"><span class="job-org-name">Diverse maatschappelijke organisaties</span><span>pro bono</span></div>
+              <div class="job-title">Adviseur &amp; trainer AI-adoptie</div>
+              <div class="job-org"><span class="job-org-name">St. Care Almere &middot; St. Wensjes &middot; St. Alle Handen Ineen</span><span class="job-badge">pro bono</span></div>
             </div>
-            <span class="job-period">02/2026 &ndash; heden</span>
+            <span class="job-period">2026 &ndash; heden</span>
             <div class="job-toggle"><i class="ph-bold ph-caret-down"></i></div>
           </div>
         </div>
-        <p class="job-tagline">Technologie werkbaar maken voor organisaties met een hart voor de samenleving</p>
+        <p class="job-tagline">Van didactisch concept tot uitvoering en borging</p>
         <div class="job-tabs">
           <div class="tab-nav">
             <button class="tab-btn active" onclick="switchTab('job-ai', 'wat', this)">Wat deed ik</button>
             <button class="tab-btn" onclick="switchTab('job-ai', 'resultaat', this)">Resultaten</button>
           </div>
           <div class="tab-panel active" data-tab="wat">
+            <p class="job-context">Maatschappelijke stichtingen draaien op medewerkers en vrijwilligers zonder technische achtergrond. Ik ontwikkelde voor hen een AI-basistraining: van didactisch concept tot uitvoering en borging.</p>
             <ul>
-              <li>Begeleiding van stichtingen bij de introductie en praktische toepassing van AI-tools in dagelijkse processen.</li>
-              <li>Vertalen van complexe technologie naar directe, werkbare oplossingen: van communicatiematerialen en pitches tot procesautomatisering.</li>
-              <li>Opstellen van presentaties, evenementenuitingen en beleidsondersteunend materiaal voor vrijwilligersorganisaties.</li>
+              <li>Ontwierp en bouwde zelfstandig een volledige e-learning. Elke module doorloopt de cyclus ervaren, begrijpen, toepassen en reflecteren, met opdrachten uit de eigen werkpraktijk.</li>
+              <li>Didactisch uitgangspunt: deelnemers ervaren eerst de kracht van AI en krijgen daarna pas de uitleg. AI-feedback dient als spiegel om van te leren, niet als beoordeling.</li>
+              <li>Gaf de training live bij alle drie de stichtingen en adviseerde besturen en coördinatoren over het inbedden van het geleerde in het dagelijks werk.</li>
+              <li>Schreef een praktisch AI-handboek voor leidinggevenden: complexe materie vertaald naar direct toepasbare leerstof.</li>
             </ul>
           </div>
           <div class="tab-panel" data-tab="resultaat">
             <div class="result-block">
-              <strong>Resultaten bij drie organisaties</strong>
-              Subsidie- en fondsaanvragen van één stichting structureel versterkt met behulp van AI: significant hogere kwaliteit voor aanmerkelijk minder tijdsinvestering. Bij een tweede stichting een geautomatiseerd systeem opgezet voor het structureel delen van nieuwsbrieven via social media, inclusief vast beeldmerk. Een derde stichting heeft na een praktische AI-basistraining zelfstandig marketingactiviteiten opgepakt die eerder onhaalbaar leken: de drempel was te hoog, de kennis ontbrak.
+              <strong>Resultaat</strong>
+              Medewerkers pakten na de basistraining zelfstandig taken op die eerder onhaalbaar leken, waaronder het opzetten van eigen marketingactiviteiten.
+            </div>
+            <div class="approach-block">
+              <strong>Ook opgeleverd</strong>
+              Subsidie- en fondsaanvragen van één stichting structureel versterkt met behulp van AI: hogere kwaliteit voor aanmerkelijk minder tijdsinvestering. Bij een tweede stichting een geautomatiseerd systeem opgezet voor het structureel delen van nieuwsbrieven via social media, inclusief vast beeldmerk.
             </div>
           </div>
         </div>
@@ -211,19 +245,20 @@
             <button class="tab-btn" onclick="switchTab('job-ta', 'resultaat', this)">Resultaten &amp; aanpak</button>
           </div>
           <div class="tab-panel active" data-tab="wat">
+            <p class="job-context">Leidinggevende van teams jong professionals en hun studententeams in het sociaal werkveld, op meerdere locaties. Daarnaast projectleider van de vakantiescholen: onderwijsprogramma's voor kinderen, uitgevoerd door pas afgestudeerde leerkrachten en stagiairs.</p>
             <ul>
-              <li>Doorgegroeid van locatiemanager naar regiomanager binnen het eerste jaar.</li>
-              <li>Leidinggevend aan teams van jong professionals in het sociaal werkveld en hun studentteams op meerdere locaties.</li>
-              <li>Meerdere medewerkers die niet naar behoren functioneerden begeleid naar goed functionerend niveau via intensieve ontwikkeltrajecten, heldere verwachtingen en opbouwende feedback.</li>
-              <li>Teamzelfstandigheid en saamhorigheid structureel vergroot, ook tijdens een periode van reorganisatie en toenemende werkdruk.</li>
-              <li>Elke vakantie opnieuw een volwaardige vakantieschool neergezet op meerdere locaties, met minder budget en minder mensen.</li>
-              <li>Verandermanager tijdens een chaotische reorganisatie: team gemotiveerd en intact door de transitie geloodst.</li>
+              <li>Groeide van locatiemanager naar volledige projectleiding van de vakantiescholen, naast de dagelijkse aansturing van twee regio's.</li>
+              <li>Nam bij het wegvallen van de onderwijsontwikkelaar de volledige inhoudelijke verantwoordelijkheid over: van thema's bepalen tot complete lesboekjes uitwerken.</li>
+              <li>Ontwierp programma's en draaiboeken zo volledig dat teams zonder onderwijservaring er pedagogisch verantwoord mee konden werken; trainde de teams voorafgaand aan iedere editie.</li>
+              <li>Ving als eindverantwoordelijke op locatie kinderen op met heimwee, gedragsproblemen of emoties die te groot waren voor de klas.</li>
+              <li>Begeleidde stagiair-coördinatoren als stagebegeleider en hielp jong professionals richting geven aan hun loopbaan; greep in bij onvoldoende functioneren.</li>
+              <li>Hield het team gemotiveerd en leerbereid tijdens een chaotische reorganisatie, met telkens minder budget en minder mensen.</li>
             </ul>
           </div>
           <div class="tab-panel" data-tab="resultaat">
             <div class="result-block">
               <strong>Resultaat</strong>
-              Laagste verloop van alle teams in de organisatie. Slechts één vertrek in twee jaar, uitsluitend door verhuizing. Team bleef structureel klaar om elders gaten op te vullen toen andere teams onderbezet waren: ook in de zwaarste periode van de reorganisatie.
+              Laagste verloop van alle teams in de organisatie: één vertrek in twee jaar, uitsluitend door verhuizing. Vakantiescholen telkens opnieuw neergezet ondanks krimpend budget. Het team bleef klaar om elders gaten op te vullen toen andere teams onderbezet waren, ook in de zwaarste periode van de reorganisatie.
             </div>
             <div class="approach-block">
               <strong>Aanpak</strong>
@@ -233,45 +268,74 @@
         </div>
       </div>
 
-      <!-- Salta Group -->
-      <div class="job-card" id="job-salta">
-        <div class="job-header" onclick="toggleJob('job-salta')">
+      <!-- Salta Group — teamleider -->
+      <div class="job-card" id="job-salta-tl">
+        <div class="job-header" onclick="toggleJob('job-salta-tl')">
           <div class="job-accent"></div>
           <div class="job-header-inner">
             <div class="job-meta">
-              <div class="job-title">Teamleider &amp; Studieadviseur</div>
-              <div class="job-org"><span class="job-org-name">Salta Group</span><span>doorgroei binnen één organisatie</span></div>
+              <div class="job-title">Teamleider</div>
+              <div class="job-org"><span class="job-org-name">Salta Group</span></div>
             </div>
-            <span class="job-period">03/2020 &ndash; 10/2023</span>
+            <span class="job-period">2022 &ndash; 10/2023</span>
             <div class="job-toggle"><i class="ph-bold ph-caret-down"></i></div>
           </div>
         </div>
         <p class="job-tagline">Doorgegroeid van individuele begeleider naar leidinggevende van drie teams</p>
         <div class="job-tabs">
           <div class="tab-nav">
-            <button class="tab-btn active" onclick="switchTab('job-salta', 'wat', this)">Wat deed ik</button>
-            <button class="tab-btn" onclick="switchTab('job-salta', 'resultaat', this)">Resultaten</button>
+            <button class="tab-btn active" onclick="switchTab('job-salta-tl', 'wat', this)">Wat deed ik</button>
+            <button class="tab-btn" onclick="switchTab('job-salta-tl', 'resultaat', this)">Resultaten</button>
           </div>
           <div class="tab-panel active" data-tab="wat">
-            <div class="subrole-label">Als studieadviseur (03/2020 &ndash; 03/2022)</div>
+            <p class="job-context">Doorgegroeid vanuit de rol van studieadviseur naar leidinggevende van drie teams (twintig medewerkers).</p>
             <ul>
-              <li>Begeleiding van mbo-studenten bij het behalen van hun opleiding: van studieplanning tot klachtenafhandeling.</li>
-              <li>Uitgeblonken in het ombuigen van klachtgesprekken naar gesprekken over zelfontplooiing: studenten verlieten het gesprek met meer motivatie dan waarmee ze binnenkwamen.</li>
-              <li>Doorgegroeid naar begeleiding van leerplichtige studenten, die intensievere controle en sturing vergen.</li>
-              <li>Controletaken voor de afdeling geautomatiseerd om begeleiding efficiënter en schaalbaarder te maken.</li>
-            </ul>
-            <div class="subrole-label">Als teamleider (03/2022 &ndash; 10/2023)</div>
-            <ul>
-              <li>Leidinggevend aan drie teams van in totaal 20 medewerkers, van pas afgestudeerde juniors tot ervaren professionals.</li>
-              <li>Gedurende meerdere maanden als enige leidinggevende een afdeling aangestuurd die normaal door een manager en drie teamleiders werd geleid.</li>
-              <li>Ervaren professionals behouden en gemotiveerd gehouden in een periode van onderbezetting en onzekerheid.</li>
-              <li>Cruciale rol gespeeld in de ontwikkeling van een nieuw softwaresysteem: praktijkkennis vertaald naar concrete systeemvereisten.</li>
+              <li>Begeleidde medewerkers via coaching, opbouwende feedback en heldere verwachtingen in hun ontwikkeling van junior naar senior professional.</li>
+              <li>Bracht meerdere onvoldoende functionerende medewerkers via gerichte ontwikkeltrajecten terug naar goed functioneren.</li>
+              <li>Automatiseerde controletaken van de afdeling en vertaalde praktijkkennis naar concrete eisen voor een nieuw begeleidingssysteem.</li>
+              <li>Hield ervaren professionals behouden en gemotiveerd in een periode van onderbezetting en onzekerheid.</li>
             </ul>
           </div>
           <div class="tab-panel" data-tab="resultaat">
             <div class="result-block">
               <strong>Resultaat</strong>
-              Afdeling draaiende gehouden met structureel personeelstekort. Meerdere maanden feitelijk de rol van manager én drie teamleiders gecombineerd zonder kwaliteitsverlies. Juniors die als risico werden gezien zijn uitgegroeid tot betrouwbare, zelfstandige professionals. Doorgroei van adviseur naar leidinggevende binnen drie jaar in dezelfde organisatie.
+              Combineerde meerdere maanden feitelijk de rol van manager én drie teamleiders, zonder verlies van kwaliteit of teamontwikkeling. Juniors die als risico werden gezien groeiden uit tot betrouwbare, zelfstandige professionals.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Salta Group — studieadviseur -->
+      <div class="job-card" id="job-salta-sa">
+        <div class="job-header" onclick="toggleJob('job-salta-sa')">
+          <div class="job-accent"></div>
+          <div class="job-header-inner">
+            <div class="job-meta">
+              <div class="job-title">Studieadviseur</div>
+              <div class="job-org"><span class="job-org-name">Salta Group</span></div>
+            </div>
+            <span class="job-period">03/2020 &ndash; 2022</span>
+            <div class="job-toggle"><i class="ph-bold ph-caret-down"></i></div>
+          </div>
+        </div>
+        <p class="job-tagline">Het leerprobleem achter de praktische klacht</p>
+        <div class="job-tabs">
+          <div class="tab-nav">
+            <button class="tab-btn active" onclick="switchTab('job-salta-sa', 'wat', this)">Wat deed ik</button>
+            <button class="tab-btn" onclick="switchTab('job-salta-sa', 'resultaat', this)">Resultaten</button>
+          </div>
+          <div class="tab-panel active" data-tab="wat">
+            <p class="job-context">Begeleidde volwassen mbo-studenten op het snijvlak van praktisch advies en individuele leerprocessen.</p>
+            <ul>
+              <li>Achterhaalde in gesprekken het onderliggende leerprobleem achter praktische klachten en boog leerstrategieën om naar wat bij de student paste.</li>
+              <li>Maakte met studenten volledige leerplanningen en hield regelmatig contact om hen erbij te houden en te motiveren.</li>
+              <li>Groeide door naar de begeleiding van leerplichtige studenten, die intensievere controle en sturing vergen.</li>
+            </ul>
+          </div>
+          <div class="tab-panel" data-tab="resultaat">
+            <div class="result-block">
+              <strong>Resultaat</strong>
+              Stuurde consequent op een interne locus of control: van een afhankelijke opstelling naar eigen verantwoordelijkheid voor studiesucces. Studenten verlieten een klachtgesprek regelmatig met meer motivatie dan waarmee ze binnenkwamen.
             </div>
           </div>
         </div>
@@ -297,16 +361,17 @@
             <button class="tab-btn" onclick="switchTab('job-jaarbeurs', 'resultaat', this)">Resultaten</button>
           </div>
           <div class="tab-panel active" data-tab="wat">
+            <p class="job-context">Dagelijkse aansturing en instructie van diverse, wisselende teams uitzendkrachten bij nationale en internationale beurzen en congressen.</p>
             <ul>
               <li>Coördinatie van alle horeca- en hospitality-gerelateerde zaken rondom nationale en internationale beurzen.</li>
-              <li>Afstemmen met beursorganisaties en accountmanagers. Aansturen van diverse, continu wisselende teams uitzendkrachten.</li>
+              <li>Afstemmen met beursorganisaties en accountmanagers.</li>
               <li>Flexibel schakelen en leemtes opvullen in een omgeving waar improvisatie en snelheid de norm zijn.</li>
             </ul>
           </div>
           <div class="tab-panel" data-tab="resultaat">
             <div class="result-block">
               <strong>Kern van deze periode</strong>
-              Geleerd om te leiden in chaos, met wisselende teams en wisselende omstandigheden. De basis voor het leiderschapspatroon dat in latere functies verder is uitgebouwd.
+              De basis voor het coachende leiderschap dat ik in latere functies uitbouwde: leiden in chaos, met wisselende teams en wisselende omstandigheden.
             </div>
           </div>
         </div>
@@ -328,6 +393,16 @@
           <li>Verandermanagement in turbulente omstandigheden</li>
           <li>Projectmanagement op meerdere locaties</li>
           <li>Verwachtingen stellen, feedback geven, aanspreken</li>
+        </ul>
+      </div>
+      <div class="card card--paper">
+        <div class="skill-group-title"><i class="ph-duotone ph-book-open-text"></i> Didactiek &amp; ontwerp</div>
+        <ul class="skill-list">
+          <li>Didactisch ontwerp van trainingen en e-learning</li>
+          <li>Leercyclus ervaren, begrijpen, toepassen, reflecteren</li>
+          <li>Draaiboeken waarmee onervaren teams kunnen werken</li>
+          <li>Lesmateriaal en handboeken schrijven</li>
+          <li>Trainingen live geven en teams begeleiden</li>
         </ul>
       </div>
       <div class="card card--paper">
@@ -366,11 +441,11 @@
         <div class="card card--paper">
           <div class="edu-card-title"><i class="ph-duotone ph-certificate"></i> Trainingen &middot; NCOI / BVO</div>
           <ul class="training-list">
-            <li>Managementvaardigheden</li>
-            <li>Timemanagement voor leidinggevenden</li>
-            <li>Coachingsvaardigheden</li>
-            <li>Projectmanagement</li>
-            <li>Didactische vaardigheden</li>
+            <li>Didactische vaardigheden <span class="training-org">BVO</span></li>
+            <li>Coachingsvaardigheden <span class="training-org">BVO</span></li>
+            <li>Projectmanagement <span class="training-org">BVO</span></li>
+            <li>Timemanagement voor leidinggevenden <span class="training-org">BVO</span></li>
+            <li>Managementvaardigheden <span class="training-org">NCOI</span></li>
           </ul>
         </div>
       </div>

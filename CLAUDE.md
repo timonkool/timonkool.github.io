@@ -178,9 +178,9 @@ De volledige schrijfstijlinstructie staat in `schrijfstijl_instructie.md`. Onder
 | Pagina | Bestand | Status |
 |--------|---------|--------|
 | Homepage | `index.html` | Live |
-| CV (visueel) | `pages/cv.html` | In ontwikkeling |
-| CV (download) | `docs/cv-timon-kool.pdf` | Nog toe te voegen |
-| Handboek AI & Cowork | `pages/portfolio/handboek-ai-cowork.html` | Nog toe te voegen |
+| CV (visueel) | `pages/cv.html` | Live |
+| CV (download) | `docs/cv-timon-kool.pdf` | Live |
+| Handboek AI & Cowork | `pages/portfolio/handboek-ai-cowork.html` | Live |
 | Basistraining AI voor stichtingen | `pages/portfolio/basistraining-ai.html` | Live |
 
 Houd dit overzicht actueel bij elke wijziging.
