@@ -1,0 +1,1010 @@
+/* Meubelplanner. Gebruikt de kleuren van de site. De plattegrond zelf blijft wit, ook in de donkere weergave. */
+
+body.breed {
+  --maxbreedte: 96rem;
+}
+
+.planner-tokens,
+#planner {
+  --canvas: #e3ded6;
+  --gevaar: #c23a3a;
+  --gevaar-vlak: #fbe9e9;
+  --ok: #1c8458;
+  --overlay: rgba(255, 255, 255, 0.93);
+  --accent-vlak: #fbe6d8;
+  --schaduw: 0 1px 2px rgba(39, 22, 7, 0.08), 0 8px 22px rgba(39, 22, 7, 0.07);
+}
+
+@media (prefers-color-scheme: dark) {
+  .planner-tokens,
+  #planner {
+    --canvas: #0d0a08;
+    --gevaar: #ff7b7b;
+    --gevaar-vlak: #3a2024;
+    --ok: #4fd19a;
+    --overlay: rgba(28, 21, 17, 0.93);
+    --accent-vlak: #3a2417;
+    --schaduw: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 22px rgba(0, 0, 0, 0.35);
+  }
+}
+
+#planner {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#planner [hidden] {
+  display: none !important;
+}
+
+.ptop {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  max-width: 100%;
+  padding: 0 12px;
+  border: 1px solid var(--rand);
+  border-radius: 8px;
+  background: var(--vlak);
+  color: var(--tekst);
+  font: inherit;
+  cursor: pointer;
+}
+
+.chip .k {
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--tekst-zacht);
+}
+
+.chip b {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 46vw;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.85rem;
+  color: var(--tekst-zacht);
+}
+
+.status::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--tekst-zacht);
+}
+
+.status.ok::before {
+  background: var(--ok);
+}
+
+.status.bezig::before {
+  background: var(--accent);
+}
+
+.status.fout,
+.status.lokaal {
+  color: var(--gevaar);
+}
+
+.status.fout::before,
+.status.lokaal::before {
+  background: var(--gevaar);
+}
+
+.work {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.stage,
+.schaalpaneel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+.bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 12px;
+}
+
+.floors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.floors button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 13px;
+  border: 1px solid var(--rand);
+  border-radius: 8px;
+  background: var(--vlak);
+  color: var(--tekst);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.floors button[aria-current="true"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-tekst);
+}
+
+.floors .fn {
+  max-width: 14rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.floors .n {
+  min-width: 20px;
+  padding: 2px 6px;
+  border-radius: 9px;
+  background: var(--achtergrond);
+  color: var(--tekst);
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+.tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: center;
+}
+
+.tools .sep {
+  width: 1px;
+  height: 24px;
+  background: var(--rand);
+  margin-inline: 4px;
+}
+
+.ib {
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--rand);
+  border-radius: 8px;
+  background: var(--vlak);
+  color: var(--tekst);
+  cursor: pointer;
+}
+
+.ib svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ib[aria-pressed="true"] {
+  background: var(--accent-vlak);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.ib:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.canvas {
+  position: relative;
+  height: clamp(340px, 62svh, 680px);
+  background: var(--canvas);
+  border: 1px solid var(--rand);
+  border-radius: 12px;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+#svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  cursor: grab;
+}
+
+#svg.panning {
+  cursor: grabbing;
+}
+
+#svg .papier {
+  fill: #ffffff;
+}
+
+.ov {
+  position: absolute;
+  background: var(--overlay);
+  border: 1px solid var(--rand);
+  border-radius: 8px;
+  box-shadow: var(--schaduw);
+  pointer-events: none;
+  color: var(--tekst);
+}
+
+.ov-tl {
+  left: 10px;
+  top: 10px;
+  padding: 6px 10px;
+  max-width: calc(100% - 20px);
+  font-size: 0.8rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ov-bl {
+  left: 10px;
+  bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  font-size: 0.8rem;
+}
+
+.ov-bl i {
+  display: block;
+  height: 7px;
+  border: 2px solid var(--tekst);
+  border-top: none;
+}
+
+.hint {
+  position: absolute;
+  left: 50%;
+  bottom: 58px;
+  transform: translateX(-50%);
+  max-width: calc(100% - 24px);
+  padding: 9px 14px;
+  background: var(--overlay);
+  border: 1px solid var(--rand);
+  border-radius: 10px;
+  box-shadow: var(--schaduw);
+  text-align: center;
+  pointer-events: none;
+  color: var(--tekst);
+}
+
+#svg .it .body {
+  stroke: rgba(10, 20, 40, 0.6);
+  stroke-width: 1.2;
+  vector-effect: non-scaling-stroke;
+  fill-opacity: 0.9;
+}
+
+#svg .it.vl .body {
+  fill-opacity: 0.42;
+  stroke-dasharray: 6 3;
+}
+
+#svg .it .halo {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 6;
+  vector-effect: non-scaling-stroke;
+  opacity: 0.95;
+}
+
+#svg .it.sel .body {
+  stroke: #0d3b9a;
+  stroke-width: 2.6;
+}
+
+#svg .it.ovl .body {
+  stroke: #d12c2c;
+  stroke-width: 2.2;
+  stroke-dasharray: 6 3;
+}
+
+#svg .it .front {
+  stroke: rgba(255, 255, 255, 0.7);
+  stroke-width: 2.4;
+  vector-effect: non-scaling-stroke;
+  stroke-linecap: round;
+}
+
+#svg .it {
+  cursor: move;
+}
+
+#svg .tx text {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  font-weight: 600;
+  fill: #fff;
+  stroke: rgba(8, 16, 32, 0.55);
+  paint-order: stroke;
+  stroke-linejoin: round;
+  text-anchor: middle;
+  dominant-baseline: central;
+}
+
+#svg .tx.vl text {
+  fill: #14202e;
+  stroke: rgba(255, 255, 255, 0.7);
+}
+
+#svg .steel {
+  stroke: #0d3b9a;
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+}
+
+#svg .greepknop {
+  fill: #1d5fd1;
+  stroke: #fff;
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+}
+
+#svg .knopteken {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+}
+
+#svg .raster-a {
+  stroke: #2a4a7a;
+  stroke-opacity: 0.14;
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+  fill: none;
+}
+
+#svg .raster-b {
+  stroke: #2a4a7a;
+  stroke-opacity: 0.3;
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+  fill: none;
+}
+
+.selbar {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+  padding: 10px 12px;
+  background: var(--vlak);
+  border: 1px solid var(--rand);
+  border-radius: 12px;
+  box-shadow: var(--schaduw);
+}
+
+.selbar .who {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  flex: 1 1 200px;
+}
+
+.selbar .who b {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.selbar .dims {
+  font-size: 0.8rem;
+  color: var(--tekst-zacht);
+  white-space: nowrap;
+}
+
+.selbar label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: var(--tekst-zacht);
+}
+
+.selbar input[type="number"] {
+  width: 78px;
+  min-height: 44px;
+  padding: 0 8px;
+  border: 1px solid var(--rand);
+  border-radius: 8px;
+  background: var(--achtergrond);
+  color: var(--tekst);
+  font: inherit;
+}
+
+.selbar .acts {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.selbar .warn {
+  flex-basis: 100%;
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.3;
+  min-height: 1.3em;
+  color: var(--gevaar);
+}
+
+.selbar.idle > * {
+  visibility: hidden;
+}
+
+.selbar.idle::after {
+  content: attr(data-idle);
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  color: var(--tekst-zacht);
+}
+
+@media (max-width: 899px) {
+  .selbar.idle {
+    display: none;
+  }
+}
+
+.sw {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  flex: none;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--rand);
+  border-radius: 8px;
+  background: var(--vlak);
+  color: var(--tekst);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.btn.pri {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-tekst);
+}
+
+.btn.dng {
+  color: var(--gevaar);
+  border-color: var(--gevaar);
+}
+
+.btn.dng.sure {
+  background: var(--gevaar);
+  color: var(--achtergrond);
+}
+
+.btn.sm {
+  min-height: 44px;
+  padding: 0 10px;
+  font-size: 0.9rem;
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.side {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: var(--vlak);
+  border: 1px solid var(--rand);
+  border-radius: 12px;
+  box-shadow: var(--schaduw);
+  overflow: hidden;
+}
+
+.stabs {
+  display: flex;
+  border-bottom: 1px solid var(--rand);
+}
+
+.stabs button {
+  flex: 1;
+  min-height: 48px;
+  border: 0;
+  background: transparent;
+  color: var(--tekst-zacht);
+  font: inherit;
+  font-weight: 600;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+}
+
+.stabs button[aria-selected="true"] {
+  color: var(--tekst);
+  border-bottom-color: var(--accent);
+}
+
+.spanel {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+.note {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: var(--accent-vlak);
+  color: var(--tekst);
+}
+
+.note.bad {
+  background: var(--gevaar-vlak);
+}
+
+.search {
+  width: 100%;
+  min-height: 44px;
+  padding: 0 12px;
+  border: 1px solid var(--rand);
+  border-radius: 8px;
+  background: var(--achtergrond);
+  color: var(--tekst);
+  font: inherit;
+}
+
+.grp {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--tekst-zacht);
+}
+
+ul.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: stretch;
+}
+
+.row-main {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 6px 10px;
+  border: 1px solid var(--rand);
+  border-radius: 8px;
+  background: var(--achtergrond);
+  color: var(--tekst);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.row.on .row-main {
+  border-color: var(--accent);
+  background: var(--accent-vlak);
+}
+
+.rn {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+
+.rn b {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rn i {
+  font-style: normal;
+  font-size: 0.8rem;
+  color: var(--tekst-zacht);
+}
+
+.row-main > svg {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  color: var(--accent);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.row .ib {
+  width: 44px;
+  height: auto;
+  min-height: 48px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid var(--rand);
+  border-radius: 10px;
+  background: var(--achtergrond);
+}
+
+.row > .form {
+  flex-basis: 100%;
+}
+
+.form h3 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.fld {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.fld > span,
+.fld > label {
+  font-size: 0.85rem;
+  color: var(--tekst-zacht);
+}
+
+.fld input,
+.fld select,
+.fld textarea,
+.form input[type="text"],
+.form input[type="number"],
+.form select,
+.form textarea {
+  min-height: 44px;
+  padding: 0 10px;
+  border: 1px solid var(--rand);
+  border-radius: 8px;
+  background: var(--vlak);
+  color: var(--tekst);
+  font: inherit;
+  min-width: 0;
+  width: 100%;
+}
+
+.form textarea {
+  padding: 8px 10px;
+  min-height: 120px;
+  resize: vertical;
+}
+
+.form textarea.code {
+  min-height: 100px;
+  font-size: 0.8rem;
+  word-break: break-all;
+}
+
+.form input[type="file"] {
+  min-height: 0;
+  padding: 8px 10px;
+}
+
+.fgrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.chk {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.chk input {
+  width: 20px;
+  height: 20px;
+  min-height: 0;
+  accent-color: var(--accent);
+}
+
+.swatches {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.swatches label {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+}
+
+.swatches input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  margin: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+.swatches span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  border: 2px solid transparent;
+}
+
+.swatches input:checked + span {
+  border-color: var(--tekst);
+  box-shadow: 0 0 0 2px var(--achtergrond) inset;
+}
+
+.swatches input:focus-visible + span {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.frow,
+.addrow {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.small {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--tekst-zacht);
+}
+
+.vlijst {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.vrow {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid var(--rand);
+  border-radius: 10px;
+  background: var(--achtergrond);
+  list-style: none;
+}
+
+.vrow.on {
+  border-color: var(--accent);
+  background: var(--accent-vlak);
+}
+
+.vrow .vt {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--tekst);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.vrow .vt b {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.vtx {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+
+.vtx i {
+  font-style: normal;
+  font-size: 0.8rem;
+  color: var(--tekst-zacht);
+}
+
+.vrow .acts {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.welkom {
+  padding: 1rem 1.2rem;
+  background: var(--vlak);
+  border: 1px solid var(--rand);
+  border-radius: 12px;
+}
+
+.welkom h2 {
+  margin-top: 0;
+}
+
+.schaalpaneel {
+  padding: 1rem;
+  background: var(--vlak);
+  border: 1px solid var(--rand);
+  border-radius: 12px;
+}
+
+.schaalpaneel h2 {
+  margin-top: 0;
+}
+
+.schaalbeeld {
+  display: block;
+  width: 100%;
+  max-height: 70vh;
+  background: #fff;
+  border: 1px solid var(--rand);
+  touch-action: none;
+  cursor: crosshair;
+}
+
+.schaalbeeld .meetlijn {
+  stroke: #d12c2c;
+  stroke-linecap: round;
+}
+
+.schaalbeeld .meetpunt circle {
+  fill: #d12c2c;
+  stroke: #fff;
+  stroke-width: 2;
+  cursor: grab;
+}
+
+.schaalbeeld .meetpunt text {
+  fill: #fff;
+  font-weight: 700;
+  font-family: system-ui, sans-serif;
+  pointer-events: none;
+}
+
+.schaalbeeld .meetpunt:focus-visible {
+  outline: 3px solid #0b57d0;
+  outline-offset: 3px;
+}
+
+.meten {
+  margin-block: 1.5rem;
+  padding: 0.5rem 1rem;
+  background: var(--vlak);
+  border: 1px solid var(--rand);
+  border-radius: 0.5rem;
+}
+
+.meten summary {
+  cursor: pointer;
+  font-weight: 600;
+  min-height: 2.75rem;
+  display: flex;
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .work {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 360px;
+    align-items: start;
+  }
+
+  .canvas {
+    height: clamp(420px, 68vh, 760px);
+  }
+
+  .spanel {
+    max-height: 72vh;
+    overflow: auto;
+  }
+}
+
+@media (max-width: 520px) {
+  .tools .ib {
+    width: 44px;
+  }
+}
+
+.note:empty {
+  display: none;
+}
+
+.visueel-verborgen {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}

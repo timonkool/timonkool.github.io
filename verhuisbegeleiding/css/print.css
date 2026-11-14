@@ -1,0 +1,232 @@
+/* Printstijl (TL-11). Zwart op wit, zonder menu en knoppen, met alle uitleg open en de adressen van de bronnen erachter. */
+
+@page {
+  margin: 1.6cm;
+}
+
+:root {
+  --achtergrond: #fff;
+  --vlak: #fff;
+  --tekst: #000;
+  --tekst-zacht: #222;
+  --accent: #000;
+  --rand: #666;
+  font-size: 11pt;
+  line-height: 1.45;
+}
+
+body {
+  background: #fff;
+  color: #000;
+  font-size: 1rem;
+}
+
+.sla-over,
+.sitekop nav,
+.sitevoet ul,
+.knoppen,
+.knop,
+.knop-klein,
+button,
+.uitnodiging,
+.conceptbalk noscript,
+input.afvinken,
+form[role="search"],
+.verwant,
+.datumaanpassing,
+.verschuiving,
+[aria-labelledby="kop-tools"],
+[aria-labelledby="kop-gereedschap"],
+.donatie,
+.held-foto,
+.heldbalk,
+.held-acties,
+.beeld,
+noscript {
+  display: none !important;
+}
+
+.sitekop,
+main,
+.sitevoet {
+  max-width: none;
+  padding-inline: 0;
+}
+
+.sitekop {
+  padding-block: 0 0.5rem;
+  border-bottom: 1px solid #000;
+  margin-bottom: 0.75rem;
+}
+
+.sitenaam {
+  font-size: 1rem;
+}
+
+main {
+  padding-block: 0;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  break-after: avoid;
+}
+
+.taak,
+.doc,
+.statuskaart,
+.bronblok,
+.melding,
+.kaartlijst li {
+  break-inside: avoid;
+  border: 1px solid #666;
+  border-radius: 0;
+  background: #fff;
+}
+
+.taak summary {
+  display: block;
+  padding: 0.4rem 0.6rem;
+  list-style: none;
+}
+
+.taak summary::-webkit-details-marker {
+  display: none;
+}
+
+.taakinhoud {
+  padding: 0 0.6rem 0.6rem;
+}
+
+/* Laat de uitleg van gesloten taken meeprinten. De schrijver van de pagina opent ze ook, voor browsers die dit negeren. */
+details::details-content {
+  content-visibility: visible;
+  display: block;
+}
+
+.taak.klaar .taaktitel {
+  text-decoration: line-through;
+}
+
+.badge,
+.badge.prio1 {
+  background: #fff;
+  color: #000;
+  border: 1px solid #000;
+}
+
+a {
+  color: #000;
+  text-decoration: underline;
+}
+
+/* Toon waar een link heen gaat. Interne links krijgen het adres niet, dat helpt op papier niet. */
+a.extern[href^="http"]::after,
+.bronnen a[href^="http"]::after {
+  content: " (" attr(href) ")";
+  font-size: 0.8em;
+  word-break: break-all;
+  margin-left: 0;
+}
+
+.bronblok {
+  margin-top: 1.5rem;
+  padding: 0.6rem 0.8rem;
+}
+
+.tekst table {
+  display: table;
+  font-size: 0.9rem;
+}
+
+.sitevoet {
+  padding-block: 0.75rem 0;
+  border-top: 1px solid #666;
+  font-size: 0.85rem;
+}
+
+/* Meubelplanner: alleen de plattegrond met de meubels, zonder paneel en knoppen. De kleuren blijven bij het afdrukken. */
+.work {
+  display: block !important;
+}
+
+.side,
+.tools,
+.selbar,
+.hint,
+.floors,
+.ptop .status,
+.ov-bl {
+  display: none !important;
+}
+
+.canvas {
+  height: 18cm !important;
+  background: #fff !important;
+  border: 1px solid #000 !important;
+}
+
+#svg {
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+}
+
+/* Voorbeeldprompts: de prompt blijft staan, de knop en de lijst met sprongen niet. */
+.promptacties,
+.promptlijst {
+  display: none !important;
+}
+
+.promptblok {
+  break-inside: avoid;
+  border: 1px solid #666;
+  border-radius: 0;
+  background: #fff;
+}
+
+.prompttekst {
+  background: #fff;
+  border: 1px solid #000;
+  border-left-width: 4px;
+  border-radius: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+/* Startpagina: geen foto's en geen donkere vlakken op papier. */
+.held,
+.strook-donker,
+.sitevoet {
+  background: #fff !important;
+  color: #000 !important;
+  min-height: 0;
+}
+
+.held::before {
+  display: none;
+}
+
+.held-inhoud,
+.strook {
+  padding: 0.5rem 0;
+  text-align: left;
+}
+
+.held a:not(.knop),
+.held .bovenkop,
+.held-uitleg,
+.voetnaam,
+.sitevoet a {
+  color: #000 !important;
+}
+
+.kaartlijst li > a:first-child::after {
+  display: none;
+}
+
+/* The bar of a test version is for the screen. */
+.testbalk {
+  display: none;
+}

@@ -1,0 +1,104 @@
+/* Zakenlijst en Mijn dossier */
+
+.filterrij {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-block: 0.8rem;
+}
+
+.filterrij [aria-pressed="true"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-tekst);
+}
+
+.zaken {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.zaak {
+  background: var(--vlak);
+  border: 1px solid var(--rand);
+  border-left-width: 4px;
+  border-radius: 0.9rem;
+  padding: 0.7rem 0.9rem;
+}
+
+.zaak.besluit-blijft {
+  border-left-color: var(--accent);
+}
+
+.zaak.besluit-bespreken {
+  border-left-style: dashed;
+}
+
+.zaak.stuk.bijna {
+  border-left-color: #b26a00;
+}
+
+.zaak.stuk.verlopen {
+  border-left-color: #b3261e;
+}
+
+.vervalregel.verlopen {
+  font-weight: 600;
+}
+
+.zaakkop {
+  margin-bottom: 0.3rem;
+}
+
+.zaakacties {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.2rem 1rem;
+}
+
+.zaakacties select,
+.zaakform input[type="text"],
+.zaakform input[type="date"],
+.zaakform select,
+.zaakform textarea {
+  font: inherit;
+  padding: 0.55rem 0.6rem;
+  min-height: 2.75rem;
+  max-width: 100%;
+  border: 1px solid var(--rand);
+  border-radius: 0.6rem;
+  background: var(--achtergrond);
+  color: var(--tekst);
+}
+
+.zaakform {
+  margin-block: 1rem;
+  padding: 0.8rem 1rem;
+  background: var(--vlak);
+  border: 1px solid var(--rand);
+  border-radius: 0.9rem;
+}
+
+.zaakform h3 {
+  margin-top: 0;
+}
+
+.zaakform textarea {
+  width: 100%;
+}
+
+.zaak .zaakform {
+  background: var(--achtergrond);
+}
+
+details > summary {
+  cursor: pointer;
+  min-height: 2.75rem;
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+}

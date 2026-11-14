@@ -1,0 +1,88 @@
+/* Kostenoverzicht */
+
+.uitkomst {
+  margin-block: 0.6rem 0.2rem;
+}
+
+.postenlijst {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.post {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.3rem;
+  align-items: center;
+}
+
+.post input[type="text"] {
+  font: inherit;
+  padding: 0.55rem 0.6rem;
+  min-height: 2.75rem;
+  border: 1px solid var(--rand);
+  border-radius: 0.6rem;
+  background: var(--vlak);
+  color: var(--tekst);
+  width: 100%;
+  max-width: 18rem;
+}
+
+.post label {
+  font-weight: 600;
+}
+
+.kostentabel {
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 28rem;
+}
+
+.kostentabel caption {
+  text-align: left;
+  margin-bottom: 0.3rem;
+}
+
+.kostentabel th,
+.kostentabel td {
+  padding: 0.45rem 0.5rem;
+  border-bottom: 1px solid var(--rand);
+  text-align: left;
+}
+
+.kostentabel td {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.kostentabel tfoot th,
+.kostentabel tfoot td {
+  font-weight: 700;
+  border-bottom: 0;
+  border-top: 2px solid var(--tekst);
+}
+
+.datumveld input[type="text"][inputmode="numeric"] {
+  font: inherit;
+  padding: 0.55rem 0.6rem;
+  min-height: 2.75rem;
+  max-width: 18rem;
+  border: 1px solid var(--rand);
+  border-radius: 0.6rem;
+  background: var(--vlak);
+  color: var(--tekst);
+}
+
+.datumveld input[aria-invalid="true"] {
+  border-color: #b3261e;
+  outline: 2px solid #b3261e;
+}
+
+@media (min-width: 40rem) {
+  .post {
+    grid-template-columns: 1fr 14rem auto;
+  }
+}
