@@ -3,235 +3,183 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Handboek AI &amp; Cowork voor leiders — Timon Kool</title>
+<title>Handboek AI &amp; Cowork voor leiders | Timon Kool</title>
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/duotone/style.css">
-<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
-<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/css/saliegroen.css?v=2026-07-29">
-<link rel="stylesheet" href="../../assets/css/nav.css">
-<style>
-  body { padding-top: 60px; }
-
-  /* Onderdelen-grid */
-  .parts-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 18px;
-    margin-top: var(--space-6);
-  }
-  .part-card i { font-size: 30px; color: var(--sage-deep); margin-bottom: 14px; display: block; }
-  .part-number { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sage-deep); margin-bottom: 8px; }
-  .part-title { font-size: 16px; font-weight: 600; color: var(--sage-ink); margin-bottom: 10px; line-height: 1.3; }
-  .part-desc { font-size: 13.5px; color: var(--muted); margin: 0; }
-
-  /* Toepassingen */
-  .use-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 14px;
-    margin-top: var(--space-6);
-  }
-  .use-group { background: var(--sage-mist); border-radius: var(--radius-md); padding: 22px; }
-  .use-group-title { display: flex; align-items: center; gap: 9px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--sage-deep); margin-bottom: 14px; }
-  .use-group-title i { font-size: 18px; }
-  .use-list { list-style: none; display: flex; flex-direction: column; gap: 7px; }
-  .use-list li { font-size: 13px; color: var(--text); display: flex; gap: 9px; align-items: flex-start; }
-  .use-list li::before { content: ''; width: 5px; height: 5px; background: var(--sage); border-radius: 50%; flex-shrink: 0; margin-top: 7px; }
-
-  /* Doelgroep */
-  .audience-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: var(--space-5); }
-  .audience-tag { background: var(--paper); border: 1.5px solid var(--sage-soft); color: var(--sage-ink); font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 8px 18px; border-radius: var(--radius-pill); }
-
-  .intro p { font-size: 16px; line-height: 1.75; color: var(--text); max-width: 720px; margin-bottom: 16px; }
-</style>
+<link rel="stylesheet" href="../../assets/css/editorial.css?v=2026-11-14">
 </head>
-<body>
+<body class="ed">
 
-<nav id="site-nav"></nav>
-
-<!-- ══ Hero ══ -->
-<header class="page-hero">
-  <div class="page-hero__inner">
-    <a href="../../index.html" class="page-hero__back"><i class="ph-bold ph-caret-left"></i> Terug naar overzicht</a>
-    <span class="page-hero__eyebrow">Handboek &middot; AI &middot; 2026</span>
-    <h1 class="page-hero__title">Minder administratie, meer mensen</h1>
-    <p class="page-hero__lead">Een praktische gids voor leidinggevenden die AI inzetten om hun werk lichter te maken, zonder technische achtergrond nodig te hebben.</p>
-    <div class="page-hero__tags">
-      <span class="chip-on-green">AI-adoptie</span>
-      <span class="chip-on-green">Leidinggevenden</span>
-      <span class="chip-on-green">Maatschappelijke sector</span>
-      <span class="chip-on-green">Praktisch</span>
+<header class="photo photo--hero photo--sub">
+  <img class="photo__img photo__img--top" src="../../assets/images/mgr1.jpg" alt="" width="1600" height="900">
+  <nav class="nav" aria-label="Hoofdmenu">
+    <a class="nav__brand" href="../../index.html">
+      <span class="nav__name">Timon Kool</span>
+      <span class="nav__tag">Leidinggevende &amp; adviseur</span>
+    </a>
+    <div class="nav__links">
+      <a class="nav__link" href="../../index.html#over-mij">Over mij</a>
+      <a class="nav__link" href="../../index.html#ervaring">Ervaring</a>
+      <a class="nav__link" href="../../index.html#portfolio" aria-current="true">Portfolio</a>
+      <a class="nav__link" href="../../index.html#contact">Contact</a>
+      <a class="nav__cv" href="../cv.html">CV</a>
     </div>
-    <div class="page-hero__actions">
-      <a href="../../docs/handboek-ai-cowork.pdf" download class="btn btn--on-green">
-        <i class="ph-duotone ph-download-simple"></i> Download handboek (.pdf)
-      </a>
+  </nav>
+  <div class="hero__body">
+    <div class="hero__end">
+      <a class="back" href="../../index.html">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg>
+        Terug naar overzicht</a>
+      <span class="eyebrow eyebrow--dark">Handboek &middot; AI &middot; 2026</span>
+      <h1 class="h1 h1--sub h1--narrow">Minder administratie, <em>meer mensen</em></h1>
+      <p class="lead">Een praktische gids voor leidinggevenden die AI inzetten om hun werk lichter te maken, zonder technische achtergrond nodig te hebben.</p>
+      <div class="actions">
+        <a class="btn btn--light" href="../../docs/handboek-ai-cowork.pdf" download>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"></path></svg>
+          Download handboek (.pdf)</a>
+        <div class="tags">
+          <span class="tag">AI-adoptie</span>
+          <span class="tag">Leidinggevenden</span>
+          <span class="tag">Maatschappelijke sector</span>
+          <span class="tag">Praktisch</span>
+        </div>
+      </div>
     </div>
   </div>
 </header>
 
-<!-- ══ Over dit handboek ══ -->
-<section class="section wrap reveal">
-  <div class="section-head"><h2 class="section-title">Over dit handboek</h2><span class="label">Introductie</span></div>
-  <div class="intro">
-    <p class="lead" style="max-width: 720px; margin-bottom: 20px;">
-      Leidinggevenden in zorg, onderwijs, welzijn, cultuur en productie zijn meer tijd kwijt aan administratie dan aan de mensen voor wie ze het doen. Dit handboek laat zien hoe dat anders kan.
-    </p>
-    <p>Geschreven samen met Claude, gebaseerd op praktijkervaring uit de maatschappelijke sector. Geen hype, geen jargon. Wel concrete instructies, direct toepasbaar. Je hebt geen technische achtergrond nodig.</p>
-    <p>Het handboek behandelt alles van de eerste setup van een AI-assistent tot dertig concrete toepassingen voor de dagelijkse praktijk van een leidinggevende.</p>
-  </div>
-</section>
+<main>
 
-<!-- ══ Wat er in staat ══ -->
-<div class="section--mist">
-  <section class="section wrap reveal">
-    <div class="section-head"><h2 class="section-title">Wat er in staat</h2><span class="label">Vijf delen</span></div>
-    <div class="parts-grid">
-      <div class="card card--paper part-card">
-        <i class="ph-duotone ph-compass-tool"></i>
-        <p class="part-number">Deel 1</p>
-        <h3 class="part-title">Het fundament</h3>
-        <p class="part-desc">Waarom AI voor leidinggevenden, hoe het werkt, en wat je er realistisch van kunt verwachten. Inclusief ethische randvoorwaarden.</p>
+  <section class="sec">
+    <div class="sec__in split">
+      <div class="stack stack--20">
+        <span class="eyebrow">Introductie</span>
+        <h2 class="h2">Over dit <em>handboek</em></h2>
       </div>
-      <div class="card card--paper part-card">
-        <i class="ph-duotone ph-gear"></i>
-        <p class="part-number">Deel 2</p>
-        <h3 class="part-title">Het systeem inrichten</h3>
-        <p class="part-desc">Stap voor stap je AI-assistent opzetten, van account aanmaken tot je eerste gesprek. Geschikt voor wie nog nooit met AI heeft gewerkt.</p>
-      </div>
-      <div class="card card--paper part-card">
-        <i class="ph-duotone ph-brain"></i>
-        <p class="part-number">Deel 3</p>
-        <h3 class="part-title">Permanent geheugen</h3>
-        <p class="part-desc">Hoe je de AI voorziet van blijvende context via een manager-profiel, zodat je niet telkens hoeft uit te leggen wie je bent en wat je nodig hebt.</p>
-      </div>
-      <div class="card card--paper part-card">
-        <i class="ph-duotone ph-list-checks"></i>
-        <p class="part-number">Deel 4</p>
-        <h3 class="part-title">Dertig toepassingen</h3>
-        <p class="part-desc">Concrete gebruikssituaties per thema: dagelijkse praktijk, teamontwikkeling, HR en verzuim, communicatie, analyse en zelfontwikkeling.</p>
-      </div>
-      <div class="card card--paper part-card">
-        <i class="ph-duotone ph-trend-up"></i>
-        <p class="part-number">Deel 5</p>
-        <h3 class="part-title">Verder groeien</h3>
-        <p class="part-desc">Hoe je AI-gebruik geleidelijk uitbreidt, wat te vermijden, en hoe je het gesprek aangaat binnen je organisatie.</p>
+      <div class="prose">
+        <p class="serif-lead">Leidinggevenden in zorg, onderwijs, welzijn, cultuur en productie zijn meer tijd kwijt aan administratie dan aan de mensen voor wie ze het doen. Dit handboek laat zien hoe dat anders kan.</p>
+        <p>Geschreven samen met Claude, gebaseerd op praktijkervaring uit de maatschappelijke sector. Geen hype, geen jargon. Wel concrete instructies, direct toepasbaar. Je hebt geen technische achtergrond nodig.</p>
+        <p>Het handboek behandelt alles van de eerste setup van een AI-assistent tot dertig concrete toepassingen voor de dagelijkse praktijk van een leidinggevende.</p>
       </div>
     </div>
   </section>
-</div>
 
-<!-- ══ Dertig toepassingen ══ -->
-<section class="section wrap reveal">
-  <div class="section-head"><h2 class="section-title">Dertig toepassingen</h2><span class="label">Zes thema's</span></div>
-  <div class="use-grid">
-    <div class="use-group">
-      <p class="use-group-title"><i class="ph-duotone ph-calendar-check"></i> Dagelijkse praktijk</p>
-      <ul class="use-list">
-        <li>Vergaderverslagen schrijven</li>
-        <li>E-mails opstellen en herschrijven</li>
-        <li>Agenda structureren</li>
-        <li>Beslissingen documenteren</li>
-        <li>Rapportages samenvatten</li>
+  <section class="sec sec--mist">
+    <div class="sec__in stack stack--64 stack--stretch">
+      <div class="stack stack--20">
+        <span class="eyebrow">Vijf delen</span>
+        <h2 class="h2">Wat er in <em>staat</em></h2>
+      </div>
+      <ul class="rows rows--w120">
+        <li class="row">
+          <span class="row__when">Deel 1</span>
+          <h3 class="row__title row__title--flex">Het fundament</h3>
+          <p class="row__text">Waarom AI voor leidinggevenden, hoe het werkt, en wat je er realistisch van kunt verwachten. Inclusief ethische randvoorwaarden.</p>
+        </li>
+        <li class="row">
+          <span class="row__when">Deel 2</span>
+          <h3 class="row__title row__title--flex">Het systeem inrichten</h3>
+          <p class="row__text">Stap voor stap je AI-assistent opzetten, van account aanmaken tot je eerste gesprek. Geschikt voor wie nog nooit met AI heeft gewerkt.</p>
+        </li>
+        <li class="row">
+          <span class="row__when">Deel 3</span>
+          <h3 class="row__title row__title--flex">Permanent geheugen</h3>
+          <p class="row__text">Hoe je de AI voorziet van blijvende context via een manager-profiel, zodat je niet telkens hoeft uit te leggen wie je bent en wat je nodig hebt.</p>
+        </li>
+        <li class="row">
+          <span class="row__when">Deel 4</span>
+          <h3 class="row__title row__title--flex">Dertig toepassingen</h3>
+          <p class="row__text">Concrete gebruikssituaties per thema: dagelijkse praktijk, teamontwikkeling, HR en verzuim, communicatie, analyse en zelfontwikkeling.</p>
+        </li>
+        <li class="row">
+          <span class="row__when">Deel 5</span>
+          <h3 class="row__title row__title--flex">Verder groeien</h3>
+          <p class="row__text">Hoe je AI-gebruik geleidelijk uitbreidt, wat te vermijden, en hoe je het gesprek aangaat binnen je organisatie.</p>
+        </li>
       </ul>
-    </div>
-    <div class="use-group">
-      <p class="use-group-title"><i class="ph-duotone ph-users-three"></i> Teamontwikkeling</p>
-      <ul class="use-list">
-        <li>Functioneringsgesprekken voorbereiden</li>
-        <li>Onboarding-documenten opstellen</li>
-        <li>Feedback formuleren</li>
-        <li>Teamoverleg structureren</li>
-        <li>Ontwikkelplannen schrijven</li>
-      </ul>
-    </div>
-    <div class="use-group">
-      <p class="use-group-title"><i class="ph-duotone ph-first-aid-kit"></i> HR &amp; verzuim</p>
-      <ul class="use-list">
-        <li>Re-integratiegesprekken voorbereiden</li>
-        <li>Verzuimcorrespondentie opstellen</li>
-        <li>Beleidsteksten herschrijven</li>
-        <li>Vacatureteksten schrijven</li>
-        <li>Sollicitatieprocedures uitwerken</li>
-      </ul>
-    </div>
-    <div class="use-group">
-      <p class="use-group-title"><i class="ph-duotone ph-chats-circle"></i> Communicatie &amp; vergaderen</p>
-      <ul class="use-list">
-        <li>Presentaties opzetten</li>
-        <li>Nieuwsbrieven schrijven</li>
-        <li>Moeilijke boodschappen formuleren</li>
-        <li>Notulen omzetten naar actiepunten</li>
-        <li>Overlegstructuren ontwerpen</li>
-      </ul>
-    </div>
-    <div class="use-group">
-      <p class="use-group-title"><i class="ph-duotone ph-chart-line"></i> Analyse &amp; inzicht</p>
-      <ul class="use-list">
-        <li>Data interpreteren</li>
-        <li>Jaarverslagen analyseren</li>
-        <li>Subsidieaanvragen toetsen</li>
-        <li>Knelpunten in processen opsporen</li>
-        <li>Benchmarks uitwerken</li>
-      </ul>
-    </div>
-    <div class="use-group">
-      <p class="use-group-title"><i class="ph-duotone ph-seedling"></i> Zelfontwikkeling</p>
-      <ul class="use-list">
-        <li>Reflectieoefeningen doen</li>
-        <li>Leiderschapsdilemma's doordenken</li>
-        <li>Literatuur samenvatten</li>
-        <li>Persoonlijke doelen formuleren</li>
-        <li>Studiegesprekken voorbereiden</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- ══ Voor wie ══ -->
-<div class="section--mist">
-  <section class="section wrap reveal">
-    <div class="section-head"><h2 class="section-title">Voor wie</h2><span class="label">Doelgroep</span></div>
-    <p class="lead" style="max-width: 720px;">
-      Geschreven voor leidinggevenden in de maatschappelijke sector die AI willen inzetten zonder dat ze er technisch in hoeven te duiken. Je hoeft niets te programmeren of te installeren.
-    </p>
-    <div class="audience-row">
-      <span class="audience-tag">Zorg</span>
-      <span class="audience-tag">Onderwijs</span>
-      <span class="audience-tag">Welzijn</span>
-      <span class="audience-tag">Cultuur</span>
-      <span class="audience-tag">Productie</span>
-      <span class="audience-tag">Non-profit</span>
     </div>
   </section>
-</div>
 
-<!-- ══ Footer ══ -->
-<footer class="site-footer">
-  <div class="site-footer__inner">
-    <a class="site-footer__brand" href="../../index.html">Timon Kool</a>
-    <div class="site-footer__social">
-      <a href="https://linkedin.com/in/timonkool" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="ph-duotone ph-linkedin-logo"></i></a>
-      <a href="../../index.html#contact" aria-label="Contact"><i class="ph-duotone ph-envelope-simple"></i></a>
+  <section class="photo photo--band photo--band-end" aria-label="Dertig toepassingen">
+    <img class="photo__img photo__img--mid" src="../../assets/images/meeting2.jpg" alt="" width="1600" height="1067" loading="lazy">
+    <div class="stack band-end">
+      <span class="eyebrow eyebrow--dark">Zes thema's</span>
+      <h2 class="h2 h2--big">Dertig <em>toepassingen</em></h2>
+    </div>
+  </section>
+
+  <section class="sec sec--tight">
+    <div class="sec__in cols">
+      <div class="col">
+        <h3>Dagelijkse praktijk</h3>
+        <ul class="plain plain--tight"><li>Vergaderverslagen schrijven</li><li>E-mails opstellen en herschrijven</li><li>Agenda structureren</li><li>Beslissingen documenteren</li><li>Rapportages samenvatten</li></ul>
+      </div>
+      <div class="col">
+        <h3>Teamontwikkeling</h3>
+        <ul class="plain plain--tight"><li>Functioneringsgesprekken voorbereiden</li><li>Onboarding-documenten opstellen</li><li>Feedback formuleren</li><li>Teamoverleg structureren</li><li>Ontwikkelplannen schrijven</li></ul>
+      </div>
+      <div class="col">
+        <h3>HR &amp; verzuim</h3>
+        <ul class="plain plain--tight"><li>Re-integratiegesprekken voorbereiden</li><li>Verzuimcorrespondentie opstellen</li><li>Beleidsteksten herschrijven</li><li>Vacatureteksten schrijven</li><li>Sollicitatieprocedures uitwerken</li></ul>
+      </div>
+      <div class="col">
+        <h3>Communicatie &amp; vergaderen</h3>
+        <ul class="plain plain--tight"><li>Presentaties opzetten</li><li>Nieuwsbrieven schrijven</li><li>Moeilijke boodschappen formuleren</li><li>Notulen omzetten naar actiepunten</li><li>Overlegstructuren ontwerpen</li></ul>
+      </div>
+      <div class="col">
+        <h3>Analyse &amp; inzicht</h3>
+        <ul class="plain plain--tight"><li>Data interpreteren</li><li>Jaarverslagen analyseren</li><li>Subsidieaanvragen toetsen</li><li>Knelpunten in processen opsporen</li><li>Benchmarks uitwerken</li></ul>
+      </div>
+      <div class="col">
+        <h3>Zelfontwikkeling</h3>
+        <ul class="plain plain--tight"><li>Reflectieoefeningen doen</li><li>Leiderschapsdilemma's doordenken</li><li>Literatuur samenvatten</li><li>Persoonlijke doelen formuleren</li><li>Studiegesprekken voorbereiden</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="download" class="sec sec--dark on-dark">
+    <div class="sec__in split split--wide split--center">
+      <div class="stack stack--28">
+        <span class="eyebrow eyebrow--dark">Doelgroep</span>
+        <h2 class="h2 h2--dark">Voor <em>wie</em></h2>
+        <p class="body-lg dark-text">Geschreven voor leidinggevenden in de maatschappelijke sector die AI willen inzetten zonder dat ze er technisch in hoeven te duiken. Je hoeft niets te programmeren of te installeren.</p>
+        <div class="tags">
+          <span class="tag">Zorg</span>
+          <span class="tag">Onderwijs</span>
+          <span class="tag">Welzijn</span>
+          <span class="tag">Cultuur</span>
+          <span class="tag">Productie</span>
+          <span class="tag">Non-profit</span>
+        </div>
+        <a class="btn btn--light" href="../../docs/handboek-ai-cowork.pdf" download>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"></path></svg>
+          Download handboek (.pdf)</a>
+      </div>
+      <div class="frame frame--audience">
+        <img src="../../assets/images/coach3.jpg" alt="Overleg aan tafel met een laptop erbij" width="1600" height="1067" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot foot--deep">
+  <div class="foot__in">
+    <a class="foot__brand" href="../../index.html">Timon Kool</a>
+    <div class="foot__links">
+      <a href="../../index.html">Home</a>
+      <a href="elearning.html">E-learning</a>
+      <a href="../cv.html">CV</a>
+      <a href="https://linkedin.com/in/timonkool" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="../../index.html#contact">Contact</a>
     </div>
   </div>
 </footer>
-
-<script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-</script>
-<script>const NAV_ROOT = '../../';</script>
-<script src="../../assets/js/nav.js"></script>
 
 </body>
 </html>

@@ -9,330 +9,229 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/duotone/style.css" />
-  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css" />
-  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/saliegroen.css?v=2026-07-29" />
-  <link rel="stylesheet" href="assets/css/nav.css" />
-  <style>
-    body { padding-top: 60px; }
-
-    /* ── Hero ── */
-    .hero-content {
-      max-width: var(--width-page);
-      margin: 0 auto;
-      padding: 8px var(--pad-edge) clamp(56px, 7vw, 80px);
-    }
-    .hero-content .lead { max-width: 600px; font-size: 21px; }
-    .hero-actions { display: flex; gap: 12px; margin-top: var(--space-6); flex-wrap: wrap; }
-
-    /* ── Over mij ── */
-    .about-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 18px;
-      margin-top: var(--space-6);
-    }
-    .about-card i { font-size: 32px; color: var(--sage-deep); margin-bottom: 14px; display: block; }
-    .about-card h3 { font-size: 17px; color: var(--sage-ink); margin-bottom: 8px; }
-    .about-card p { font-size: 14px; color: var(--muted); margin: 0; }
-
-    /* ── Werkervaring ── */
-    .exp-list { display: flex; flex-direction: column; gap: 14px; }
-    .exp-item {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 8px 24px;
-      align-items: start;
-    }
-    .exp-role { font-size: 17px; font-weight: 600; color: var(--sage-ink); }
-    .exp-org { font-size: 14px; color: var(--sage-deep); font-weight: 500; margin-top: 2px; }
-    .exp-period {
-      font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--muted); white-space: nowrap; padding-top: 4px;
-    }
-    .exp-desc { font-size: 13.5px; color: var(--muted); margin-top: 8px; grid-column: 1 / -1; }
-
-    /* ── Portfolio ── */
-    .portfolio-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 18px;
-      margin-top: var(--space-6);
-    }
-    .portfolio-card {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      min-height: 220px;
-      text-decoration: none;
-      transition: transform 0.2s var(--ease-soft), box-shadow 0.2s var(--ease-soft);
-    }
-    .portfolio-card:hover { transform: translateY(-3px); }
-    .portfolio-card.card--paper:hover { box-shadow: var(--shadow-md); }
-    .portfolio-card i.pf-icon { font-size: 36px; }
-    .portfolio-card .pf-body { margin-top: auto; }
-    .portfolio-card h3 { font-size: 19px; margin-bottom: 6px; }
-    .portfolio-card p { font-size: 13.5px; margin: 0; }
-    .pf-arrow { font-size: 18px; }
-
-    /* ── CV-blok ── */
-    .cv-block {
-      display: flex; align-items: center; justify-content: space-between;
-      gap: 24px; flex-wrap: wrap;
-    }
-    .cv-block h2 { font-family: var(--font-display); font-size: 24px; color: var(--cream); margin-bottom: 8px; }
-    .cv-block p { font-size: 14px; color: var(--sage-soft); max-width: 440px; margin: 0; }
-
-    /* ── Opleiding ── */
-    .edu-list { display: flex; flex-direction: column; gap: 10px; margin-top: var(--space-5); }
-    .edu-item {
-      display: flex; align-items: center; gap: 14px;
-      padding: 16px 20px; background: var(--sage-mist); border-radius: var(--radius-md);
-    }
-    .edu-item i { font-size: 22px; color: var(--sage-deep); flex-shrink: 0; }
-    .edu-item span { font-size: 14px; color: var(--text); font-weight: 500; }
-    .edu-item small { font-size: 12px; color: var(--muted); margin-left: auto; text-align: right; }
-
-    /* ── Contact ── */
-    .contact-layout {
-      display: grid; grid-template-columns: 1fr 1.6fr; gap: 24px;
-      margin-top: var(--space-6); align-items: start;
-    }
-    .contact-links { display: flex; flex-direction: column; gap: 12px; }
-    .contact-item {
-      display: flex; align-items: center; gap: 14px;
-      background: var(--paper); border-radius: var(--radius-md); padding: 18px 22px;
-      box-shadow: var(--shadow-soft); text-decoration: none;
-      transition: transform 0.2s var(--ease-soft);
-    }
-    .contact-item:hover { transform: translateY(-2px); }
-    .contact-icon {
-      width: 40px; height: 40px; border-radius: 50%; background: var(--sage-deep);
-      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-    }
-    .contact-icon i { font-size: 20px; color: var(--cream); }
-    .contact-label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
-    .contact-value { font-size: 14px; font-weight: 600; color: var(--sage-ink); }
-    .contact-form { background: var(--paper); border-radius: var(--radius-lg); padding: 28px; box-shadow: var(--shadow-soft); }
-    .form-success { display: none; font-size: 14px; color: var(--sage-deep); font-weight: 600; text-align: center; margin-top: 12px; }
-
-    @media (max-width: 760px) {
-      .contact-layout { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 640px) {
-      .exp-item { grid-template-columns: 1fr; }
-      .exp-period { order: -1; padding-top: 0; }
-    }
-  </style>
+  <link rel="stylesheet" href="assets/css/editorial.css?v=2026-11-14" />
 </head>
-<body>
+<body class="ed">
 
-  <nav id="site-nav"></nav>
-
-  <!-- ══ Hero ══ -->
-  <header class="hero-shell">
-    <img class="hero-portrait" src="assets/images/profielfoto-timon.jpg" alt="Portret van Timon Kool" width="900" height="900">
-    <div class="cs" style="--cs-size: clamp(46px, 11vw, 104px); --cs-pad: clamp(20px, 5vw, 48px);">
-      <div class="cs-band">
-        <span class="label cs-eyebrow">Leidinggevende &amp; adviseur</span>
+  <header class="photo photo--hero photo--home">
+    <img class="photo__img" src="assets/images/meeting3.jpg" alt="" width="1600" height="900">
+    <nav class="nav" aria-label="Hoofdmenu">
+      <a class="nav__brand" href="#top">
+        <span class="nav__name">Timon Kool</span>
+        <span class="nav__tag">Leidinggevende &amp; adviseur</span>
+      </a>
+      <div class="nav__links">
+        <a class="nav__link" href="#over-mij">Over mij</a>
+        <a class="nav__link" href="#ervaring">Ervaring</a>
+        <a class="nav__link" href="#portfolio">Portfolio</a>
+        <a class="nav__link" href="#contact">Contact</a>
+        <a class="nav__cv" href="pages/cv.html">CV</a>
       </div>
-      <div class="cs-zone">
-        <span class="cs-text cs-white" aria-hidden="true">Timon Kool</span>
-        <h1 class="cs-text cs-green">Timon Kool</h1>
+    </nav>
+
+    <div class="hero__body" id="top">
+      <div class="hero__grid">
+        <div class="stack stack--28">
+          <span class="eyebrow eyebrow--dark">Verbindend &middot; motiverend &middot; adaptief</span>
+          <h1 class="h1 h1--home">Mensen en technologie <em>bij elkaar</em></h1>
+          <p class="lead">Ik breng mensen en technologie bij elkaar om efficiënt en bevredigend te werken.</p>
+          <div class="actions actions--tight">
+            <a class="btn btn--light" href="#contact">Neem contact op</a>
+            <a class="btn btn--ghost" href="#portfolio">Bekijk mijn werk
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+            </a>
+          </div>
+        </div>
+        <div class="frame frame--home frame--center">
+          <img src="assets/images/profielfoto-timon.jpg" alt="Portret van Timon Kool" width="900" height="900">
+        </div>
       </div>
     </div>
-    <div class="hero-content">
-      <p class="lead">
-        Verbindend, motiverend en adaptief. Ik breng mensen en technologie bij elkaar om efficiënt en bevredigend te werken.
-      </p>
-      <div class="hero-actions">
-        <a href="#contact" class="btn btn--primary">Neem contact op</a>
-        <a href="#portfolio" class="btn btn--secondary">Bekijk mijn werk <i class="ph-fill ph-arrow-down-right"></i></a>
-      </div>
+
+    <div class="hero__foot">
+      <nav class="strip" aria-label="Snelle links">
+        <a href="pages/portfolio/handboek-ai-cowork.html">
+          <span class="strip__label"><span class="strip__k">Handboek</span><span class="strip__v">AI &amp; Cowork voor leiders</span></span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+        </a>
+        <a href="pages/portfolio/elearning.html">
+          <span class="strip__label"><span class="strip__k">E-learning</span><span class="strip__v">Werken met AI, drie niveaus</span></span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+        </a>
+        <a href="pages/cv.html">
+          <span class="strip__label"><span class="strip__k">CV</span><span class="strip__v">Ervaring en opleiding</span></span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+        </a>
+      </nav>
     </div>
   </header>
 
-  <!-- ══ Over mij ══ -->
-  <section id="over-mij" class="section wrap reveal">
-    <div class="section-head">
-      <span class="label">Over mij</span>
-    </div>
-    <h2 class="section-title" style="max-width: 16ch; margin-bottom: 20px;">Generalist met een scherp oog voor mensen en processen</h2>
-    <p class="lead" style="max-width: 640px;">
-      Als leidinggevende ben ik begripvol, empathisch en helder over verwachtingen. Ik vertrouw op de expertise van mijn mensen, maar vraag wel door.
-    </p>
-    <div class="about-grid">
-      <div class="card card--mist about-card">
-        <i class="ph-duotone ph-users-three"></i>
-        <h3>Verbinden en motiveren</h3>
-        <p>Ik haal energie uit een diverse omgeving en weet mensen in beweging te krijgen, ook wanneer ze zelf nog niet geloven dat groei mogelijk is.</p>
-      </div>
-      <div class="card card--mist about-card">
-        <i class="ph-duotone ph-compass"></i>
-        <h3>Groot plaatje, kleine stappen</h3>
-        <p>Ik zie verbanden en patronen waar anderen losse puzzelstukken zien. Daarmee geef ik richting, stel ik prioriteiten en help ik teams gestructureerd vooruit.</p>
-      </div>
-      <div class="card card--mist about-card">
-        <i class="ph-duotone ph-arrows-clockwise"></i>
-        <h3>Verandering als kans</h3>
-        <p>Ik heb teams door reorganisaties heen geleid en zorg dat mensen betrokken blijven, ook als de omgeving chaotisch is. Verandermanagement is een houding.</p>
-      </div>
-      <div class="card card--mist about-card">
-        <i class="ph-duotone ph-sparkle"></i>
-        <h3>AI als werkinstrument</h3>
-        <p>Ik werk actief met AI om slimmer te werken en ontwikkel materialen voor anderen om hetzelfde te leren, van handboeken tot interactieve e-learnings.</p>
-      </div>
-    </div>
-  </section>
+  <main>
 
-  <!-- ══ Werkervaring ══ -->
-  <div class="section--mist">
-    <section id="ervaring" class="section wrap reveal">
-      <div class="section-head">
-        <h2 class="section-title">Waar ik mijn vak heb geleerd</h2>
-        <span class="label">Werkervaring</span>
-      </div>
-      <div class="exp-list">
-        <div class="card card--paper exp-item">
-          <div>
-            <div class="exp-role">Regiomanager</div>
-            <div class="exp-org">Talent Academie</div>
-          </div>
-          <div class="exp-period">2023 &ndash; 2025</div>
-          <p class="exp-desc">Begonnen als locatiemanager en snel doorgegroeid naar regiomanager. Leidinggevend aan teams van jong professionals en hun studententeams in het sociaal werkveld. Projectleider voor vakantiescholen, beleidsontwikkeling en een digitale kennisbank. Daarnaast verandermanager tijdens een complexe reorganisatie.</p>
+    <section id="over-mij" class="sec">
+      <div class="sec__in split split--wide">
+        <div class="frame frame--about">
+          <img src="assets/images/coach1.jpg" alt="Twee collega's in een een-op-eengesprek aan tafel" width="1600" height="1067" loading="lazy">
         </div>
-        <div class="card card--paper exp-item">
-          <div>
-            <div class="exp-role">Teamleider</div>
-            <div class="exp-org">Salta Group</div>
-          </div>
-          <div class="exp-period">2020 &ndash; 2023</div>
-          <p class="exp-desc">Leidinggevend aan drie teams van in totaal twintig mensen, van starters tot ervaren professionals. Betrokken bij meerdere bedrijfsbrede processen en projecten. Contactpersoon voor externe partners.</p>
-        </div>
-        <div class="card card--paper exp-item">
-          <div>
-            <div class="exp-role">Floormanager hospitality</div>
-            <div class="exp-org">Jaarbeurs e.a.</div>
-          </div>
-          <div class="exp-period">2016 &ndash; 2020</div>
-          <p class="exp-desc">Dagelijkse aansturing van hospitality en catering rondom beurzen en congressen. Aansturen van een divers en wisselend team uitzendkrachten. Afstemming met beursorganisaties en accountmanagers.</p>
+        <div class="stack stack--28">
+          <span class="eyebrow">Over mij</span>
+          <h2 class="h2">Generalist met een scherp oog voor <em>mensen en processen</em></h2>
+          <p class="body-lg">Als leidinggevende ben ik begripvol, empathisch en helder over verwachtingen. Ik vertrouw op de expertise van mijn mensen, maar vraag wel door.</p>
+          <ul class="numlist">
+            <li>
+              <span class="numlist__n">01</span>
+              <div><h3>Verbinden en motiveren</h3><p>Ik haal energie uit een diverse omgeving en weet mensen in beweging te krijgen, ook wanneer ze zelf nog niet geloven dat groei mogelijk is.</p></div>
+            </li>
+            <li>
+              <span class="numlist__n">02</span>
+              <div><h3>Groot plaatje, kleine stappen</h3><p>Ik zie verbanden en patronen waar anderen losse puzzelstukken zien. Daarmee geef ik richting, stel ik prioriteiten en help ik teams gestructureerd vooruit.</p></div>
+            </li>
+            <li>
+              <span class="numlist__n">03</span>
+              <div><h3>Verandering als kans</h3><p>Ik heb teams door reorganisaties heen geleid en zorg dat mensen betrokken blijven, ook als de omgeving chaotisch is.</p></div>
+            </li>
+            <li>
+              <span class="numlist__n">04</span>
+              <div><h3>AI als werkinstrument</h3><p>Ik werk actief met AI om slimmer te werken en ontwikkel materialen voor anderen om hetzelfde te leren, van handboeken tot interactieve e-learnings.</p></div>
+            </li>
+          </ul>
         </div>
       </div>
     </section>
-  </div>
 
-  <!-- ══ Portfolio ══ -->
-  <section id="portfolio" class="section wrap reveal">
-    <div class="section-head">
-      <h2 class="section-title">Wat ik maak</h2>
-      <span class="label">Portfolio</span>
-    </div>
-    <div class="portfolio-grid">
-      <a href="pages/portfolio/handboek-ai-cowork.html" class="card card--green portfolio-card">
-        <i class="ph-duotone ph-book-open pf-icon" style="color: var(--cream);"></i>
-        <div class="pf-body">
-          <span class="card-label">Handboek &middot; AI</span>
-          <h3 style="color: var(--cream);">Handboek AI &amp; Cowork voor leiders</h3>
-          <p style="color: var(--sage-soft);">Praktische gids voor leidinggevenden die AI-tools zoals Cowork willen inzetten in hun dagelijkse werk. Concrete instructies, geen hype.</p>
-        </div>
-        <i class="ph ph-arrow-up-right pf-arrow" style="color: var(--cream);"></i>
-      </a>
-      <a href="pages/portfolio/elearning.html" class="card card--paper portfolio-card">
-        <i class="ph-duotone ph-books pf-icon" style="color: var(--sage-deep);"></i>
-        <div class="pf-body">
-          <span class="card-label">E-learning &middot; AI</span>
-          <h3 style="color: var(--sage-ink);">E-learningplatform werken met AI</h3>
-          <p style="color: var(--muted);">Drie e-learnings op oplopend niveau, van beginner tot gevorderd. Met opdrachten, AI-feedback op je eigen antwoorden en een certificaat per niveau.</p>
-        </div>
-        <i class="ph ph-arrow-up-right pf-arrow" style="color: var(--sage-deep);"></i>
-      </a>
-    </div>
-  </section>
-
-  <!-- ══ CV-blok ══ -->
-  <div class="wrap" style="padding-bottom: var(--space-9);">
-    <div class="card card--green cv-block">
-      <div>
-        <h2>Mijn volledige CV</h2>
-        <p>Overzicht van mijn werkervaring, opleiding en vaardigheden. Neem gerust contact op als je meer wilt weten.</p>
+    <section class="photo photo--band photo--band-center" aria-label="Verandering als kans">
+      <img class="photo__img photo__img--top" src="assets/images/workshop2.jpg" alt="" width="1600" height="900" loading="lazy">
+      <div class="stack stack--24 band-center">
+        <span class="eyebrow eyebrow--dark">Verandering als kans</span>
+        <p class="quote">Verandermanagement is een <em>houding</em>.</p>
       </div>
-      <a href="pages/cv.html" class="btn btn--on-green">Bekijk CV</a>
-    </div>
-  </div>
+    </section>
 
-  <!-- ══ Opleiding ══ -->
-  <section id="opleiding" class="section wrap reveal" style="padding-top: 0;">
-    <div class="section-head">
-      <h2 class="section-title">Achtergrond</h2>
-      <span class="label">Opleiding &amp; training</span>
-    </div>
-    <div class="edu-list">
-      <div class="edu-item"><i class="ph-duotone ph-graduation-cap"></i><span>Propedeuse Psychologie</span><small>Universiteit Utrecht</small></div>
-      <div class="edu-item"><i class="ph-duotone ph-certificate"></i><span>Training Managementvaardigheden</span><small>NCOI</small></div>
-      <div class="edu-item"><i class="ph-duotone ph-certificate"></i><span>Training Coachingsvaardigheden</span><small>BVO</small></div>
-      <div class="edu-item"><i class="ph-duotone ph-certificate"></i><span>Training Projectmanagement</span><small>BVO</small></div>
-      <div class="edu-item"><i class="ph-duotone ph-certificate"></i><span>Training Didactische vaardigheden</span><small>BVO</small></div>
-      <div class="edu-item"><i class="ph-duotone ph-certificate"></i><span>Training Timemanagement voor leidinggevenden</span><small>BVO</small></div>
-    </div>
-  </section>
-
-  <!-- ══ Contact ══ -->
-  <div class="section--mist">
-    <section id="contact" class="section wrap reveal">
-      <div class="section-head">
-        <h2 class="section-title">Praten over een samenwerking?</h2>
-        <span class="label">Contact</span>
-      </div>
-      <p class="lead" style="max-width: 520px;">
-        Ik hoor graag van je. Of het nu gaat om een concrete vacature, een adviesvraag of een eerste kennismaking.
-      </p>
-      <div class="contact-layout">
-        <div class="contact-links">
-          <a href="https://linkedin.com/in/timonkool" target="_blank" rel="noopener" class="contact-item">
-            <div class="contact-icon"><i class="ph-fill ph-linkedin-logo"></i></div>
-            <div>
-              <div class="contact-label">LinkedIn</div>
-              <div class="contact-value">linkedin.com/in/timonkool</div>
-            </div>
+    <section id="ervaring" class="sec sec--mist">
+      <div class="sec__in stack stack--64">
+        <div class="stack stack--20">
+          <span class="eyebrow">Werkervaring</span>
+          <h2 class="h2">Waar ik mijn vak heb <em>geleerd</em></h2>
+        </div>
+        <ul class="rows">
+          <li class="row">
+            <span class="row__when">2023 &ndash; 2025</span>
+            <div class="row__main"><h3 class="row__title">Regiomanager</h3><span class="row__org">Talent Academie</span></div>
+            <p class="row__text">Begonnen als locatiemanager en snel doorgegroeid naar regiomanager. Leidinggevend aan teams van jong professionals en hun studententeams in het sociaal werkveld. Projectleider voor vakantiescholen, beleidsontwikkeling en een digitale kennisbank. Daarnaast verandermanager tijdens een complexe reorganisatie.</p>
+          </li>
+          <li class="row">
+            <span class="row__when">2020 &ndash; 2023</span>
+            <div class="row__main"><h3 class="row__title">Teamleider</h3><span class="row__org">Salta Group</span></div>
+            <p class="row__text">Leidinggevend aan drie teams van in totaal twintig mensen, van starters tot ervaren professionals. Betrokken bij meerdere bedrijfsbrede processen en projecten. Contactpersoon voor externe partners.</p>
+          </li>
+          <li class="row">
+            <span class="row__when">2016 &ndash; 2020</span>
+            <div class="row__main"><h3 class="row__title">Floormanager hospitality</h3><span class="row__org">Jaarbeurs e.a.</span></div>
+            <p class="row__text">Dagelijkse aansturing van hospitality en catering rondom beurzen en congressen. Aansturen van een divers en wisselend team uitzendkrachten. Afstemming met beursorganisaties en accountmanagers.</p>
+          </li>
+        </ul>
+        <div class="stack stack--20">
+          <p class="muted">Overzicht van mijn werkervaring, opleiding en vaardigheden. Neem gerust contact op als je meer wilt weten.</p>
+          <a class="more" href="pages/cv.html">Bekijk mijn volledige CV
+            <span class="more__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
           </a>
-          <div class="contact-item" style="cursor: default;">
-            <div class="contact-icon"><i class="ph-duotone ph-map-pin"></i></div>
-            <div>
-              <div class="contact-label">Locatie</div>
-              <div class="contact-value">Almere, Nederland</div>
-            </div>
-          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="portfolio" class="sec">
+      <div class="sec__in stack stack--64">
+        <div class="stack stack--20">
+          <span class="eyebrow">Portfolio</span>
+          <h2 class="h2">Wat ik <em>maak</em></h2>
+        </div>
+        <div class="cards">
+          <a class="card" href="pages/portfolio/handboek-ai-cowork.html">
+            <img class="photo-card photo-card--a" src="assets/images/mgr1.jpg" alt="Leidinggevende neemt documenten door achter zijn bureau" width="1600" height="900" loading="lazy">
+            <span class="card__body">
+              <span class="eyebrow">Handboek &middot; AI</span>
+              <span class="card__title">Handboek AI &amp; Cowork voor leiders</span>
+              <span>Praktische gids voor leidinggevenden die AI-tools zoals Cowork willen inzetten in hun dagelijkse werk. Concrete instructies, geen hype.</span>
+              <span class="card__more">Lees meer <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+            </span>
+          </a>
+          <a class="card" href="pages/portfolio/elearning.html">
+            <img class="photo-card photo-card--b" src="assets/images/duo1.jpg" alt="Twee mensen kijken samen naar een laptop" width="1600" height="1067" loading="lazy">
+            <span class="card__body">
+              <span class="eyebrow">E-learning &middot; AI</span>
+              <span class="card__title">E-learningplatform werken met AI</span>
+              <span>Drie e-learnings op oplopend niveau, van beginner tot gevorderd. Met opdrachten, AI-feedback op je eigen antwoorden en een certificaat per niveau.</span>
+              <span class="card__more">Lees meer <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="opleiding" class="sec sec--dark on-dark">
+      <div class="deco deco--a" aria-hidden="true"></div>
+      <div class="deco deco--b" aria-hidden="true"></div>
+      <div class="sec__in split">
+        <div class="stack stack--20">
+          <span class="eyebrow eyebrow--dark">Opleiding &amp; training</span>
+          <h2 class="h2 h2--dark">Mijn <em>achtergrond</em></h2>
+        </div>
+        <ul class="facts">
+          <li><span class="facts__name">Propedeuse Psychologie</span><span class="facts__org">Universiteit Utrecht</span></li>
+          <li><span class="facts__name">Training Managementvaardigheden</span><span class="facts__org">NCOI</span></li>
+          <li><span class="facts__name">Training Coachingsvaardigheden</span><span class="facts__org">BVO</span></li>
+          <li><span class="facts__name">Training Projectmanagement</span><span class="facts__org">BVO</span></li>
+          <li><span class="facts__name">Training Didactische vaardigheden</span><span class="facts__org">BVO</span></li>
+          <li><span class="facts__name">Training Timemanagement voor leidinggevenden</span><span class="facts__org">BVO</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="contact" class="sec">
+      <div class="sec__in split split--wide">
+        <div class="stack stack--28">
+          <span class="eyebrow">Contact</span>
+          <h2 class="h2">Praten over een <em>samenwerking?</em></h2>
+          <p class="body-lg">Ik hoor graag van je. Of het nu gaat om een concrete vacature, een adviesvraag of een eerste kennismaking.</p>
+          <img class="photo-wide" src="assets/images/coach2.jpg" alt="Twee mensen in gesprek aan een tafel" width="1600" height="1067" loading="lazy">
+          <dl class="contact-facts">
+            <div><dt>LinkedIn</dt><dd><a href="https://linkedin.com/in/timonkool" target="_blank" rel="noopener">linkedin.com/in/timonkool</a></dd></div>
+            <div><dt>Locatie</dt><dd>Almere, Nederland</dd></div>
+          </dl>
         </div>
 
-        <form class="contact-form" id="contact-form" action="https://formspree.io/f/xojbeokz" method="POST">
-          <div class="field">
-            <label class="field-label" for="name">Naam</label>
-            <input class="input" type="text" id="name" name="name" placeholder="Jouw naam" required />
+        <form class="form" id="contact-form" action="https://formspree.io/f/xojbeokz" method="POST">
+          <div class="form__field">
+            <label class="form__label" for="name">Naam</label>
+            <input class="form__input" type="text" id="name" name="name" placeholder="Jouw naam" autocomplete="name" required />
           </div>
-          <div class="field">
-            <label class="field-label" for="email">E-mailadres</label>
-            <input class="input" type="email" id="email" name="email" placeholder="jouw@email.nl" required />
+          <div class="form__field">
+            <label class="form__label" for="email">E-mailadres</label>
+            <input class="form__input" type="email" id="email" name="email" placeholder="jouw@email.nl" autocomplete="email" required />
           </div>
-          <div class="field">
-            <label class="field-label" for="message">Bericht</label>
-            <textarea class="textarea" id="message" name="message" rows="4" placeholder="Waar wil je over sparren?" required></textarea>
+          <div class="form__field">
+            <label class="form__label" for="message">Bericht</label>
+            <textarea class="form__input form__input--area" id="message" name="message" rows="5" placeholder="Waar wil je over sparren?" required></textarea>
           </div>
-          <button type="submit" class="btn btn--primary" style="width: 100%;">Verstuur bericht</button>
-          <p class="form-success" id="form-success">Bericht verstuurd. Ik neem zo snel mogelijk contact op.</p>
+          <button type="submit" class="btn btn--solid">Verstuur bericht</button>
+          <p class="form-success" id="form-success" role="status">Bericht verstuurd. Ik neem zo snel mogelijk contact op.</p>
         </form>
       </div>
     </section>
-  </div>
 
-  <!-- ══ Footer ══ -->
-  <footer class="site-footer">
-    <div class="site-footer__inner">
-      <span class="site-footer__brand">Timon Kool</span>
-      <div class="site-footer__social">
-        <a href="https://linkedin.com/in/timonkool" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="ph-duotone ph-linkedin-logo"></i></a>
-        <a href="#contact" aria-label="Contact"><i class="ph-duotone ph-envelope-simple"></i></a>
+  </main>
+
+  <footer class="foot">
+    <div class="foot__in">
+      <span class="foot__brand">Timon Kool</span>
+      <div class="foot__links">
+        <a href="#over-mij">Over mij</a>
+        <a href="#ervaring">Ervaring</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="pages/cv.html">CV</a>
+        <a href="https://linkedin.com/in/timonkool" target="_blank" rel="noopener">LinkedIn</a>
       </div>
     </div>
   </footer>
@@ -357,16 +256,6 @@
         }
       });
     }
-
-    // Scroll-reveal
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
-      });
-    }, { threshold: 0.08 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   </script>
-  <script>const NAV_ROOT = './';</script>
-  <script src="assets/js/nav.js"></script>
 </body>
 </html>

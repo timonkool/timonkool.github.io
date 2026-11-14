@@ -11,232 +11,178 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/duotone/style.css">
-<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
-<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/css/saliegroen.css?v=2026-07-29">
-<link rel="stylesheet" href="../../assets/css/nav.css">
-<style>
-  body { padding-top: 60px; }
-
-  /* Banner naar het platform */
-  .elearning { background: var(--sage-ink); }
-  .elearning__inner {
-    max-width: var(--width-page); margin: 0 auto;
-    padding: clamp(40px, 5vw, 56px) var(--pad-edge);
-    display: flex; align-items: center; justify-content: space-between; gap: 40px;
-  }
-  .elearning__left { flex: 1; }
-  .elearning__badge {
-    display: inline-block; background: rgba(200,212,196,0.18); border: 1px solid rgba(200,212,196,0.35);
-    color: var(--sage-soft); font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
-    padding: 5px 14px; border-radius: var(--radius-pill); margin-bottom: 16px;
-  }
-  .elearning__title { font-family: var(--font-display); font-weight: 700; font-size: clamp(24px, 3.5vw, 36px); color: var(--cream); line-height: 1.15; letter-spacing: var(--ls-display); margin-bottom: 14px; }
-  .elearning__desc { font-size: 15px; color: var(--sage-soft); max-width: 480px; }
-  .elearning__cta { flex-shrink: 0; }
-
-  /* Niveaus */
-  .parts-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 18px; margin-top: var(--space-6); }
-  .part-meta { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
-  .part-number { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sage-deep); }
-  .part-time { font-size: 11px; font-weight: 600; color: var(--muted); background: var(--sage-mist); padding: 3px 10px; border-radius: var(--radius-pill); white-space: nowrap; }
-  .part-card.card--paper .part-time { background: var(--cream); }
-  .part-title { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 600; color: var(--sage-ink); margin-bottom: 10px; line-height: 1.3; }
-  .part-title i { font-size: 22px; color: var(--sage-deep); flex-shrink: 0; }
-  .part-desc { font-size: 13.5px; color: var(--muted); margin: 0 0 10px; }
-  .part-desc:last-child { margin-bottom: 0; }
-
-  /* Zo werkt het */
-  .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 14px; margin-top: var(--space-6); }
-  .skill-item { background: var(--sage-mist); border-radius: var(--radius-md); padding: 22px; display: flex; gap: 14px; align-items: flex-start; }
-  .skill-icon { width: 38px; height: 38px; background: var(--sage-deep); border-radius: var(--radius-sm); flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
-  .skill-icon i { font-size: 20px; color: var(--cream); }
-  .skill-title { font-size: 14px; font-weight: 700; color: var(--sage-ink); margin-bottom: 4px; }
-  .skill-desc { font-size: 12.5px; color: var(--muted); line-height: 1.55; }
-
-  /* Doelgroep */
-  .audience-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: var(--space-5); }
-  .audience-tag { background: var(--paper); border: 1.5px solid var(--sage-soft); color: var(--sage-ink); font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 8px 18px; border-radius: var(--radius-pill); }
-
-  .intro p { font-size: 16px; line-height: 1.75; color: var(--text); max-width: 720px; margin-bottom: 16px; }
-
-  /* Materiaal van de groepstraining */
-  .materiaal-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: var(--space-5); }
-
-  @media (max-width: 720px) {
-    .elearning__inner { flex-direction: column; align-items: flex-start; gap: 28px; }
-  }
-</style>
+<link rel="stylesheet" href="../../assets/css/editorial.css?v=2026-11-14">
 </head>
-<body>
+<body class="ed">
 
-<nav id="site-nav"></nav>
-
-<!-- ══ Hero ══ -->
-<header class="page-hero">
-  <div class="page-hero__inner">
-    <a href="../../index.html" class="page-hero__back"><i class="ph-bold ph-caret-left"></i> Terug naar overzicht</a>
-    <span class="page-hero__eyebrow">E-learning &middot; AI &middot; 2026</span>
-    <h1 class="page-hero__title">E-learningplatform: werken met AI</h1>
-    <p class="page-hero__lead">Drie e-learnings op oplopend niveau, van je eerste vraag aan AI tot een vaste werkwijze. Je leest, oefent en krijgt AI-feedback op je eigen antwoorden.</p>
-    <div class="page-hero__tags">
-      <span class="chip-on-green">Drie niveaus</span>
-      <span class="chip-on-green">Tekst en opdrachten</span>
-      <span class="chip-on-green">AI-feedback</span>
-      <span class="chip-on-green">Certificaat per niveau</span>
-      <span class="chip-on-green">Vrij toegankelijk</span>
+<header class="photo photo--hero photo--sub">
+  <img class="photo__img photo__img--low" src="../../assets/images/laptop2.jpg" alt="" width="1600" height="1067">
+  <nav class="nav" aria-label="Hoofdmenu">
+    <a class="nav__brand" href="../../index.html">
+      <span class="nav__name">Timon Kool</span>
+      <span class="nav__tag">Leidinggevende &amp; adviseur</span>
+    </a>
+    <div class="nav__links">
+      <a class="nav__link" href="../../index.html#over-mij">Over mij</a>
+      <a class="nav__link" href="../../index.html#ervaring">Ervaring</a>
+      <a class="nav__link" href="../../index.html#portfolio" aria-current="true">Portfolio</a>
+      <a class="nav__link" href="../../index.html#contact">Contact</a>
+      <a class="nav__cv" href="../cv.html">CV</a>
     </div>
-    <div class="page-hero__actions">
-      <a href="/elearning/" class="btn btn--on-green">
-        <i class="ph-fill ph-play-circle"></i> Naar het e-learningplatform
-      </a>
+  </nav>
+  <div class="hero__body">
+    <div class="hero__end">
+      <a class="back" href="../../index.html">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg>
+        Terug naar overzicht</a>
+      <span class="eyebrow eyebrow--dark">E-learning &middot; AI &middot; 2026</span>
+      <h1 class="h1 h1--sub h1--narrow">E-learningplatform: <em>werken met AI</em></h1>
+      <p class="lead">Drie e-learnings op oplopend niveau, van je eerste vraag aan AI tot een vaste werkwijze. Je leest, oefent en krijgt AI-feedback op je eigen antwoorden.</p>
+      <div class="actions">
+        <a class="btn btn--light" href="/elearning/">Naar het e-learningplatform
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+        <div class="tags">
+          <span class="tag">Drie niveaus</span>
+          <span class="tag">Tekst en opdrachten</span>
+          <span class="tag">AI-feedback</span>
+          <span class="tag">Certificaat per niveau</span>
+          <span class="tag">Vrij toegankelijk</span>
+        </div>
+      </div>
     </div>
   </div>
 </header>
 
-<!-- ══ Over het platform ══ -->
-<section class="section wrap reveal">
-  <div class="section-head"><h2 class="section-title">Over het platform</h2><span class="label">Het doel</span></div>
-  <div class="intro">
-    <p class="lead" style="max-width: 720px; margin-bottom: 20px;">
-      Veel mensen weten dat AI hun werk lichter kan maken, maar niet waar ze moeten beginnen of hoe ze het veilig doen. Dit platform neemt je daarin mee, in je eigen tempo en met je eigen werk als oefenmateriaal.
-    </p>
-    <p>Het platform bestaat uit drie e-learnings die op elkaar aansluiten. Niveau 1 legt de basis: wat AI is, hoe je het veilig gebruikt en hoe je een goede vraag stelt. Niveau 2 gaat over één echte taak uit je eigen werk, van begin tot eind. Niveau 3 maakt van AI een vast onderdeel van je werkdag.</p>
-    <p>Alles is leestekst met opdrachten. Er zit geen video of audio in. Je leest een kort stuk, beantwoordt een kennischeck en past het toe. Bij de schrijfopdrachten reageert een AI-leercoach op wat jij hebt geschreven.</p>
-    <p>Het platform is begonnen als één e-learning bij de basistraining AI voor stichtingen. Die e-learning is nu niveau 1. Voor wie verder wil zijn er twee vervolgniveaus bijgekomen.</p>
-  </div>
-</section>
+<main>
 
-<!-- ══ De drie niveaus ══ -->
-<div class="section--mist">
-  <section class="section wrap reveal">
-    <div class="section-head"><h2 class="section-title">De drie niveaus</h2><span class="label">Oplopend niveau</span></div>
-    <div class="parts-grid">
-      <div class="card card--paper part-card">
-        <div class="part-meta"><span class="part-number">Niveau 1 &middot; Beginner</span><span class="part-time">Ongeveer 3 uur</span></div>
-        <h3 class="part-title"><i class="ph-duotone ph-plant"></i> AI voor beginners</h3>
-        <p class="part-desc">Wat AI is, wat het wel en niet kan, welke informatie je wel en niet deelt en hoe je een goede prompt schrijft. Je oefent met een casus en met een taak uit je eigen werk, en sluit af met een persoonlijk actieplan.</p>
-        <p class="part-desc">Geschreven voor medewerkers en vrijwilligers van stichtingen. Geen voorkennis nodig.</p>
+  <section class="sec">
+    <div class="sec__in split">
+      <div class="stack stack--20">
+        <span class="eyebrow">Het doel</span>
+        <h2 class="h2">Over het <em>platform</em></h2>
       </div>
-      <div class="card card--paper part-card">
-        <div class="part-meta"><span class="part-number">Niveau 2 &middot; Verdiepend</span><span class="part-time">10 dagen</span></div>
-        <h3 class="part-title"><i class="ph-duotone ph-briefcase"></i> AI aan het werk</h3>
-        <p class="part-desc">Met AI en je eigen bronmateriaal maak je één echt document, van begin tot eind. Je geeft je eigen materiaal mee, stuurt in ronden bij, controleert het resultaat tegen je bronnen en knipt een grote taak in stappen.</p>
-        <p class="part-desc">Meestal ongeveer een kwartier per dag. Voor wie al goede vragen aan AI stelt.</p>
-      </div>
-      <div class="card card--paper part-card">
-        <div class="part-meta"><span class="part-number">Niveau 3 &middot; Gevorderd</span><span class="part-time">20 dagen</span></div>
-        <h3 class="part-title"><i class="ph-duotone ph-handshake"></i> AI als vaste collega</h3>
-        <p class="part-desc">In vier weken geef je taken uit handen aan een werkagent, maak je ze herhaalbaar, bouw je een geheugen dat van jou blijft en veranker je dat in je werkdag.</p>
-        <p class="part-desc">Ongeveer twintig minuten per dag. Je hebt een betaald abonnement op Claude of ChatGPT nodig.</p>
+      <div class="prose">
+        <p class="serif-lead">Veel mensen weten dat AI hun werk lichter kan maken, maar niet waar ze moeten beginnen of hoe ze het veilig doen. Dit platform neemt je daarin mee, in je eigen tempo en met je eigen werk als oefenmateriaal.</p>
+        <p>Het platform bestaat uit drie e-learnings die op elkaar aansluiten. Niveau 1 legt de basis: wat AI is, hoe je het veilig gebruikt en hoe je een goede vraag stelt. Niveau 2 gaat over één echte taak uit je eigen werk, van begin tot eind. Niveau 3 maakt van AI een vast onderdeel van je werkdag.</p>
+        <p>Alles is leestekst met opdrachten. Er zit geen video of audio in. Je leest een kort stuk, beantwoordt een kennischeck en past het toe. Bij de schrijfopdrachten reageert een AI-leercoach op wat jij hebt geschreven.</p>
+        <p>Het platform is begonnen als één e-learning bij de basistraining AI voor stichtingen. Die e-learning is nu niveau 1. Voor wie verder wil zijn er twee vervolgniveaus bijgekomen.</p>
       </div>
     </div>
   </section>
-</div>
 
-<!-- ══ Zo werkt het ══ -->
-<section class="section wrap reveal">
-  <div class="section-head"><h2 class="section-title">Zo werkt het</h2><span class="label">Opzet</span></div>
-  <div class="skills-grid">
-    <div class="skill-item">
-      <div class="skill-icon"><i class="ph-duotone ph-book-open-text"></i></div>
-      <div><p class="skill-title">Alleen tekst en opdrachten</p><p class="skill-desc">Geen video en geen audio. Korte leesblokken, kennischecks en opdrachten die je in je eigen werk uitvoert.</p></div>
-    </div>
-    <div class="skill-item">
-      <div class="skill-icon"><i class="ph-duotone ph-chat-circle-text"></i></div>
-      <div><p class="skill-title">AI-feedback op je eigen antwoord</p><p class="skill-desc">Een ingebouwde AI-leercoach reageert op wat jij schrijft. Je hoeft niets te installeren of in te stellen.</p></div>
-    </div>
-    <div class="skill-item">
-      <div class="skill-icon"><i class="ph-duotone ph-certificate"></i></div>
-      <div><p class="skill-title">Certificaat per niveau</p><p class="skill-desc">Rond je een niveau af, dan krijg je een certificaat van dat niveau.</p></div>
-    </div>
-    <div class="skill-item">
-      <div class="skill-icon"><i class="ph-duotone ph-door-open"></i></div>
-      <div><p class="skill-title">Vrij toegankelijk</p><p class="skill-desc">Geen account en geen toegangscode. Je opent de link en begint.</p></div>
-    </div>
-    <div class="skill-item">
-      <div class="skill-icon"><i class="ph-duotone ph-bookmark-simple"></i></div>
-      <div><p class="skill-title">Je voortgang blijft bij jou</p><p class="skill-desc">Je voortgang en antwoorden staan in je eigen browser, op je eigen apparaat.</p></div>
-    </div>
-    <div class="skill-item">
-      <div class="skill-icon"><i class="ph-duotone ph-shield-check"></i></div>
-      <div><p class="skill-title">Open over privacy</p><p class="skill-desc">Wat je bij een opdracht instuurt, gaat via de server van de cursus naar Claude van Anthropic. Vul dus geen persoonsgegevens of vertrouwelijke informatie in.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ Banner naar het platform ══ -->
-<div class="elearning">
-  <div class="elearning__inner">
-    <div class="elearning__left">
-      <span class="elearning__badge">Vrij toegankelijk</span>
-      <h2 class="elearning__title">Kies je niveau en begin</h2>
-      <p class="elearning__desc">Nieuw met AI? Begin bij niveau 1. Werk je er al mee, dan kun je ook instappen op niveau 2 of 3. De volgorde is een advies, geen verplichting.</p>
-    </div>
-    <div class="elearning__cta">
-      <a href="/elearning/" class="btn btn--on-green btn--lg">
-        <i class="ph-fill ph-play-circle"></i> Naar het e-learningplatform
-      </a>
-    </div>
-  </div>
-</div>
-
-<!-- ══ Voor wie ══ -->
-<div class="section--mist">
-  <section class="section wrap reveal">
-    <div class="section-head"><h2 class="section-title">Voor wie</h2><span class="label">Doelgroep</span></div>
-    <p class="lead" style="max-width: 720px;">
-      Voor iedereen die AI in zijn werk wil gebruiken en daar houvast bij zoekt. Niveau 1 vraagt geen voorkennis en geen kennis van technologie. Niveau 2 en 3 zijn voor wie al met AI werkt en er meer uit wil halen.
-    </p>
-    <div class="audience-row">
-      <span class="audience-tag">Beginners</span>
-      <span class="audience-tag">Gevorderden</span>
-      <span class="audience-tag">Medewerkers</span>
-      <span class="audience-tag">Vrijwilligers</span>
-      <span class="audience-tag">Stichtingen</span>
-      <span class="audience-tag">Non-profit</span>
+  <section class="sec sec--mist">
+    <div class="sec__in stack stack--64 stack--stretch">
+      <div class="stack stack--20">
+        <span class="eyebrow">Oplopend niveau</span>
+        <h2 class="h2">De drie <em>niveaus</em></h2>
+      </div>
+      <div class="cols cols--lvl">
+        <article class="level">
+          <img class="photo-card photo-card--lvl" src="../../assets/images/laptop1.jpg" alt="Handen typen op een laptop" width="1600" height="1065" loading="lazy">
+          <div class="stack stack--10 stack--stretch">
+            <div class="level__meta"><span>Niveau 1 &middot; Beginner</span><span>Ongeveer 3 uur</span></div>
+            <h3 class="level__title">AI voor beginners</h3>
+            <p>Wat AI is, wat het wel en niet kan, welke informatie je wel en niet deelt en hoe je een goede prompt schrijft. Je oefent met een casus en met een taak uit je eigen werk, en sluit af met een persoonlijk actieplan.</p>
+            <p class="level__note">Geschreven voor medewerkers en vrijwilligers van stichtingen. Geen voorkennis nodig.</p>
+          </div>
+        </article>
+        <article class="level">
+          <img class="photo-card photo-card--lvl" src="../../assets/images/laptop3.jpg" alt="Iemand werkt aan een document op een laptop" width="1600" height="1067" loading="lazy">
+          <div class="stack stack--10 stack--stretch">
+            <div class="level__meta"><span>Niveau 2 &middot; Verdiepend</span><span>10 dagen</span></div>
+            <h3 class="level__title">AI aan het werk</h3>
+            <p>Met AI en je eigen bronmateriaal maak je één echt document, van begin tot eind. Je geeft je eigen materiaal mee, stuurt in ronden bij, controleert het resultaat tegen je bronnen en knipt een grote taak in stappen.</p>
+            <p class="level__note">Meestal ongeveer een kwartier per dag. Voor wie al goede vragen aan AI stelt.</p>
+          </div>
+        </article>
+        <article class="level">
+          <img class="photo-card photo-card--lvl" src="../../assets/images/duo1.jpg" alt="Twee collega's werken samen achter een laptop" width="1600" height="1067" loading="lazy">
+          <div class="stack stack--10 stack--stretch">
+            <div class="level__meta"><span>Niveau 3 &middot; Gevorderd</span><span>20 dagen</span></div>
+            <h3 class="level__title">AI als vaste collega</h3>
+            <p>In vier weken geef je taken uit handen aan een werkagent, maak je ze herhaalbaar, bouw je een geheugen dat van jou blijft en veranker je dat in je werkdag.</p>
+            <p class="level__note">Ongeveer twintig minuten per dag. Je hebt een betaald abonnement op Claude of ChatGPT nodig.</p>
+          </div>
+        </article>
+      </div>
     </div>
   </section>
-</div>
 
-<!-- ══ Materiaal van de groepstraining ══ -->
-<section class="section wrap reveal">
-  <div class="section-head"><h2 class="section-title">Liever met een groep</h2><span class="label">Training van 90 minuten</span></div>
-  <div class="intro">
-    <p>Niveau 1 hoort bij een training van negentig minuten voor medewerkers en vrijwilligers van stichtingen. De presentatie en de handout met oefeningen kun je vrij downloaden en gebruiken als basis voor een eigen bijeenkomst.</p>
-  </div>
-  <div class="materiaal-row">
-    <a href="../../docs/basistraining-ai.pptx" download class="btn btn--primary">
-      <i class="ph-duotone ph-download-simple"></i> Download presentatie (.pptx)
-    </a>
-    <a href="../../docs/handheld-basistraining-ai.html" target="_blank" rel="noopener" class="btn btn--secondary">
-      <i class="ph-duotone ph-file-text"></i> Handout oefeningen
-    </a>
-  </div>
-</section>
+  <section class="sec">
+    <div class="sec__in stack stack--64 stack--stretch">
+      <div class="stack stack--20">
+        <span class="eyebrow">Opzet</span>
+        <h2 class="h2">Zo <em>werkt</em> het</h2>
+      </div>
+      <div class="cols">
+        <div class="col col--tight"><h3>Alleen tekst en opdrachten</h3><p>Geen video en geen audio. Korte leesblokken, kennischecks en opdrachten die je in je eigen werk uitvoert.</p></div>
+        <div class="col col--tight"><h3>AI-feedback op je eigen antwoord</h3><p>Een ingebouwde AI-leercoach reageert op wat jij schrijft. Je hoeft niets te installeren of in te stellen.</p></div>
+        <div class="col col--tight"><h3>Certificaat per niveau</h3><p>Rond je een niveau af, dan krijg je een certificaat van dat niveau.</p></div>
+        <div class="col col--tight"><h3>Vrij toegankelijk</h3><p>Geen account en geen toegangscode. Je opent de link en begint.</p></div>
+        <div class="col col--tight"><h3>Je voortgang blijft bij jou</h3><p>Je voortgang en antwoorden staan in je eigen browser, op je eigen apparaat.</p></div>
+        <div class="col col--tight"><h3>Open over privacy</h3><p>Wat je bij een opdracht instuurt, gaat via de server van de cursus naar Claude van Anthropic. Vul dus geen persoonsgegevens of vertrouwelijke informatie in.</p></div>
+      </div>
+    </div>
+  </section>
 
-<!-- ══ Footer ══ -->
-<footer class="site-footer">
-  <div class="site-footer__inner">
-    <a class="site-footer__brand" href="../../index.html">Timon Kool</a>
-    <div class="site-footer__social">
-      <a href="https://linkedin.com/in/timonkool" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="ph-duotone ph-linkedin-logo"></i></a>
-      <a href="../../index.html#contact" aria-label="Contact"><i class="ph-duotone ph-envelope-simple"></i></a>
+  <section class="photo photo--band photo--band-cta" aria-label="Kies je niveau">
+    <img class="photo__img" src="../../assets/images/mgr2.jpg" alt="" width="1600" height="1067" loading="lazy">
+    <div class="stack band-end">
+      <span class="eyebrow eyebrow--dark">Vrij toegankelijk</span>
+      <h2 class="h2 h2--big">Kies je niveau en <em>begin</em></h2>
+      <p class="body-lg dark-text">Nieuw met AI? Begin bij niveau 1. Werk je er al mee, dan kun je ook instappen op niveau 2 of 3. De volgorde is een advies, geen verplichting.</p>
+      <a class="btn btn--light" href="/elearning/">Naar het e-learningplatform
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec__in split split--wide split--center">
+      <div class="frame frame--train">
+        <img src="../../assets/images/train1.jpg" alt="Trainer geeft uitleg aan een groep in een trainingsruimte" width="1600" height="900" loading="lazy">
+      </div>
+      <div class="stack">
+        <span class="eyebrow">Training van 90 minuten</span>
+        <h2 class="h2">Liever met een <em>groep</em></h2>
+        <p class="body-lg">Niveau 1 hoort bij een training van negentig minuten voor medewerkers en vrijwilligers van stichtingen. De presentatie en de handout met oefeningen kun je vrij downloaden en gebruiken als basis voor een eigen bijeenkomst.</p>
+        <div class="actions actions--tight">
+          <a class="btn btn--solid" href="../../docs/basistraining-ai.pptx" download>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"></path></svg>
+            Download presentatie (.pptx)</a>
+          <a class="btn btn--outline" href="../../docs/handheld-basistraining-ai.html" target="_blank" rel="noopener">Handout oefeningen</a>
+        </div>
+        <div class="stack stack--12 divider-top">
+          <span class="eyebrow">Voor wie</span>
+          <p class="body-lg">Voor iedereen die AI in zijn werk wil gebruiken en daar houvast bij zoekt. Niveau 1 vraagt geen voorkennis en geen kennis van technologie. Niveau 2 en 3 zijn voor wie al met AI werkt en er meer uit wil halen.</p>
+          <div class="tags">
+            <span class="tag tag--dark">Beginners</span>
+            <span class="tag tag--dark">Gevorderden</span>
+            <span class="tag tag--dark">Medewerkers</span>
+            <span class="tag tag--dark">Vrijwilligers</span>
+            <span class="tag tag--dark">Stichtingen</span>
+            <span class="tag tag--dark">Non-profit</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="foot__in">
+    <a class="foot__brand" href="../../index.html">Timon Kool</a>
+    <div class="foot__links">
+      <a href="../../index.html">Home</a>
+      <a href="handboek-ai-cowork.html">Handboek</a>
+      <a href="../cv.html">CV</a>
+      <a href="https://linkedin.com/in/timonkool" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="../../index.html#contact">Contact</a>
     </div>
   </div>
 </footer>
-
-<script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-</script>
-<script>const NAV_ROOT = '../../';</script>
-<script src="../../assets/js/nav.js"></script>
 
 </body>
 </html>
