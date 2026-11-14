@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600" role="img" aria-label="Twee collega's naast elkaar aan een bureau, een mens en een AI-collega">
+  <!-- Niveau 3, AI als vaste collega. Vlakke kleuren uit de Saliegroene rust, geen verloop. -->
+  <rect width="600" height="600" fill="#c8d4c4"/>
+
+  <!-- Rustige heuvels onderaan, een tint dieper dan bij niveau 2 -->
+  <path d="M0 478 Q 150 428 300 464 T 600 444 V600 H0 Z" fill="#8ba287"/>
+  <path d="M0 544 Q 180 506 340 534 T 600 518 V600 H0 Z" fill="#5d7059"/>
+
+  <!-- De twee collega's iets kleiner, zodat ze ook in de smalle kaartuitsnede passen -->
+  <g transform="translate(300 292) scale(0.82) translate(-300 -292)">
+    <!-- Een zachte cirkel achter de twee collega's -->
+    <circle cx="300" cy="284" r="150" fill="#eef2ec"/>
+
+    <!-- De mens: ronde kop, donkere schouders -->
+    <circle cx="214" cy="270" r="40" fill="#3a4a38"/>
+    <path d="M140 394 A74 72 0 0 1 288 394 Z" fill="#3a4a38"/>
+
+    <!-- De AI-collega: vierkantere kop met een rustige balk, lichte schouders -->
+    <rect x="346" y="230" width="80" height="80" rx="28" fill="#ffffff"/>
+    <rect x="362" y="262" width="48" height="14" rx="7" fill="#5d7059"/>
+    <path d="M312 394 A74 72 0 0 1 460 394 Z" fill="#ffffff"/>
+
+    <!-- Het bureau waaraan ze samen zitten, over de volle breedte -->
+    <rect x="-300" y="392" width="1200" height="34" fill="#5d7059"/>
+    <rect x="-300" y="426" width="1200" height="14" fill="#3a4a38"/>
+  </g>
+</svg>

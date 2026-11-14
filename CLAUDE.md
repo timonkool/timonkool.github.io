@@ -181,7 +181,10 @@ De volledige schrijfstijlinstructie staat in `schrijfstijl_instructie.md`. Onder
 | CV (visueel) | `pages/cv.html` | Live |
 | CV (download) | `docs/cv-timon-kool.pdf` | Live |
 | Handboek AI & Cowork | `pages/portfolio/handboek-ai-cowork.html` | Live |
-| Basistraining AI voor stichtingen | `pages/portfolio/basistraining-ai.html` | Live |
+| E-learningplatform werken met AI (portfoliopagina) | `pages/portfolio/elearning.html` | Live |
+| E-learningplatform (de app, drie niveaus) | `elearning/` | Live. Build uit de projectmap `Elearning platform timonkool.nl`; niet met de hand wijzigen |
+| Doorstuurpagina oude portfoliopagina | `pages/portfolio/basistraining-ai.html` | Stuurt door naar `elearning.html` |
+| Doorstuurpagina oude cursus | `elearning-ai-voor-beginners/index.html` | Stuurt door naar `/elearning/` |
 
 Houd dit overzicht actueel bij elke wijziging.
 

@@ -30,10 +30,10 @@
       icon:  'ph-book-open'
     },
     {
-      label: 'Basistraining AI voor stichtingen',
-      href:  href('pages/portfolio/basistraining-ai.html'),
-      tag:   'Training',
-      icon:  'ph-chalkboard-simple'
+      label: 'E-learningplatform werken met AI',
+      href:  href('pages/portfolio/elearning.html'),
+      tag:   'E-learning',
+      icon:  'ph-books'
     }
   ];
 
